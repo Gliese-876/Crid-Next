@@ -2,7 +2,9 @@
 
 [简体中文](README.md) · [繁體中文](README.zh-Hant.md) · [English](README.en.md)
 
-Crid Next is an Android timetable app for checking today's classes, managing semesters and timetable plans, and getting reminders before class.
+**A little clarity for every week.**
+
+Crid Next is a lightweight, native Android timetable app that makes today's classes and the week ahead easy to read. It keeps the details that real timetables depend on: alternating weeks, separate teaching blocks, and changing teachers and rooms. From your first import to your end-of-term backup, clear views and thoughtful interactions make it a comfortable everyday companion.
 
 **Android 12 or later · 简体中文 / 繁體中文 / English · First public release: 2.0.0**
 
@@ -13,18 +15,35 @@ Crid Next is an Android timetable app for checking today's classes, managing sem
 
 [Changelog](CHANGELOG.md)
 
+## Built around campus life
+
+### Clear to read, natural to use
+
+Each course keeps its own soft color, making it easy to recognize across views. A clear text hierarchy and balanced spacing give class names, times, and rooms their own place. Light and dark themes share a consistent visual style, while illustrations bring a little warmth to a day without classes.
+
+As you swipe between pages, the page and navigation indicator follow your finger together. Menus and dialogs open from where you tapped and return along the same path. Expand the course details panel with a drag, or swipe it down to close, with a natural flow between viewing, switching, and returning.
+
+### See your next class and the week ahead
+
+Today puts your current and upcoming classes in view, while the weekly timetable helps you plan your week. Today and weekly widgets bring class times, names, and rooms to your home screen; reminders before class give you one less thing to keep track of.
+
+Browse on your phone or spread out on a tablet. Widgets adapt their layout and level of detail to the space available. Larger system text gets more room in the app and widgets, keeping everyday information easy to read.
+
+### Keep the details that make a timetable yours
+
+Crid Next preserves odd/even-week schedules, separate week ranges, and changes of teacher and room. Classes marked as awaiting a time stay in your plan, ready to complete later. An import preview surfaces missing details and time conflicts before you confirm, giving you a clearer picture of what you are saving.
+
+Multiple semesters and plans let you keep different arrangements. Custom class periods, course editing, and holiday and makeup-class settings help the timetable follow your school's schedule.
+
+### Small to install, easy to take with you
+
+The universal APK for version 2.0.0 is about **4.05 MB**. Timetables stay on your device, and everyday viewing and editing work offline, including when the campus connection is unreliable.
+
+For sharing, PNG and PDF exports carry the app's daily and weekly layouts into a day, week, month, or full-semester view. For keeping your data, JSON preserves course and lesson details for backup and reimport.
+
 ## Install
 
 Download the `.apk` file from the [GitHub releases](https://github.com/Gliese-876/Crid-Next/releases/latest) or [Gitee releases](https://gitee.com/gliese-876/crid-next/releases), open it, and follow the installation prompts. When installing through a browser or file manager for the first time, allow that app to install apps from unknown sources. The APK supports ARM64, ARM32, x86, and x86_64 devices.
-
-## What you can do
-
-- **See today and the whole week.** Today shows your daily schedule and next class; the weekly timetable gives you a broader view.
-- **Keep different timetables.** Save multiple plans for each semester, add courses manually, and edit teachers, locations, and class times.
-- **Review before importing.** Import from a campus portal or a local file, check missing details and time conflicts, then create, merge, or replace a plan.
-- **Check classes from your home screen.** Add a today or weekly widget, and turn on reminders before class.
-- **Share and back up.** Export a day, week, month, or semester as PNG / PDF, or save a JSON timetable you can import again.
-- **Make it your own.** Choose light or dark themes, three interface languages, phone or tablet layouts, and holiday and makeup-class settings.
 
 ## Get started
 
@@ -73,13 +92,13 @@ Turn on reminders in **Settings**, then check notification, exact-alarm, and bac
 
 Timetables are stored on your device, and file imports are processed locally. When using the AI conversion workflow above, you send the file to the AI service you choose. Export a JSON backup before uninstalling. PNG / PDF files are for viewing and sharing; use JSON to restore courses.
 
-## How Crid Next relates to Crid
+## From Crid to Crid Next
 
 Crid Next continues the timetable app idea behind [Crid](https://github.com/Gliese-876/Crid). The same author rewrote it from scratch as a native Android app using Kotlin, Jetpack Compose, and Material 3. The original Flutter-based Crid retains its Apache-2.0 license and is archived for reference. Development continues in Crid Next.
 
 The projects use separate data formats. When moving from the original Crid, import your campus timetable again or convert it to Crid Next JSON using the workflow above, then set up the semester and daily periods.
 
-This project is also an experiment in **vibe coding with frontier models**: using natural-language collaboration to develop requirements, implement features, refine the interface, and test the app. The code is public for others to use, inspect, and improve.
+Crid Next is also an experiment in **vibe coding with frontier models**. Real timetable needs guide the work, with natural-language collaboration shaping implementation, interface refinements, and testing. The result is an app you can download, inspect, and build on. Contributions drawn from everyday campus use are welcome.
 
 ## Feedback and contributions
 

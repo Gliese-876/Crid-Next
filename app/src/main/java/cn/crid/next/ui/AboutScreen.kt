@@ -3,7 +3,6 @@ package cn.crid.next.ui
 import android.content.Intent
 import android.net.Uri
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -313,8 +312,7 @@ private fun AboutDocumentDialog(filename: String, title: String, text: UiText, o
                     if (filename == "MIT.txt") item {
                         Surface(modifier = Modifier.fillMaxWidth().testTag("about_license_scope_card"),
                             shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.tertiaryContainer,
-                            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
-                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary.copy(alpha = .35f))) {
+                            contentColor = MaterialTheme.colorScheme.onTertiaryContainer) {
                             Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                                     AppGlyph("info", tint = MaterialTheme.colorScheme.onTertiaryContainer,

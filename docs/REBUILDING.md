@@ -38,7 +38,7 @@ Without release signing environment variables, the release output is
 own Android signing key. The project's `tools/release.ps1` is for the maintainer's
 registered release key; the commands above work independently of that key.
 
-On Linux or macOS, use `./gradlew` with the same Gradle task names. Android Studio
+On Linux or macOS, use `sh ./gradlew` with the same Gradle task names. Android Studio
 can also open the root directory and build the project with JDK 21.
 
 ## Rebuild JExcelAPI

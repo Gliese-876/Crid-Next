@@ -3,6 +3,7 @@ package cn.crid.next.ui
 import android.content.Intent
 import android.net.Uri
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -310,10 +311,17 @@ private fun AboutDocumentDialog(filename: String, title: String, text: UiText, o
                 LazyColumn(Modifier.weight(1f).widthIn(max = 760.dp).fillMaxWidth(), contentPadding = PaddingValues(24.dp),
                     verticalArrangement = Arrangement.spacedBy(20.dp)) {
                     if (filename == "MIT.txt") item {
-                        Surface(shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
-                            Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Text(text.t("适用范围", "Scope", "適用範圍"), style = MaterialTheme.typography.titleMedium,
-                                    modifier = Modifier.semantics { heading() })
+                        Surface(modifier = Modifier.fillMaxWidth().testTag("about_license_scope_card"),
+                            shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.tertiaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary.copy(alpha = .35f))) {
+                            Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                                    AppGlyph("info", tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                                        modifier = Modifier.size(28.dp).testTag("about_license_scope_info"))
+                                    Text(text.t("适用范围", "Scope", "適用範圍"), style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f).semantics { heading() })
+                                }
                                 Text(text.t(
                                     "MIT 适用于本项目有权许可的原创代码、文档与资源。第三方组件和素材另依其许可及权利声明。",
                                     "MIT covers original code, documentation and assets this project has the right to license. Third-party components and assets retain their own licenses and rights notices.",

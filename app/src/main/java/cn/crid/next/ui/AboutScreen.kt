@@ -107,7 +107,7 @@ internal fun AboutScreen(text: UiText, onBack: () -> Unit) {
                 }
                 item {
                     AboutSection(text.t("作者", "Author", "作者")) {
-                        AboutRow("author", aboutPersonLabel("Gliese-876", "Gliese-876"),
+                        AboutRow("author", aboutPersonLabel("Gliese-876", "Gliese-876", text),
                             text.t("开发与维护", "Development and maintenance", "開發與維護"), "open",
                             onClick = { openLink(AboutProjectLinks.AUTHOR) }, modifier = Modifier.testTag("about_author"),
                             avatarResource = R.drawable.avatar_gliese_876)
@@ -129,7 +129,7 @@ internal fun AboutScreen(text: UiText, onBack: () -> Unit) {
                         aboutAcknowledgements.forEachIndexed { index, person ->
                             if (index > 0) AboutDivider()
                             key(person.profileUrl) {
-                                AboutRow("author", person.displayLabel, person.contribution(text), "open",
+                                AboutRow("author", person.displayLabel(text), person.contribution(text), "open",
                                     onClick = { openLink(person.profileUrl) },
                                     modifier = Modifier.testTag("about_contributor_${person.username.ifBlank { person.name }}"),
                                     avatarResource = person.avatarResource)
@@ -148,7 +148,7 @@ internal fun AboutScreen(text: UiText, onBack: () -> Unit) {
                             onClick = { licenseOrigin.capture(); documentOrigin = licenseOrigin; document = "MIT.txt" },
                             modifier = Modifier.testTag("about_license").modalOrigin(licenseOrigin))
                         AboutDivider()
-                        AboutRow("thanks", text.t("开源致谢", "Open-source acknowledgements", "開源致謝"),
+                        AboutRow("thanks", text.t("开源致谢", "Open-source credits", "開源致謝"),
                             text.t("与优秀的作品同行", "Built with great projects", "與優秀的作品同行"), "next",
                             onClick = { noticesOrigin.capture(); documentOrigin = noticesOrigin; document = "THIRD_PARTY_NOTICES.txt" },
                             modifier = Modifier.testTag("about_notices").modalOrigin(noticesOrigin))
@@ -166,7 +166,7 @@ internal fun AboutScreen(text: UiText, onBack: () -> Unit) {
     }
     document?.let { filename ->
         val title = if (filename == "MIT.txt") text.t("MIT 开源协议", "MIT License", "MIT 開源協議")
-        else text.t("开源致谢", "Open-source acknowledgements", "開源致謝")
+        else text.t("开源致谢", "Open-source credits", "開源致謝")
         AboutDocumentDialog(filename, title, text, documentOrigin) { document = null }
     }
 }

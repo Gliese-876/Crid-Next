@@ -12,16 +12,15 @@ internal data class AboutAcknowledgement(
     val contributionZhTw: String = "",
     @DrawableRes val avatarResource: Int? = null,
 ) {
-    val displayLabel: String
-        get() = aboutPersonLabel(name, username)
+    fun displayLabel(text: UiText): String = aboutPersonLabel(name, username, text)
 
     fun contribution(text: UiText): String = text.t(contributionZhCn, contributionEn, contributionZhTw)
 }
 
-internal fun aboutPersonLabel(name: String, username: String): String = when {
+internal fun aboutPersonLabel(name: String, username: String, text: UiText): String = when {
     username.isBlank() -> name
     name.isBlank() || name == username -> username
-    else -> "$name (@$username)"
+    else -> text.t("$name（@$username）", "$name (@$username)", "$name（@$username）")
 }
 
 // Add one entry per person; the About page renders each entry with its own profile link.

@@ -1,6 +1,8 @@
 # Image attribution
 
-The GitHub and Gitee icon paths are from [Simple Icons](https://github.com/simple-icons/simple-icons/tree/98820a4dc8c363ca72fa2c0d294ea4a0a9bba75d), whose [CC0 1.0 Universal text](../../third_party/licenses/CC0-1.0.txt) applies to the copyright and related rights its affirmers can grant. The SVG copies add a white background for readability in light and dark Markdown themes; the Android VectorDrawables convert the same paths. CC0 does not grant trademark rights. The platforms' names and marks remain subject to their respective holders' rights; their use here does not imply endorsement.
+The Android GitHub and Gitee icon paths are from [Simple Icons](https://github.com/simple-icons/simple-icons/tree/98820a4dc8c363ca72fa2c0d294ea4a0a9bba75d), whose [CC0 1.0 Universal text](../../third_party/licenses/CC0-1.0.txt) applies to the copyright and related rights its affirmers can grant. The Android VectorDrawables convert those paths. CC0 does not grant trademark rights. The platforms' names and marks remain subject to their respective holders' rights; their use here does not imply endorsement.
+
+README download and source links use hosted [Shields.io badges](https://shields.io/badges/static-badge), wrapped in standard Markdown links.
 
 The following GitHub avatars identify the author and acknowledged contributors. They were retrieved on 2026-10-06 and are stored locally so the app's credits work offline. The PNG copies retain the supplied image pixels. These records identify the source accounts, not the copyright owners of the underlying artwork.
 

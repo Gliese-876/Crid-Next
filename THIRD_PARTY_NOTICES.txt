@@ -10,7 +10,7 @@ GitHub and Gitee brand icon paths
 Simple Icons contributors — CC0 1.0 Universal for rights they can grant
 https://github.com/simple-icons/simple-icons/tree/98820a4dc8c363ca72fa2c0d294ea4a0a9bba75d
 https://creativecommons.org/publicdomain/zero/1.0/
-Converted to Android vector drawables and placed on light backplates for the README.
+Converted to Android vector drawables for the application's project links.
 CC0 does not grant trademark or patent rights or clear rights held by others.
 Brand names and marks remain subject to their respective holders' rights.
 The use of these marks does not imply endorsement by GitHub or Gitee.

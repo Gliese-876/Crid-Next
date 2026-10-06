@@ -26,7 +26,7 @@ APK / AAB 是由上述不同来源内容组成的分发物，不能将其中全�
 
 ## 平台图标、名称与商标
 
-GitHub、Gitee 图标的路径数据来自指定版本的 Simple Icons，按其 [CC0 1.0 Universal](third_party/licenses/CC0-1.0.txt) 声明提供；Android VectorDrawable 和 README SVG 是这些路径的格式转换。来源、版本和调整记录见[素材归属说明](docs/assets/ATTRIBUTION.md)。
+应用内 GitHub、Gitee 图标的路径数据来自指定版本的 Simple Icons，按其 [CC0 1.0 Universal](third_party/licenses/CC0-1.0.txt) 声明提供；Android VectorDrawable 是这些路径的格式转换。来源、版本和 README 托管徽章的说明见[素材归属说明](docs/assets/ATTRIBUTION.md)。
 
 CC0 处理的是声明者有权放弃或许可的版权及相关权利。其第 4(a) 条明确排除商标权和专利权，声明者也不负责为其他权利人清理权利。因此，图标路径的 CC0 声明不等于 GitHub、Gitee 的名称或商标可被任意使用，也不表示这些平台认可或赞助本项目；具体使用仍须有相应权利依据。[CC0 原文第 2–4 条](https://creativecommons.org/publicdomain/zero/1.0/legalcode.en)
 

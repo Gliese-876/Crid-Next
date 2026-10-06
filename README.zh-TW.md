@@ -6,11 +6,11 @@ Crid Next 是一款 Android 課表應用程式，可以查看今天的安排、�
 
 **Android 12 及以上 · 简体中文 / 繁體中文 / English · 首個公開版本 2.0.0**
 
-[GitHub 下載](https://github.com/Gliese-876/Crid-Next/releases/latest) · [Gitee 下載](https://gitee.com/gliese-876/crid-next/releases) · [GitHub 原始碼](https://github.com/Gliese-876/Crid-Next) · [Gitee 原始碼](https://gitee.com/gliese-876/crid-next) · [更新紀錄](CHANGELOG.md)
+[<img src="docs/assets/github.svg" width="18" height="18" alt=""> GitHub 下載](https://github.com/Gliese-876/Crid-Next/releases/latest) · [<img src="docs/assets/gitee.svg" width="18" height="18" alt=""> Gitee 下載](https://gitee.com/gliese-876/crid-next/releases) · [<img src="docs/assets/github.svg" width="18" height="18" alt=""> GitHub 原始碼](https://github.com/Gliese-876/Crid-Next) · [<img src="docs/assets/gitee.svg" width="18" height="18" alt=""> Gitee 原始碼](https://gitee.com/gliese-876/crid-next) · [更新紀錄](CHANGELOG.md)
 
 ## 安裝
 
-在 [GitHub 發行頁](https://github.com/Gliese-876/Crid-Next/releases/latest)或 [Gitee 發行頁](https://gitee.com/gliese-876/crid-next/releases)下載 `.apk` 檔案，開啟後依系統提示安裝。首次透過瀏覽器或檔案管理員安裝時，需要允許該應用程式安裝未知來源的應用程式。APK 支援 ARM64、ARM32、x86 和 x86_64 裝置。
+在 [<img src="docs/assets/github.svg" width="18" height="18" alt=""> GitHub 發行頁](https://github.com/Gliese-876/Crid-Next/releases/latest)或 [<img src="docs/assets/gitee.svg" width="18" height="18" alt=""> Gitee 發行頁](https://gitee.com/gliese-876/crid-next/releases)下載 `.apk` 檔案，開啟後依系統提示安裝。首次透過瀏覽器或檔案管理員安裝時，需要允許該應用程式安裝未知來源的應用程式。APK 支援 ARM64、ARM32、x86 和 x86_64 裝置。
 
 ## 你可以用它做什麼
 
@@ -78,9 +78,16 @@ Crid Next 延續了 [Crid](https://github.com/Gliese-876/Crid) 的課表應用�
 
 ## 回饋與貢獻
 
-歡迎在 [GitHub Issues](https://github.com/Gliese-876/Crid-Next/issues) 回報問題或提出建議。匯入問題請附匿名課表、預期結果和應用程式版本；介面問題可附裝置型號及螢幕截圖。提交檔案前請移除真實姓名、學號和隱藏中繼資料。[公開測試樣例說明](tests/README.md)介紹了現有樣例和檢查方式。
+歡迎在 [<img src="docs/assets/github.svg" width="18" height="18" alt=""> GitHub Issues](https://github.com/Gliese-876/Crid-Next/issues) 回報問題或提出建議。匯入問題請附匿名課表、預期結果和應用程式版本；介面問題可附裝置型號及螢幕截圖。提交檔案前請移除真實姓名、學號和隱藏中繼資料。[公開測試樣例說明](tests/README.md)介紹了現有樣例和檢查方式。
 
-感謝 [方緣（Fangyuanz06）](https://github.com/Fangyuanz06) 協助測試和改進，感謝 [ChiHuchen](https://github.com/ChiHuchen) 提供北京校區課表資料，也感謝參與回饋與貢獻的每個人。
+作者：[<img src="docs/assets/avatar-gliese-876.png" width="40" height="40" alt=""> Gliese-876](https://github.com/Gliese-876)
+
+特別鳴謝：
+
+- [<img src="docs/assets/avatar-fangyuanz06.png" width="40" height="40" alt=""> 方緣（Fangyuanz06）](https://github.com/Fangyuanz06)：協助測試和改進。
+- [<img src="docs/assets/avatar-chihuchen.png" width="40" height="40" alt=""> ChiHuchen](https://github.com/ChiHuchen)：提供北京校區課表資料。
+
+也感謝參與回饋與貢獻的每個人。
 
 ## 開發者：建置與測試
 

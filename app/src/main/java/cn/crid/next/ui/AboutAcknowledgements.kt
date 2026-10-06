@@ -1,5 +1,8 @@
 package cn.crid.next.ui
 
+import androidx.annotation.DrawableRes
+import cn.crid.next.R
+
 internal data class AboutAcknowledgement(
     val name: String,
     val profileUrl: String,
@@ -7,6 +10,7 @@ internal data class AboutAcknowledgement(
     val contributionZhCn: String = "",
     val contributionEn: String = "",
     val contributionZhTw: String = "",
+    @DrawableRes val avatarResource: Int? = null,
 ) {
     val displayLabel: String
         get() = aboutPersonLabel(name, username)
@@ -16,7 +20,8 @@ internal data class AboutAcknowledgement(
 
 internal fun aboutPersonLabel(name: String, username: String): String = when {
     username.isBlank() -> name
-    else -> "${name.ifBlank { username }}(@$username)"
+    name.isBlank() || name == username -> username
+    else -> "$name (@$username)"
 }
 
 // Add one entry per person; the About page renders each entry with its own profile link.
@@ -28,6 +33,7 @@ internal val aboutAcknowledgements = listOf(
         contributionZhCn = "协助测试和改进",
         contributionEn = "Testing and improvements",
         contributionZhTw = "協助測試和改進",
+        avatarResource = R.drawable.avatar_fangyuanz06,
     ),
     AboutAcknowledgement(
         name = "",
@@ -36,5 +42,6 @@ internal val aboutAcknowledgements = listOf(
         contributionZhCn = "提供北京校区数据",
         contributionEn = "Beijing campus timetable data",
         contributionZhTw = "提供北京校區資料",
+        avatarResource = R.drawable.avatar_chihuchen,
     ),
 )

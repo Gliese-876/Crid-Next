@@ -3,6 +3,21 @@ Crid Next — third-party software
 Crid Next's original implementation is licensed under MIT. Third-party
 components retain their own copyright notices and licenses.
 
+GitHub and Gitee brand icon paths
+Simple Icons contributors — CC0 1.0 Universal
+https://github.com/simple-icons/simple-icons/tree/98820a4dc8c363ca72fa2c0d294ea4a0a9bba75d
+https://creativecommons.org/publicdomain/zero/1.0/
+Converted to Android vector drawables and placed on light backplates for the README.
+Brand names and marks remain the property of their respective owners.
+
+GitHub profile avatars
+Gliese-876, Fangyuanz06 and ChiHuchen — artwork remains the respective owner's work.
+https://github.com/Gliese-876
+https://github.com/Fangyuanz06
+https://github.com/ChiHuchen
+Local copies identify the author and acknowledged contributors. Source URLs are
+recorded in docs/assets/ATTRIBUTION.md; these images are not relicensed as app code.
+
 Kotlin, kotlinx-coroutines and kotlinx-serialization
 JetBrains and contributors — Apache License 2.0
 https://github.com/JetBrains/kotlin

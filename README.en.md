@@ -6,11 +6,11 @@ Crid Next is an Android timetable app for checking today's classes, managing sem
 
 **Android 12 or later · 简体中文 / 繁體中文 / English · First public release: 2.0.0**
 
-[Download from GitHub](https://github.com/Gliese-876/Crid-Next/releases/latest) · [Download from Gitee](https://gitee.com/gliese-876/crid-next/releases) · [GitHub source](https://github.com/Gliese-876/Crid-Next) · [Gitee source](https://gitee.com/gliese-876/crid-next) · [Changelog](CHANGELOG.md)
+[<img src="docs/assets/github.svg" width="18" height="18" alt=""> Download from GitHub](https://github.com/Gliese-876/Crid-Next/releases/latest) · [<img src="docs/assets/gitee.svg" width="18" height="18" alt=""> Download from Gitee](https://gitee.com/gliese-876/crid-next/releases) · [<img src="docs/assets/github.svg" width="18" height="18" alt=""> GitHub source](https://github.com/Gliese-876/Crid-Next) · [<img src="docs/assets/gitee.svg" width="18" height="18" alt=""> Gitee source](https://gitee.com/gliese-876/crid-next) · [Changelog](CHANGELOG.md)
 
 ## Install
 
-Download the `.apk` file from the [GitHub releases](https://github.com/Gliese-876/Crid-Next/releases/latest) or [Gitee releases](https://gitee.com/gliese-876/crid-next/releases), open it, and follow the installation prompts. When installing through a browser or file manager for the first time, allow that app to install apps from unknown sources. The APK supports ARM64, ARM32, x86, and x86_64 devices.
+Download the `.apk` file from the [<img src="docs/assets/github.svg" width="18" height="18" alt=""> GitHub releases](https://github.com/Gliese-876/Crid-Next/releases/latest) or [<img src="docs/assets/gitee.svg" width="18" height="18" alt=""> Gitee releases](https://gitee.com/gliese-876/crid-next/releases), open it, and follow the installation prompts. When installing through a browser or file manager for the first time, allow that app to install apps from unknown sources. The APK supports ARM64, ARM32, x86, and x86_64 devices.
 
 ## What you can do
 
@@ -78,9 +78,16 @@ This project is also an experiment in **vibe coding with frontier models**: usin
 
 ## Feedback and contributions
 
-Report problems or suggest improvements through [GitHub Issues](https://github.com/Gliese-876/Crid-Next/issues). For import problems, include an anonymized timetable, the expected result, and the app version. For interface problems, include your device model and a screenshot when useful. Remove real names, student IDs, and hidden metadata before submitting files. The [public fixture guide](tests/README.md) describes the existing examples and checks.
+Report problems or suggest improvements through [<img src="docs/assets/github.svg" width="18" height="18" alt=""> GitHub Issues](https://github.com/Gliese-876/Crid-Next/issues). For import problems, include an anonymized timetable, the expected result, and the app version. For interface problems, include your device model and a screenshot when useful. Remove real names, student IDs, and hidden metadata before submitting files. The [public fixture guide](tests/README.md) describes the existing examples and checks.
 
-Thanks to [Fangyuanz06 (方缘)](https://github.com/Fangyuanz06) for testing and improvements, [ChiHuchen](https://github.com/ChiHuchen) for Beijing campus timetable data, and everyone who shares feedback or contributes.
+Author: [<img src="docs/assets/avatar-gliese-876.png" width="40" height="40" alt=""> Gliese-876](https://github.com/Gliese-876)
+
+Special thanks:
+
+- [<img src="docs/assets/avatar-fangyuanz06.png" width="40" height="40" alt=""> Fangyuanz06 (方缘)](https://github.com/Fangyuanz06) for testing and improvements.
+- [<img src="docs/assets/avatar-chihuchen.png" width="40" height="40" alt=""> ChiHuchen](https://github.com/ChiHuchen) for Beijing campus timetable data.
+
+Thanks to everyone who shares feedback or contributes.
 
 ## For developers: build and test
 

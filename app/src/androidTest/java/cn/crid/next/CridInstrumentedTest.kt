@@ -384,7 +384,7 @@ class CridInstrumentedTest {
             assertEquals(0,focused.windowInsetsController!!.systemBarsAppearance and WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
         }
         compose.onNodeWithTag("about_content").performScrollToNode(hasTestTag("about_author"))
-        compose.onNodeWithText("Gliese-876(@Gliese-876)").assertExists()
+        compose.onNodeWithText("Gliese-876").assertExists()
         compose.onNodeWithTag("about_content").performScrollToNode(hasTestTag("about_license"))
         compose.onNodeWithTag("about_license").performClick()
         compose.onNodeWithTag("about_license_text").assertTextContains("Permission is hereby granted",substring=true)

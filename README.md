@@ -6,11 +6,11 @@ Crid Next 是一款 Android 课表应用，可以查看今天的安排、管理�
 
 **Android 12 及以上 · 简体中文 / 繁體中文 / English · 首个公开版本 2.0.0**
 
-[GitHub 下载](https://github.com/Gliese-876/Crid-Next/releases/latest) · [Gitee 下载](https://gitee.com/gliese-876/crid-next/releases) · [GitHub 源码](https://github.com/Gliese-876/Crid-Next) · [Gitee 源码](https://gitee.com/gliese-876/crid-next) · [更新日志](CHANGELOG.md)
+[<img src="docs/assets/github.svg" width="18" height="18" alt=""> GitHub 下载](https://github.com/Gliese-876/Crid-Next/releases/latest) · [<img src="docs/assets/gitee.svg" width="18" height="18" alt=""> Gitee 下载](https://gitee.com/gliese-876/crid-next/releases) · [<img src="docs/assets/github.svg" width="18" height="18" alt=""> GitHub 源码](https://github.com/Gliese-876/Crid-Next) · [<img src="docs/assets/gitee.svg" width="18" height="18" alt=""> Gitee 源码](https://gitee.com/gliese-876/crid-next) · [更新日志](CHANGELOG.md)
 
 ## 安装
 
-在 [GitHub 发行页](https://github.com/Gliese-876/Crid-Next/releases/latest)或 [Gitee 发行页](https://gitee.com/gliese-876/crid-next/releases)下载 `.apk` 文件，打开后按系统提示安装。首次通过浏览器或文件管理器安装时，需要允许该应用安装未知来源的应用。APK 支持 ARM64、ARM32、x86 和 x86_64 设备。
+在 [<img src="docs/assets/github.svg" width="18" height="18" alt=""> GitHub 发行页](https://github.com/Gliese-876/Crid-Next/releases/latest)或 [<img src="docs/assets/gitee.svg" width="18" height="18" alt=""> Gitee 发行页](https://gitee.com/gliese-876/crid-next/releases)下载 `.apk` 文件，打开后按系统提示安装。首次通过浏览器或文件管理器安装时，需要允许该应用安装未知来源的应用。APK 支持 ARM64、ARM32、x86 和 x86_64 设备。
 
 ## 你可以用它做什么
 
@@ -78,9 +78,16 @@ Crid Next 延续了 [Crid](https://github.com/Gliese-876/Crid) 的课表应用�
 
 ## 反馈与贡献
 
-欢迎在 [GitHub Issues](https://github.com/Gliese-876/Crid-Next/issues) 反馈问题或提出建议。导入问题请附匿名课表、预期结果和应用版本；界面问题可附设备型号及截图。提交文件前请移除真实姓名、学号和隐藏元数据。[公开测试样例说明](tests/README.md)介绍了现有样例和检查方式。
+欢迎在 [<img src="docs/assets/github.svg" width="18" height="18" alt=""> GitHub Issues](https://github.com/Gliese-876/Crid-Next/issues) 反馈问题或提出建议。导入问题请附匿名课表、预期结果和应用版本；界面问题可附设备型号及截图。提交文件前请移除真实姓名、学号和隐藏元数据。[公开测试样例说明](tests/README.md)介绍了现有样例和检查方式。
 
-感谢 [方缘（Fangyuanz06）](https://github.com/Fangyuanz06) 协助测试和改进，感谢 [ChiHuchen](https://github.com/ChiHuchen) 提供北京校区课表数据，也感谢参与反馈与贡献的每个人。
+作者：[<img src="docs/assets/avatar-gliese-876.png" width="40" height="40" alt=""> Gliese-876](https://github.com/Gliese-876)
+
+特别鸣谢：
+
+- [<img src="docs/assets/avatar-fangyuanz06.png" width="40" height="40" alt=""> 方缘（Fangyuanz06）](https://github.com/Fangyuanz06)：协助测试和改进。
+- [<img src="docs/assets/avatar-chihuchen.png" width="40" height="40" alt=""> ChiHuchen](https://github.com/ChiHuchen)：提供北京校区课表数据。
+
+也感谢参与反馈与贡献的每个人。
 
 ## 开发者：构建与测试
 

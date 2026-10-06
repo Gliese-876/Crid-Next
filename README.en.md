@@ -1,4 +1,4 @@
-[简体中文](README.md) · [繁體中文](README.zh-TW.md) · [English](README.en.md)
+[简体中文](README.md) · [繁體中文](README.zh-Hant.md) · [English](README.en.md)
 
 # Crid Next
 
@@ -114,4 +114,4 @@ See the [release workflow](docs/发布流程.md) for release builds and signing,
 
 ## License
 
-Crid Next's original code is released under the [MIT License](LICENSE). Third-party components keep their own licenses, listed in the [third-party notices](app/src/main/assets/licenses/THIRD_PARTY_NOTICES.txt). JExcelAPI uses LGPL-2.1-or-later; its corresponding source and instructions for replacing it and rebuilding are in [third_party/](third_party/README.md). License texts are also available offline in **Settings → About**.
+Unless otherwise stated, Crid Next's original source code, documentation and original assets are available under the [MIT License](LICENSE), to the extent the project has the right to license them, for use, modification and redistribution on its terms. Third-party components retain their own licenses; brand icons and avatars have separate rights notices. Bundling them with the app does not relicense them under MIT. See [Licensing scope](LICENSING.md#english-summary); third-party license texts are also available offline in **Settings → About**.

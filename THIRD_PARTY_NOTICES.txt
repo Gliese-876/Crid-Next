@@ -1,22 +1,32 @@
 Crid Next — third-party software
 
-Crid Next's original implementation is licensed under MIT. Third-party
-components retain their own copyright notices and licenses.
+Except where otherwise stated, Crid Next's original source code, documentation
+and original assets are licensed under MIT to the extent its contributors have
+the right to grant that license. Third-party materials retain their own licenses
+and rights notices; the complete APK/AAB is not exclusively MIT-licensed.
+Scope and redistribution details: LICENSING.md in the source repository.
 
 GitHub and Gitee brand icon paths
-Simple Icons contributors — CC0 1.0 Universal
+Simple Icons contributors — CC0 1.0 Universal for rights they can grant
 https://github.com/simple-icons/simple-icons/tree/98820a4dc8c363ca72fa2c0d294ea4a0a9bba75d
 https://creativecommons.org/publicdomain/zero/1.0/
 Converted to Android vector drawables and placed on light backplates for the README.
-Brand names and marks remain the property of their respective owners.
+CC0 does not grant trademark or patent rights or clear rights held by others.
+Brand names and marks remain subject to their respective holders' rights.
+The use of these marks does not imply endorsement by GitHub or Gitee.
 
 GitHub profile avatars
-Gliese-876, Fangyuanz06 and ChiHuchen — artwork remains the respective owner's work.
+Source accounts: Gliese-876, Fangyuanz06 and ChiHuchen.
 https://github.com/Gliese-876
 https://github.com/Fangyuanz06
 https://github.com/ChiHuchen
-Local copies identify the author and acknowledged contributors. Source URLs are
-recorded in docs/assets/ATTRIBUTION.md; these images are not relicensed as app code.
+Local copies identify the author and acknowledged contributors. Copyright and
+other applicable rights belong to their respective rightsholders, who are not
+necessarily the account holders. Public availability is not an MIT, CC0 or other
+open license. These images are excluded from Crid Next's MIT grant. The recorded
+sources do not establish additional open-license permission from the image
+rightsholders; reuse requires an applicable authorization or other legal basis.
+File and source records: docs/assets/ATTRIBUTION.md.
 
 Kotlin, kotlinx-coroutines and kotlinx-serialization
 JetBrains and contributors — Apache License 2.0
@@ -46,14 +56,16 @@ GNU Lesser General Public License 2.1 or later
 https://sourceforge.net/projects/jexcelapi/
 Unmodified matching source: third_party/jxl-2.6.12-sources.jar in this repository.
 Source artifact: https://repo.maven.apache.org/maven2/net/sourceforge/jexcelapi/jxl/2.6.12/jxl-2.6.12-sources.jar
-The source build links the dependency by its Maven coordinate; it may be
-replaced and the application rebuilt using the documented Gradle commands.
+Complete corresponding sources, build files and resources:
+third_party/jxl-2.6.12-complete-sources.zip in this repository and the releases.
+Modification and reverse engineering to debug library modifications are permitted.
+The library may be replaced and the app relinked using docs/REBUILDING.md.
 
 jsoup 1.18.3
 Jonathan Hedley and contributors — MIT License
 https://jsoup.org/
 https://github.com/jhy/jsoup
 
-Full license texts are bundled in app/src/main/assets/licenses and reproduced
-below in the application's open-source notices. Development-only test tools
-are not part of the production application.
+The application's app/src/main/assets/licenses/THIRD_PARTY_NOTICES.txt contains
+the full Apache-2.0, LGPL-2.1, jsoup MIT and CC0 texts. This root file is their
+attribution index. Development-only test tools are not part of the production app.

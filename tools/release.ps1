@@ -270,7 +270,7 @@ try {
     Copy-Item -LiteralPath $builtApk -Destination (Join-Path $releaseDirectory $apkName) -Force
     Copy-Item -LiteralPath $builtBundle -Destination (Join-Path $releaseDirectory $bundleName) -Force
     Copy-Item -LiteralPath $mappingFile -Destination (Join-Path $releaseDirectory 'r8-mapping.txt') -Force
-    $licenseFiles = @('LICENSE', 'app/src/main/assets/licenses/THIRD_PARTY_NOTICES.txt',
+    $licenseFiles = @('LICENSE', 'LICENSING.md', 'app/src/main/assets/licenses/THIRD_PARTY_NOTICES.txt',
         'third_party/jxl-2.6.12-complete-sources.zip', 'docs/REBUILDING.md')
     foreach ($licenseFile in $licenseFiles) {
         Copy-Item -LiteralPath (Join-Path $projectRoot $licenseFile) -Destination $releaseDirectory -Force
@@ -304,7 +304,7 @@ try {
     $null = Invoke-ReleaseTool -Executable (Get-Command git).Source -Arguments @(
         'archive', '--format=zip', "--output=$sourceArchivePath", $sourceCommit
     )
-    $distributionNames = @($apkName, $bundleName, $sourceArchiveName, 'r8-mapping.txt', 'LICENSE',
+    $distributionNames = @($apkName, $bundleName, $sourceArchiveName, 'r8-mapping.txt', 'LICENSE', 'LICENSING.md',
         'THIRD_PARTY_NOTICES.txt', 'jxl-2.6.12-complete-sources.zip', 'REBUILDING.md')
     $distributionFiles = foreach ($fileName in $distributionNames) {
         $file = Get-Item -LiteralPath (Join-Path $releaseDirectory $fileName)

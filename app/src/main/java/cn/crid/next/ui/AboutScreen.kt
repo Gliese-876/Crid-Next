@@ -144,12 +144,12 @@ internal fun AboutScreen(text: UiText, onBack: () -> Unit) {
                             onClick = { openLink(AboutProjectLinks.ORIGINAL_CRID) }, modifier = Modifier.testTag("about_original_project"))
                         AboutDivider()
                         AboutRow("code", text.t("MIT 开源协议", "MIT License", "MIT 開源協議"),
-                            text.t("自由使用、修改与分享", "Free to use, change and share", "自由使用、修改與分享"), "next",
+                            text.t("本项目原创内容", "Original project content", "本專案原創內容"), "next",
                             onClick = { licenseOrigin.capture(); documentOrigin = licenseOrigin; document = "MIT.txt" },
                             modifier = Modifier.testTag("about_license").modalOrigin(licenseOrigin))
                         AboutDivider()
-                        AboutRow("thanks", text.t("开源致谢", "Open-source credits", "開源致謝"),
-                            text.t("与优秀的作品同行", "Built with great projects", "與優秀的作品同行"), "next",
+                        AboutRow("thanks", text.t("第三方许可", "Third-party licenses", "第三方授權"),
+                            text.t("依赖与素材", "Dependencies and assets", "相依元件與素材"), "next",
                             onClick = { noticesOrigin.capture(); documentOrigin = noticesOrigin; document = "THIRD_PARTY_NOTICES.txt" },
                             modifier = Modifier.testTag("about_notices").modalOrigin(noticesOrigin))
                     }
@@ -166,7 +166,7 @@ internal fun AboutScreen(text: UiText, onBack: () -> Unit) {
     }
     document?.let { filename ->
         val title = if (filename == "MIT.txt") text.t("MIT 开源协议", "MIT License", "MIT 開源協議")
-        else text.t("开源致谢", "Open-source credits", "開源致謝")
+        else text.t("第三方许可", "Third-party licenses", "第三方授權")
         AboutDocumentDialog(filename, title, text, documentOrigin) { document = null }
     }
 }
@@ -307,7 +307,21 @@ private fun AboutDocumentDialog(filename: String, title: String, text: UiText, o
         Surface(Modifier.fillMaxSize().testTag("about_document"), color = MaterialTheme.colorScheme.surface) {
             Column(Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing), horizontalAlignment = Alignment.CenterHorizontally) {
                 AboutHeader(title, text, motion.dismiss, "about_document_back")
-                LazyColumn(Modifier.weight(1f).widthIn(max = 760.dp).fillMaxWidth(), contentPadding = PaddingValues(24.dp)) {
+                LazyColumn(Modifier.weight(1f).widthIn(max = 760.dp).fillMaxWidth(), contentPadding = PaddingValues(24.dp),
+                    verticalArrangement = Arrangement.spacedBy(20.dp)) {
+                    if (filename == "MIT.txt") item {
+                        Surface(shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
+                            Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Text(text.t("适用范围", "Scope", "適用範圍"), style = MaterialTheme.typography.titleMedium,
+                                    modifier = Modifier.semantics { heading() })
+                                Text(text.t(
+                                    "MIT 适用于本项目有权许可的原创代码、文档与资源。第三方组件和素材另依其许可及权利声明。",
+                                    "MIT covers original code, documentation and assets this project has the right to license. Third-party components and assets retain their own licenses and rights notices.",
+                                    "MIT 適用於本專案有權授權的原創程式碼、文件與資源。第三方元件與素材另依其授權及權利聲明。",
+                                ), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.testTag("about_license_scope"))
+                            }
+                        }
+                    }
                     item {
                         SelectionContainer {
                             Text(body, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.testTag("about_license_text"))

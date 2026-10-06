@@ -1,4 +1,4 @@
-[简体中文](README.md) · [繁體中文](README.zh-TW.md) · [English](README.en.md)
+[简体中文](README.md) · [繁體中文](README.zh-Hant.md) · [English](README.en.md)
 
 # Crid Next
 
@@ -114,4 +114,4 @@ sh ./gradlew :core:test :app:testDebugUnitTest :app:assembleDebug
 
 ## 许可
 
-Crid Next 的原创代码以 [MIT License](LICENSE) 开源。第三方组件保留各自许可，详见[第三方开源声明](app/src/main/assets/licenses/THIRD_PARTY_NOTICES.txt)；其中 JExcelAPI 使用 LGPL-2.1-or-later，其对应源码和替换构建说明保存在 [third_party/](third_party/README.md)。相关协议也可以在应用的「设置 → 关于」中离线阅读。
+除另有声明，Crid Next 有权许可的原创源代码、文档与原创资源以 [MIT License](LICENSE) 开源，可按其条款使用、修改及分发。第三方组件保留各自许可，品牌图标和头像另有权利说明；这些内容不因随应用发布而改为 MIT。具体适用范围见[许可说明](LICENSING.md)，第三方许可全文也可在应用的「设置 → 关于」中离线阅读。

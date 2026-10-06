@@ -1,23 +1,34 @@
 # Core computation benchmark
 
-Run from the repository root with PowerShell 7 after a normal project build has populated the Gradle dependency cache:
+Use a Git checkout of the public repository with tag `v2.0.0` available. Install
+JDK 21 under `tools/local/jdk-21` and run a normal project build to populate the
+Gradle dependency cache, then run from the repository root with PowerShell 7:
 
 ```powershell
-./tools/performance.ps1
+./tools/performance.ps1 -BaselineRef v2.0.0 -OutputDirectory artifacts/performance-v2.0.0
 ```
 
-The script uses the bundled JDK at `tools/local/jdk-21` and cached Kotlin 2.3.0 compiler. It exports the baseline from Git (`d2b0fe3` by default), copies the current sources, and compiles both in separate artifact directories without running Gradle. Nothing is read from `.env`.
+The script uses that local JDK and the cached Kotlin 2.3.0 compiler. It exports
+the selected baseline from Git, copies the current working-tree sources, and
+compiles both in separate artifact directories without running Gradle. The JDK
+and dependency cache are local prerequisites, not files included in the source
+archive. Nothing is read from `.env`.
+
+The script's default `d2b0fe3` belongs to the private development history used for
+the 2026-10-02 measurements. The public history starts at `v2.0.0`, so explicitly
+pass `-BaselineRef v2.0.0` or another compatible public commit. A downloaded source
+ZIP alone has no Git history from which to export a baseline.
 
 For a quick behavioral comparison without timing:
 
 ```powershell
-./tools/performance.ps1 -VerifyOnly
+./tools/performance.ps1 -BaselineRef v2.0.0 -VerifyOnly -OutputDirectory artifacts/performance-v2.0.0
 ```
 
 An additional probe compares the single-day public entry point on the dense fixture and its out-of-semester early return:
 
 ```powershell
-./tools/performance.ps1 -SingleDayProbe -OutputDirectory artifacts/performance-2026-10-02/single-day
+./tools/performance.ps1 -BaselineRef v2.0.0 -SingleDayProbe -OutputDirectory artifacts/performance-v2.0.0/single-day
 ```
 
 The single-day probe uses at least 100 warm-up operations and batches of up to 256 operations. The shorter early-return probe uses at least 10,000 warm-up operations and permits batches of up to 1,000,000 operations. `-VerifyOnly` can also be combined with `-SingleDayProbe`.
@@ -30,6 +41,13 @@ Four timed workloads use deterministic, validator-approved fixtures:
 | Display | Project 112 days of occurrences for 120 courses / 720 lessons into display cards; occurrence calculation is excluded. |
 | Import | Preview a merge of 180 courses plus duplicate/new arrangements, including conflict detection and warnings. |
 | Reminders | Build the complete reminder snapshot with 120 courses and the existing 64-alarm cap. |
+
+The schedule adapters deliberately differ: the baseline calls the single-date
+entry point for each date, while the current variant prepares one shared index
+for the batch. This preserves the method used for the original optimization
+experiment. Even when both variants use `v2.0.0` code, their schedule timings can
+differ because of this calling pattern; that difference is not a measured
+improvement between releases.
 
 Each JVM first checks full output SHA-256 digests (including ordering, representatives, source lessons, warnings, and reminder content). An additional fixed-seed comparison covers 128 randomized card-projection cases. A mismatch aborts the run.
 

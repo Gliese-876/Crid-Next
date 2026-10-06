@@ -1,6 +1,6 @@
-[简体中文](README.md) · [繁體中文](README.zh-Hant.md) · [English](README.en.md)
-
 # Crid Next
+
+[简体中文](README.md) · [繁體中文](README.zh-Hant.md) · [English](README.en.md)
 
 Crid Next is an Android timetable app for checking today's classes, managing semesters and timetable plans, and getting reminders before class.
 
@@ -85,12 +85,12 @@ This project is also an experiment in **vibe coding with frontier models**: usin
 
 Report problems or suggest improvements through [GitHub Issues](https://github.com/Gliese-876/Crid-Next/issues). For import problems, include an anonymized timetable, the expected result, and the app version. For interface problems, include your device model and a screenshot when useful. Remove real names, student IDs, and hidden metadata before submitting files. The [public fixture guide](tests/README.md) describes the existing examples and checks.
 
-Author: [<img src="docs/assets/avatar-gliese-876.png" width="40" height="40" alt=""> Gliese-876](https://github.com/Gliese-876)
+Author: [![Gliese-876](https://img.shields.io/badge/Gliese--876-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Gliese-876)
 
 Special thanks:
 
-- [<img src="docs/assets/avatar-fangyuanz06.png" width="40" height="40" alt=""> Fangyuanz06 (方缘)](https://github.com/Fangyuanz06) for testing and improvements.
-- [<img src="docs/assets/avatar-chihuchen.png" width="40" height="40" alt=""> ChiHuchen](https://github.com/ChiHuchen) for Beijing campus timetable data.
+- [![Fangyuanz06 (方缘)](https://img.shields.io/badge/Fangyuanz06%20%28%E6%96%B9%E7%BC%98%29-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Fangyuanz06) for testing and improvements.
+- [![ChiHuchen](https://img.shields.io/badge/ChiHuchen-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/ChiHuchen) for Beijing campus timetable data.
 
 Thanks to everyone who shares feedback or contributes.
 

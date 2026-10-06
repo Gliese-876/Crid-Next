@@ -35,8 +35,10 @@ The root [`THIRD_PARTY_NOTICES.txt`](../THIRD_PARTY_NOTICES.txt) is an attributi
 index. The [application's copy](../app/src/main/assets/licenses/THIRD_PARTY_NOTICES.txt)
 also includes the full license texts and is available offline in the app.
 
-Each release distributes the matching Crid Next source archive, this complete
-JExcelAPI source ZIP, the app's full third-party notices, the MIT license and the
+The published `v2.0.0` release on [GitHub](https://github.com/Gliese-876/Crid-Next/releases/tag/v2.0.0)
+and [Gitee](https://gitee.com/gliese-876/crid-next/releases/tag/v2.0.0) includes the
+matching Crid Next source archive, this complete JExcelAPI source ZIP, the app's
+full third-party notices, the MIT license, [its scope](../LICENSING.md) and the
 [rebuilding instructions](../docs/REBUILDING.md) alongside the APK. Keep these
 materials available with binary downloads on each release host. This uses the
 source-and-relinking route in [LGPL 2.1 §6(a) and §6(d)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html#section6).

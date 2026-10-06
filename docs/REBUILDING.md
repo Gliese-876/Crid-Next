@@ -1,7 +1,7 @@
 # Rebuilding Crid Next
 
 You can build Crid Next from a release's matching source archive, replace its
-JExcelAPI library and install your own APK. The application source is under MIT;
+JExcelAPI library and install your own APK. Crid Next's original application code is under MIT;
 JExcelAPI is under LGPL-2.1-or-later. Modification and reverse engineering to debug
 changes to that library are permitted. Its source and license are supplied in
 [`third_party/`](../third_party/README.md).
@@ -9,7 +9,12 @@ changes to that library are permitted. Its source and license are supplied in
 ## Build the application
 
 Use the source archive attached to the same release as the APK, or check out that
-release's Git tag. For 2.0.0, use tag `v2.0.0`. Install:
+release's Git tag. The published `v2.0.0` tag identifies commit
+`ffec2a9b7fa6dd97a9484f8fbeba79c6769b56e0` on both
+[GitHub](https://github.com/Gliese-876/Crid-Next/releases/tag/v2.0.0) and
+[Gitee](https://gitee.com/gliese-876/crid-next/releases/tag/v2.0.0). Its matching
+application archive is `Crid-Next-2.0.0-source.zip`. Later documentation commits
+on `main` do not change the source used for that APK. Install:
 
 - JDK 21, with `JAVA_HOME` pointing to it;
 - Android SDK Platform 37, SDK Build Tools and Platform Tools, with `ANDROID_HOME`
@@ -109,6 +114,7 @@ sources, build scripts and resources. Release checksums identify the exact files
 offered with the APK.
 
 Keep the application source archive, `jxl-2.6.12-complete-sources.zip`, `LICENSE`,
+the [license scope statement](../LICENSING.md),
 the full `THIRD_PARTY_NOTICES.txt` copied from `app/src/main/assets/licenses/`, and
 this document available on the same release page as the binaries. This supplies
 the materials for modifying the library and rebuilding the combined application

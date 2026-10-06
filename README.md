@@ -1,6 +1,6 @@
-[简体中文](README.md) · [繁體中文](README.zh-Hant.md) · [English](README.en.md)
-
 # Crid Next
+
+[简体中文](README.md) · [繁體中文](README.zh-Hant.md) · [English](README.en.md)
 
 Crid Next 是一款 Android 课表应用，可以查看今天的安排、管理多个学期与课表方案，并在上课前提醒你。
 
@@ -85,12 +85,12 @@ Crid Next 延续了 [Crid](https://github.com/Gliese-876/Crid) 的课表应用�
 
 欢迎在 [GitHub Issues](https://github.com/Gliese-876/Crid-Next/issues) 反馈问题或提出建议。导入问题请附匿名课表、预期结果和应用版本；界面问题可附设备型号及截图。提交文件前请移除真实姓名、学号和隐藏元数据。[公开测试样例说明](tests/README.md)介绍了现有样例和检查方式。
 
-作者：[<img src="docs/assets/avatar-gliese-876.png" width="40" height="40" alt=""> Gliese-876](https://github.com/Gliese-876)
+作者：[![Gliese-876](https://img.shields.io/badge/Gliese--876-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Gliese-876)
 
 特别鸣谢：
 
-- [<img src="docs/assets/avatar-fangyuanz06.png" width="40" height="40" alt=""> 方缘（Fangyuanz06）](https://github.com/Fangyuanz06)：协助测试和改进。
-- [<img src="docs/assets/avatar-chihuchen.png" width="40" height="40" alt=""> ChiHuchen](https://github.com/ChiHuchen)：提供北京校区课表数据。
+- [![方缘（Fangyuanz06）](https://img.shields.io/badge/%E6%96%B9%E7%BC%98%EF%BC%88Fangyuanz06%EF%BC%89-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Fangyuanz06)：协助测试和改进。
+- [![ChiHuchen](https://img.shields.io/badge/ChiHuchen-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/ChiHuchen)：提供北京校区课表数据。
 
 也感谢参与反馈与贡献的每个人。
 
@@ -119,4 +119,4 @@ sh ./gradlew :core:test :app:testDebugUnitTest :app:assembleDebug
 
 ## 许可
 
-除另有声明，Crid Next 有权许可的原创源代码、文档与原创资源以 [MIT License](LICENSE) 开源，可按其条款使用、修改及分发。第三方组件保留各自许可，品牌图标和头像另有权利说明；这些内容不因随应用发布而改为 MIT。具体适用范围见[许可说明](LICENSING.md)，第三方许可全文也可在应用的「设置 → 关于」中离线阅读。
+除非另有声明，Crid Next 有权许可的原创源代码、文档与原创资源以 [MIT License](LICENSE) 开源，可按其条款使用、修改及分发。第三方组件保留各自许可，品牌图标和头像另有权利说明；这些内容不因随应用发布而改为 MIT。具体适用范围见[许可说明](LICENSING.md)，第三方许可全文也可在应用的「设置 → 关于」中离线阅读。

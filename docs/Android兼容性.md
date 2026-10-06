@@ -1,6 +1,6 @@
 # Android 兼容性
 
-Crid Next 的最低运行版本为 **Android 12（API 31）**。1.11 已完整移除 HDR 控件功能，P3 按显示能力自动启用；`compileSdk` 与 `targetSdk` 均为 37。兼容修改集中在版本判断与少量 API 替换，保留原生小组件及通知实现。
+Crid Next 2.0.0 的最低运行版本为 **Android 12（API 31）**，`compileSdk` 与 `targetSdk` 均为 37。P3 按显示能力自动启用；HDR 控件已在 1.11 移除。下文将当前兼容条件与 1.9 历史审计分开记录。
 
 ## 决定最低版本的调用
 
@@ -33,7 +33,7 @@ API 36/37 的新重载与同名类型按完整签名核对。例如，应用使�
 
 初始审计于 2026 年 9 月 28 日检查生产 Kotlin 源码、Manifest 和资源，并将编译后的平台成员引用与本地 SDK 的 `api-versions.xml` 对照。源码审查同时检查调用路径、能力判断及 SDK 版本保护，区分 API 存在条件与设备是否支持 HDR。
 
-AGP 9.1.1 的当前生产字节码目录是 `app/build/intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes`；core 使用 `core/build/classes/kotlin/main`。旧目录 `app/build/tmp/kotlin-classes/debug` 有历史构建残留，不用于本轮结论。
+当时 AGP 9.1.1 的生产字节码目录是 `app/build/intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes`；core 使用 `core/build/classes/kotlin/main`。旧目录 `app/build/tmp/kotlin-classes/debug` 有历史构建残留，未用于该次结论。
 
 初始快照扫描这两个生产目录中的 439 个 `.class` 文件，从常量池提取 `Methodref`、`InterfaceMethodref` 和 `Fieldref`。引用按所属类、成员名及 JVM 描述符去重，只统计 `android/`、`java/` 和 `javax/`；查询版本表时沿父类及接口解析继承成员，并取类与成员引入版本的较高值。版本表位于本机 SDK 的 `platforms/android-37.0/data/api-versions.xml`。
 
@@ -43,7 +43,11 @@ AGP 9.1.1 的当前生产字节码目录是 `app/build/intermediates/built_in_ko
 
 ## 依赖与构建版本
 
-本轮从当前 debug 应用的 Manifest 合并报告定位并读取 64 个依赖 Manifest，包含生产依赖与 debug 工具依赖，声明的运行时 `minSdk` 最高为 **23**。主要依赖的结果如下。
+2.0.0 使用 AGP 9.1.1、Kotlin 2.3.0、Compose BOM 2026.09.00、Activity Compose 1.12.1 与 Lifecycle 2.10.0。当前直接依赖以 [app/build.gradle.kts](../app/build.gradle.kts) 和 [core/build.gradle.kts](../core/build.gradle.kts) 为准。WorkManager 和 Browser 已移除；周期维护由系统 JobScheduler 承担，教务页面使用平台 WebView。
+
+### 1.9 历史依赖快照
+
+该次审计从 debug 应用的 Manifest 合并报告读取 64 个依赖 Manifest，包含生产依赖与 debug 工具依赖，声明的运行时 `minSdk` 最高为 **23**。下表仅记录当时依赖，不代表 2.0.0 仍包含全部组件。
 
 | 依赖 | 版本 | 运行时最低 API | AAR 要求的最低 compileSdk |
 | --- | --- | ---: | ---: |
@@ -60,10 +64,10 @@ API 31 已提供所用的 `java.time` 和通知通道接口。构建保持标准
 
 ## 1.9 历史验证范围
 
-Android 15 模拟器本轮累计 **130 项不同方法通过，无失败或跳过**。初始候选版完成 111 项，最低版本调整及最终修复后补测相关路径，按当前测试方法去重。包含真实通知链、原有 13 项导出检查、HDR F16 绘制和输入法开启时的两种页面切换。记录见 [API 35 兼容性结果](../artifacts/qa-v1.9/api35/COMPATIBILITY.json)。
+Android 15 模拟器该次累计 **130 项不同方法通过，无失败或跳过**。初始候选版完成 111 项，最低版本调整及最终修复后补测相关路径，按当时测试方法去重。包含真实通知链、原有 13 项导出检查、HDR F16 绘制和输入法开启时的两种页面切换。本地记录：`artifacts/qa-v1.9/api35/COMPATIBILITY.json`。
 
 API 31 已完成 **113 项设备检查，全部通过，无跳过**。覆盖全部课表样例的解析与持久化、原生小组件，以及 7 项通知调度检查；真实 AlarmManager 到 Manifest receiver 再到通知的投递链已通过。该组还包含 5 项导出检查和 6 项完全本地的 WebView 下载捕获检查。键盘弹出时点击导航和直接横滑均取得同一原失败测试 APK 的修复前后对照，目标页稳定停留、草稿保留和课表表头手势回归通过。
 
-两个版本的最终测试均已恢复设备设置与授权，最终应用崩溃缓冲为零。API 31 首轮同时运行 UI 自动化诊断曾导致测试工具的 UiAutomation 冲突，诊断日志单独保留，未计为应用崩溃或通过项。最低版本详情见 [API 31 兼容性结果](../artifacts/qa-v1.9/api31/COMPATIBILITY.json)，跨设备去重和测试范围见 [QA 汇总](../artifacts/qa-v1.9/QA-SUMMARY.json)。
+两个版本的最终测试均已恢复设备设置与授权，最终应用崩溃缓冲为零。API 31 首轮同时运行 UI 自动化诊断曾导致测试工具的 UiAutomation 冲突，诊断日志单独保留，未计为应用崩溃或通过项。最低版本详情保存在本地 `artifacts/qa-v1.9/api31/COMPATIBILITY.json`，跨设备去重和测试范围在 `artifacts/qa-v1.9/QA-SUMMARY.json`。
 
-上述 HDR 测试属于 1.9 历史记录，该功能及专属测试已在 1.11 删除。当前验证见 [1.11 迭代记录](迭代验证-1.11.md)。P3 物理色域、厂商后台管理策略和不同启动器行为仍需对应设备验证。
+上述 HDR 测试属于 1.9 历史记录，该功能及专属测试已在 1.11 删除，移除验证见 [1.11 迭代记录](迭代验证-1.11.md)。当前发行范围见 [2.0.0 发行说明](releases/v2.0.0.md)。历史 `artifacts/` 路径指开发时的本地记录，不随公开源码提供。P3 物理色域、厂商后台管理策略和不同启动器行为仍需对应设备验证。

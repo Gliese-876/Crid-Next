@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_day_summary" android:layout_width="0dp" android:layout_height="wrap_content"
+    android:layout_weight="1">
+    <LinearLayout android:id="@+id/widget_day_click" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:gravity="center_horizontal" android:minHeight="64dp"
+        android:paddingStart="4dp" android:paddingEnd="4dp" android:paddingTop="8dp" android:paddingBottom="8dp">
+        <TextView android:id="@+id/widget_day_weekday" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:gravity="center" android:textSize="12sp" android:maxLines="1" android:ellipsize="end" android:includeFontPadding="false" />
+        <TextView android:id="@+id/widget_day_number" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:gravity="center" android:textSize="18sp" android:textStyle="bold" android:maxLines="1" android:paddingTop="2dp" android:includeFontPadding="false" />
+        <TextView android:id="@+id/widget_day_count" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:gravity="center" android:textSize="12sp" android:maxLines="1" android:ellipsize="end" android:paddingTop="3dp" android:includeFontPadding="false" />
+        <TextView android:id="@+id/widget_day_extra" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:gravity="center" android:textSize="12sp" android:maxLines="1" android:ellipsize="end" android:includeFontPadding="false" />
+    </LinearLayout>
+</FrameLayout>

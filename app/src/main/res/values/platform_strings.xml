@@ -1,0 +1,33 @@
+<resources>
+    <string name="platform_today">Today</string>
+    <string name="platform_week">This week</string>
+    <string name="platform_import">Import timetable</string>
+    <string name="platform_no_semester">Create a semester to get started</string>
+    <string name="platform_no_plan">Choose a timetable</string>
+    <string name="platform_no_today_classes">No classes today</string>
+    <string name="platform_no_week_classes">No classes this week</string>
+    <string name="platform_out_of_week">Other week</string>
+    <string name="platform_no_class">No class · holiday</string>
+    <string name="platform_makeup">Make-up class</string>
+    <string name="platform_reminder_channel">Class reminders</string>
+    <string name="platform_widget_theme">Widget appearance</string>
+    <string name="platform_follow_app">Follow app</string>
+    <string name="platform_light">Light</string>
+    <string name="platform_dark">Dark</string>
+    <string name="platform_save">Save</string>
+    <string name="platform_more_courses">%1$d more classes · Open timetable</string>
+    <string name="platform_widget_today_description">Your classes today, at a glance</string>
+    <string name="platform_widget_week_description">Browse your classes for the week</string>
+    <string name="platform_widget_week_resize">Enlarge widget</string>
+    <string name="platform_widget_more_day_classes">%1$d more classes</string>
+    <string name="platform_class_now">In class</string>
+    <string name="platform_class_next">Up next</string>
+    <string name="platform_classes_finished">Today\'s classes are over</string>
+    <string name="platform_widget_view_day">View today</string>
+    <string name="platform_widget_other_courses">%1$d more · View today</string>
+    <string name="platform_widget_day_off">Free</string>
+    <string name="platform_widget_day_entries">%1$d total</string>
+    <string name="platform_widget_actual_count">%1$d classes</string>
+    <string name="platform_widget_total_count">%1$d entries · Open timetable</string>
+    <string name="platform_widget_week_count">%1$d classes · %2$d entries · View week</string>
+</resources>

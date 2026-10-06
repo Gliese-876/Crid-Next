@@ -1,0 +1,667 @@
+{
+  "source": "北京师范大学珠海校区2026-2027学年秋季学期学生课表.xls",
+  "sha256": "cec6842d956cb7d0ab4854c8a91f12523efb7e93396fb198f18da94bd1ae92d0",
+  "sourceSemester": "北京师范大学珠海校区2026-2027学年秋季学期学生课表",
+  "courseCount": 11,
+  "lessonCount": 25,
+  "unresolved": [],
+  "courses": [
+    {
+      "name": "合成课课课课课课戌",
+      "credits": "3.0",
+      "extra": {
+        "课程代码": "ZZZ70007",
+        "总学时": "64",
+        "上课班号": "04",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 1,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "样甲楼C101(140)",
+          "teacher": "示例往",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课课丑",
+      "credits": "2.0",
+      "extra": {
+        "课程代码": "ZZZ70008",
+        "总学时": "32",
+        "上课班号": "38",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 5,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "样甲楼C104(93)",
+          "teacher": "EXAM PLEA EXAMPLE",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课课课课庚",
+      "credits": "2.0",
+      "extra": {
+        "课程代码": "ZZZ70009",
+        "总学时": "32",
+        "上课班号": "01",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 4,
+          "startPeriod": 9,
+          "endPeriod": 10,
+          "location": "样丙楼A205(90)",
+          "teacher": "示例宙",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课课未",
+      "credits": "1.0",
+      "extra": {
+        "课程代码": "ZZZ70010",
+        "总学时": "16",
+        "上课班号": "20",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否",
+        "未排课": "11-13周 []；示例戌\n16周 []；示例戌"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            9,
+            10
+          ],
+          "weekday": 5,
+          "startPeriod": 9,
+          "endPeriod": 10,
+          "location": "样甲楼C201(140)",
+          "teacher": "示例戌",
+          "note": ""
+        },
+        {
+          "weeks": [
+            11,
+            12,
+            13
+          ],
+          "weekday": 0,
+          "teacher": "示例戌",
+          "location": "",
+          "note": "11-13周 []",
+          "unscheduled": true
+        },
+        {
+          "weeks": [
+            14,
+            15
+          ],
+          "weekday": 5,
+          "startPeriod": 9,
+          "endPeriod": 10,
+          "location": "样甲楼C201(140)",
+          "teacher": "示例戌",
+          "note": ""
+        },
+        {
+          "weeks": [
+            16
+          ],
+          "weekday": 0,
+          "teacher": "示例戌",
+          "location": "",
+          "note": "16周 []",
+          "unscheduled": true
+        }
+      ]
+    },
+    {
+      "name": "合成课课子3",
+      "credits": "0.25",
+      "extra": {
+        "课程代码": "ZZZ70011",
+        "总学时": "8",
+        "上课班号": "06",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            10
+          ],
+          "weekday": 5,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "样甲楼A202(225)",
+          "teacher": "示壬",
+          "note": ""
+        },
+        {
+          "weeks": [
+            12
+          ],
+          "weekday": 5,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "样甲楼A202(225)",
+          "teacher": "示例月",
+          "note": ""
+        },
+        {
+          "weeks": [
+            14
+          ],
+          "weekday": 5,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "样甲楼A202(225)",
+          "teacher": "示例收",
+          "note": ""
+        },
+        {
+          "weeks": [
+            16
+          ],
+          "weekday": 5,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "样甲楼A202(225)",
+          "teacher": "示例日",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课寅Ⅲ",
+      "credits": "6.0",
+      "extra": {
+        "课程代码": "ZZZ70012",
+        "总学时": "96",
+        "上课班号": "02",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 1,
+          "startPeriod": 1,
+          "endPeriod": 2,
+          "location": "样甲楼D206(225)",
+          "teacher": "示例乙",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 3,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "样甲楼D206(225)",
+          "teacher": "示例乙",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 5,
+          "startPeriod": 1,
+          "endPeriod": 2,
+          "location": "样甲楼D206(225)",
+          "teacher": "示例乙",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课戊 Ⅲ",
+      "credits": "4.0",
+      "extra": {
+        "课程代码": "ZZZ70013",
+        "总学时": "64",
+        "上课班号": "01",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 2,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "样甲楼C209(225)",
+          "teacher": "示例宿",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 4,
+          "startPeriod": 1,
+          "endPeriod": 2,
+          "location": "样甲楼C209(225)",
+          "teacher": "示例宿",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课癸",
+      "credits": "4.0",
+      "extra": {
+        "课程代码": "ZZZ70014",
+        "总学时": "64",
+        "上课班号": "03",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 2,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "样甲楼D206(225)",
+          "teacher": "示例荒",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 3,
+          "startPeriod": 1,
+          "endPeriod": 2,
+          "location": "样甲楼D206(225)",
+          "teacher": "示例荒",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课课壬B",
+      "credits": "2.0",
+      "extra": {
+        "课程代码": "ZZZ70015",
+        "总学时": "64",
+        "上课班号": "13",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1
+          ],
+          "weekday": 4,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "样甲楼C106(140)",
+          "teacher": "示例未",
+          "note": ""
+        },
+        {
+          "weeks": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 4,
+          "startPeriod": 5,
+          "endPeriod": 8,
+          "location": "样甲楼B103(40)",
+          "teacher": "示例未",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课辛BⅡ",
+      "credits": "4.0",
+      "extra": {
+        "课程代码": "ZZZ70016",
+        "总学时": "64",
+        "上课班号": "02",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否",
+        "教师名单": "示例卯;示列"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1
+          ],
+          "weekday": 1,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "样甲楼D405(93)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 4,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "样甲楼D405(93)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 1,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "样甲楼D405(93)",
+          "teacher": "",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "Python合成课甲",
+      "credits": "2.0",
+      "extra": {
+        "课程代码": "ZZZ70021",
+        "总学时": "48",
+        "上课班号": "01",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 3,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "样甲楼C203(140)",
+          "teacher": "示例盈",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 3,
+          "startPeriod": 7,
+          "endPeriod": 7,
+          "location": "样甲楼C203(140)",
+          "teacher": "示例盈",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "unscheduledLessonCount": 2
+}

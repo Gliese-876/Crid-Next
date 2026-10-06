@@ -1,0 +1,33 @@
+<resources>
+    <string name="platform_today">今天</string>
+    <string name="platform_week">本周课表</string>
+    <string name="platform_import">导入课表</string>
+    <string name="platform_no_semester">创建学期，安排课程</string>
+    <string name="platform_no_plan">请选择课表方案</string>
+    <string name="platform_no_today_classes">今天没有课程</string>
+    <string name="platform_no_week_classes">本周没有课程</string>
+    <string name="platform_out_of_week">非本周</string>
+    <string name="platform_no_class">休假 · 不上课</string>
+    <string name="platform_makeup">调休补课</string>
+    <string name="platform_reminder_channel">上课提醒</string>
+    <string name="platform_widget_theme">小组件外观</string>
+    <string name="platform_follow_app">跟随应用</string>
+    <string name="platform_light">浅色</string>
+    <string name="platform_dark">深色</string>
+    <string name="platform_save">保存</string>
+    <string name="platform_more_courses">还有 %1$d 节课 · 打开课表查看</string>
+    <string name="platform_widget_today_description">随时查看今天的课程</string>
+    <string name="platform_widget_week_description">浏览本周课程安排</string>
+    <string name="platform_widget_week_resize">请放大小组件</string>
+    <string name="platform_widget_more_day_classes">另有 %1$d 节课</string>
+    <string name="platform_class_now">正在上课</string>
+    <string name="platform_class_next">接下来</string>
+    <string name="platform_classes_finished">今日课程已结束</string>
+    <string name="platform_widget_view_day">查看今天</string>
+    <string name="platform_widget_other_courses">另有 %1$d 项 · 查看今天</string>
+    <string name="platform_widget_day_off">无课</string>
+    <string name="platform_widget_day_entries">共%1$d项</string>
+    <string name="platform_widget_actual_count">%1$d 节课</string>
+    <string name="platform_widget_total_count">%1$d 项安排 · 打开课表</string>
+    <string name="platform_widget_week_count">%1$d 节课 · %2$d 项安排 · 查看本周</string>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut android:shortcutId="today" android:enabled="true" android:icon="@drawable/ic_shortcut_today"
+        android:shortcutShortLabel="@string/platform_today">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="cn.crid.next" android:targetClass="cn.crid.next.MainActivity">
+            <extra android:name="route" android:value="today" />
+        </intent>
+    </shortcut>
+    <shortcut android:shortcutId="timetable" android:enabled="true" android:icon="@drawable/ic_shortcut_timetable"
+        android:shortcutShortLabel="@string/platform_week">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="cn.crid.next" android:targetClass="cn.crid.next.MainActivity">
+            <extra android:name="route" android:value="timetable" />
+        </intent>
+    </shortcut>
+    <shortcut android:shortcutId="import" android:enabled="true" android:icon="@drawable/ic_shortcut_import"
+        android:shortcutShortLabel="@string/platform_import">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="cn.crid.next" android:targetClass="cn.crid.next.MainActivity">
+            <extra android:name="route" android:value="import" />
+        </intent>
+    </shortcut>
+</shortcuts>

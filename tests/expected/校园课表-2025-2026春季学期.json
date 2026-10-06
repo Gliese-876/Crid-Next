@@ -1,0 +1,850 @@
+{
+  "source": "校园课表-2025-2026春季学期.xls",
+  "sha256": "1d11c0c14234cc657ae73386cd7195de2d841c534b4a8d980a174327634701dc",
+  "sourceSemester": "合成示例大学测试校区2025-2026学年春季学期学生课表",
+  "courseCount": 14,
+  "lessonCount": 40,
+  "unresolved": [],
+  "courses": [
+    {
+      "name": "合成通识课程甲乙",
+      "credits": "3.0",
+      "extra": {
+        "课程代码": "TST01102",
+        "总学时": "64",
+        "上课班号": "02",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 2,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "示例楼A101(100)",
+          "teacher": "教师甲",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成理论",
+      "credits": "2.0",
+      "extra": {
+        "课程代码": "TST01108",
+        "总学时": "36",
+        "上课班号": "07",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否",
+        "未排课": "11周 []；教师乙"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 0,
+          "teacher": "教师乙",
+          "location": "",
+          "note": "11周 []",
+          "unscheduled": true
+        },
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 6,
+          "startPeriod": 1,
+          "endPeriod": 4,
+          "location": "示例楼A102(100)",
+          "teacher": "教师乙",
+          "note": ""
+        },
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 6,
+          "startPeriod": 5,
+          "endPeriod": 8,
+          "location": "示例楼A102(100)",
+          "teacher": "教师乙",
+          "note": ""
+        },
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 7,
+          "startPeriod": 1,
+          "endPeriod": 4,
+          "location": "示例楼A102(100)",
+          "teacher": "教师乙",
+          "note": ""
+        },
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 7,
+          "startPeriod": 5,
+          "endPeriod": 8,
+          "location": "示例楼A102(100)",
+          "teacher": "教师乙",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "体能(入门)",
+      "credits": "1.0",
+      "extra": {
+        "课程代码": "TST01223",
+        "总学时": "32",
+        "上课班号": "02",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1
+          ],
+          "weekday": 1,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "示例楼A103(10)",
+          "teacher": "甲师",
+          "note": ""
+        },
+        {
+          "weeks": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 1,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "测试馆(10)",
+          "teacher": "甲师",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成语言听说",
+      "credits": "2.0",
+      "extra": {
+        "课程代码": "TST02123",
+        "总学时": "32",
+        "上课班号": "55",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "weekday": 4,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A104(10)",
+          "teacher": "教师丙",
+          "note": ""
+        },
+        {
+          "weeks": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 4,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A104(10)",
+          "teacher": "SYNTHETIC TEACHER ALFA",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成编程课程（A）",
+      "credits": "3.0",
+      "extra": {
+        "课程代码": "TST04189",
+        "总学时": "64",
+        "上课班号": "04",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 3,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "示例楼A105(10)",
+          "teacher": "教师丁",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 3,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A106(10)",
+          "teacher": "教师丁",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成影像案例专题赏析",
+      "credits": "2.0",
+      "extra": {
+        "课程代码": "TST05642",
+        "总学时": "32",
+        "上课班号": "01",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 3,
+          "startPeriod": 9,
+          "endPeriod": 10,
+          "location": "示例楼A107(10)",
+          "teacher": "乙师",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成教育案例与实践",
+      "credits": "1.0",
+      "extra": {
+        "课程代码": "TST06123",
+        "总学时": "16",
+        "上课班号": "04",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否",
+        "教师名单": "丙师;教师戊;教师己;教师庚;教师辛"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            9
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例(100)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            10
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例楼A108(100)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例楼A108(100)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            12
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例(100)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            13
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例楼A108(100)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            14
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例(100)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            15
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例楼A108(100)",
+          "teacher": "",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成心理Ⅱ",
+      "credits": "1.0",
+      "extra": {
+        "课程代码": "TST06125",
+        "总学时": "16",
+        "上课班号": "01",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否",
+        "未排课": "7-14周 [ ]；教师壬"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "weekday": 0,
+          "teacher": "教师壬",
+          "location": "",
+          "note": "7-14周 [ ]",
+          "unscheduled": true
+        }
+      ]
+    },
+    {
+      "name": "合成安全导论",
+      "credits": "1.0",
+      "extra": {
+        "课程代码": "TST06706",
+        "总学时": "16",
+        "上课班号": "08",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否",
+        "教师名单": "教师癸;教师子;教师丑;教师寅;教师卯;教师辰"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            9
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109(100)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            10
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109(100)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109(100)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            12
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109(100)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            13
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109(100)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            14
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109(100)",
+          "teacher": "",
+          "note": ""
+        },
+        {
+          "weeks": [
+            15
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109(100)",
+          "teacher": "",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成与政策2",
+      "credits": "0.25",
+      "extra": {
+        "课程代码": "TST09002",
+        "总学时": "8",
+        "上课班号": "02",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            10,
+            12
+          ],
+          "weekday": 5,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "示例楼A110(100)",
+          "teacher": "教师巳",
+          "note": ""
+        },
+        {
+          "weeks": [
+            13
+          ],
+          "weekday": 5,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "示例楼A110(100)",
+          "teacher": "教师午",
+          "note": ""
+        },
+        {
+          "weeks": [
+            14
+          ],
+          "weekday": 5,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "示例楼A110(100)",
+          "teacher": "教师未",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成分析Ⅱ",
+      "credits": "6.0",
+      "extra": {
+        "课程代码": "TST11002",
+        "总学时": "96",
+        "上课班号": "04",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 1,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "示例楼A101(100)",
+          "teacher": "教师酉",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 3,
+          "startPeriod": 1,
+          "endPeriod": 2,
+          "location": "示例楼A101(100)",
+          "teacher": "教师酉",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 5,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "示例楼A101(100)",
+          "teacher": "教师酉",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成学基础 Ⅱ",
+      "credits": "4.0",
+      "extra": {
+        "课程代码": "TST11004",
+        "总学时": "64",
+        "上课班号": "02",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 2,
+          "startPeriod": 1,
+          "endPeriod": 2,
+          "location": "示例楼A111(100)",
+          "teacher": "教师戌",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 4,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "示例楼A111(100)",
+          "teacher": "教师戌",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成分析研讨课Ⅰ",
+      "credits": "2.0",
+      "extra": {
+        "课程代码": "TST21001",
+        "总学时": "32",
+        "上课班号": "01",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1
+          ],
+          "weekday": 2,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A112(10)",
+          "teacher": "丁师",
+          "note": ""
+        },
+        {
+          "weeks": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 2,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A113(100)",
+          "teacher": "丁师",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成物理BI",
+      "credits": "4.0",
+      "extra": {
+        "课程代码": "TST01003",
+        "总学时": "64",
+        "上课班号": "02",
+        "修读性质": "初修",
+        "辅修标识": "主修",
+        "免听标识": "否"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 1,
+          "startPeriod": 1,
+          "endPeriod": 2,
+          "location": "示例楼A114(100)",
+          "teacher": "戊师",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 3,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "示例楼A114(100)",
+          "teacher": "戊师",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "unscheduledLessonCount": 2
+}

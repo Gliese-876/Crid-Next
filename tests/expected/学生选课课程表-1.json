@@ -1,0 +1,589 @@
+{
+  "source": "学生选课课程表-1.xls",
+  "sha256": "d294ff657aa4d9256ec8b770e705d17226fa090ff8db68e7acb80f2114a4153a",
+  "sourceSemester": null,
+  "courseCount": 14,
+  "lessonCount": 26,
+  "unscheduledLessonCount": 0,
+  "unresolved": [],
+  "courses": [
+    {
+      "name": "合成课课课课卯",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 4,
+          "startPeriod": 1,
+          "endPeriod": 3,
+          "location": "四107",
+          "teacher": "示寒",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课课丑",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            4,
+            8,
+            12
+          ],
+          "weekday": 3,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "样样乙学",
+          "teacher": "示例寅",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7,
+            9,
+            10,
+            11,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 3,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "二211",
+          "teacher": "示例寅",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课课未",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            9
+          ],
+          "weekday": 5,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "九502",
+          "teacher": "示例星",
+          "note": ""
+        },
+        {
+          "weeks": [
+            7
+          ],
+          "weekday": 5,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "九502",
+          "teacher": "示例癸",
+          "note": ""
+        },
+        {
+          "weeks": [
+            5
+          ],
+          "weekday": 5,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "九502",
+          "teacher": "示暑",
+          "note": ""
+        },
+        {
+          "weeks": [
+            2
+          ],
+          "weekday": 5,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "九502",
+          "teacher": "示丁",
+          "note": ""
+        },
+        {
+          "weeks": [
+            3,
+            4,
+            6,
+            8
+          ],
+          "weekday": 5,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "样样乙学",
+          "teacher": "示洪",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课己",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 1,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "二103",
+          "teacher": "示例己",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课课课课课戌",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "weekday": 2,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "九304",
+          "teacher": "示例庚",
+          "note": ""
+        },
+        {
+          "weeks": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 2,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "九304",
+          "teacher": "示丑",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课子3",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            7
+          ],
+          "weekday": 3,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "二208",
+          "teacher": "示例丙",
+          "note": ""
+        },
+        {
+          "weeks": [
+            8
+          ],
+          "weekday": 3,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "二208",
+          "teacher": "示亥",
+          "note": ""
+        },
+        {
+          "weeks": [
+            9
+          ],
+          "weekday": 3,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "二208",
+          "teacher": "示例子",
+          "note": ""
+        },
+        {
+          "weeks": [
+            10
+          ],
+          "weekday": 3,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "二208",
+          "teacher": "示例宇",
+          "note": ""
+        },
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 3,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "二208",
+          "teacher": "示例子",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课申",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 4,
+          "startPeriod": 5,
+          "endPeriod": 7,
+          "location": "十110",
+          "teacher": "示例酉",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课课课课课辰",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 5,
+          "startPeriod": 5,
+          "endPeriod": 7,
+          "location": "八205",
+          "teacher": "示例地",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 5,
+          "startPeriod": 8,
+          "endPeriod": 8,
+          "location": "八301",
+          "teacher": "示例地",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "《合成》课乙",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 1,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "九502",
+          "teacher": "示例天",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课课丙",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 1,
+          "startPeriod": 9,
+          "endPeriod": 10,
+          "location": "四108",
+          "teacher": "示例戊",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课课课丁",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1
+          ],
+          "weekday": 2,
+          "startPeriod": 9,
+          "endPeriod": 10,
+          "location": "七103",
+          "teacher": "示例玄",
+          "note": ""
+        },
+        {
+          "weeks": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 2,
+          "startPeriod": 9,
+          "endPeriod": 10,
+          "location": "二201",
+          "teacher": "示例玄",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课午",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 3,
+          "startPeriod": 9,
+          "endPeriod": 10,
+          "location": "七302",
+          "teacher": "示例黄",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课酉",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 4,
+          "startPeriod": 9,
+          "endPeriod": 11,
+          "location": "二208",
+          "teacher": "示例秋",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成课课课课课课巳",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "weekday": 5,
+          "startPeriod": 9,
+          "endPeriod": 11,
+          "location": "七101",
+          "teacher": "示例申",
+          "note": ""
+        }
+      ]
+    }
+  ]
+}

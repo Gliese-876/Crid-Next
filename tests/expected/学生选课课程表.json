@@ -1,0 +1,752 @@
+{
+  "source": "学生选课课程表.xls",
+  "sha256": "e52f5e69cfac49c33673596b68b7590a8e4ab93be80df0e6e49dea03d5a862b2",
+  "sourceSemester": null,
+  "courseCount": 14,
+  "lessonCount": 40,
+  "unresolved": [],
+  "courses": [
+    {
+      "name": "合成物理BI",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 1,
+          "startPeriod": 1,
+          "endPeriod": 2,
+          "location": "示例楼A114",
+          "teacher": "戊师",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 3,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "示例楼A114",
+          "teacher": "戊师",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成学基础 Ⅱ",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 2,
+          "startPeriod": 1,
+          "endPeriod": 2,
+          "location": "示例楼A111",
+          "teacher": "教师戌",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 4,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "示例楼A111",
+          "teacher": "教师戌",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成分析Ⅱ",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 3,
+          "startPeriod": 1,
+          "endPeriod": 2,
+          "location": "示例楼A101",
+          "teacher": "教师酉",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 1,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "示例楼A101",
+          "teacher": "教师酉",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 5,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "示例楼A101",
+          "teacher": "教师酉",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成理论",
+      "credits": "",
+      "extra": {
+        "未排课": "11周；教师乙"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 6,
+          "startPeriod": 1,
+          "endPeriod": 4,
+          "location": "示例楼A102",
+          "teacher": "教师乙",
+          "note": ""
+        },
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 7,
+          "startPeriod": 1,
+          "endPeriod": 4,
+          "location": "示例楼A102",
+          "teacher": "教师乙",
+          "note": ""
+        },
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 6,
+          "startPeriod": 5,
+          "endPeriod": 8,
+          "location": "示例楼A102",
+          "teacher": "教师乙",
+          "note": ""
+        },
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 7,
+          "startPeriod": 5,
+          "endPeriod": 8,
+          "location": "示例楼A102",
+          "teacher": "教师乙",
+          "note": ""
+        },
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 0,
+          "teacher": "教师乙",
+          "location": "",
+          "note": "11周",
+          "unscheduled": true
+        }
+      ]
+    },
+    {
+      "name": "体能(入门)",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1
+          ],
+          "weekday": 1,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "示例楼A103",
+          "teacher": "甲师",
+          "note": ""
+        },
+        {
+          "weeks": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 1,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "测试馆",
+          "teacher": "甲师",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成通识课程甲乙",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 2,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "示例楼A101",
+          "teacher": "教师甲",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成编程课程（A）",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 3,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "示例楼A105",
+          "teacher": "教师丁",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 3,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A106",
+          "teacher": "教师丁",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成与政策2",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            14
+          ],
+          "weekday": 5,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "示例楼A110",
+          "teacher": "教师巳",
+          "note": ""
+        },
+        {
+          "weeks": [
+            13
+          ],
+          "weekday": 5,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "示例楼A110",
+          "teacher": "教师午",
+          "note": ""
+        },
+        {
+          "weeks": [
+            10,
+            12
+          ],
+          "weekday": 5,
+          "startPeriod": 5,
+          "endPeriod": 6,
+          "location": "示例楼A110",
+          "teacher": "教师未",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成分析研讨课Ⅰ",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 2,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A113",
+          "teacher": "丁师",
+          "note": ""
+        },
+        {
+          "weeks": [
+            1
+          ],
+          "weekday": 2,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A112",
+          "teacher": "丁师",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成语言听说",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "weekday": 4,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A104",
+          "teacher": "SYNTHETIC TEACHER ALFA",
+          "note": ""
+        },
+        {
+          "weeks": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 4,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A104",
+          "teacher": "教师丙",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成安全导论",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109",
+          "teacher": "教师辰",
+          "note": ""
+        },
+        {
+          "weeks": [
+            15
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109",
+          "teacher": "教师寅",
+          "note": ""
+        },
+        {
+          "weeks": [
+            14
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109",
+          "teacher": "教师子",
+          "note": ""
+        },
+        {
+          "weeks": [
+            9
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109",
+          "teacher": "教师癸",
+          "note": ""
+        },
+        {
+          "weeks": [
+            10
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109",
+          "teacher": "教师癸",
+          "note": ""
+        },
+        {
+          "weeks": [
+            12
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109",
+          "teacher": "教师卯",
+          "note": ""
+        },
+        {
+          "weeks": [
+            13
+          ],
+          "weekday": 5,
+          "startPeriod": 7,
+          "endPeriod": 8,
+          "location": "示例楼A109",
+          "teacher": "教师丑",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成影像案例专题赏析",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "weekday": 3,
+          "startPeriod": 9,
+          "endPeriod": 10,
+          "location": "示例楼A107",
+          "teacher": "乙师",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成教育案例与实践",
+      "credits": "",
+      "extra": {},
+      "lessons": [
+        {
+          "weeks": [
+            11
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例楼A108",
+          "teacher": "教师辛",
+          "note": ""
+        },
+        {
+          "weeks": [
+            14
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例点",
+          "teacher": "教师辛",
+          "note": ""
+        },
+        {
+          "weeks": [
+            12
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例点",
+          "teacher": "丙师",
+          "note": ""
+        },
+        {
+          "weeks": [
+            13
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例楼A108",
+          "teacher": "教师己",
+          "note": ""
+        },
+        {
+          "weeks": [
+            9
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例点",
+          "teacher": "教师庚",
+          "note": ""
+        },
+        {
+          "weeks": [
+            15
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例楼A108",
+          "teacher": "丙师",
+          "note": ""
+        },
+        {
+          "weeks": [
+            10
+          ],
+          "weekday": 5,
+          "startPeriod": 11,
+          "endPeriod": 12,
+          "location": "示例楼A108",
+          "teacher": "教师戊",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "合成心理Ⅱ",
+      "credits": "",
+      "extra": {
+        "未排课": "7-14周；教师壬"
+      },
+      "lessons": [
+        {
+          "weeks": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "weekday": 0,
+          "teacher": "教师壬",
+          "location": "",
+          "note": "7-14周",
+          "unscheduled": true
+        }
+      ]
+    }
+  ],
+  "unscheduledLessonCount": 2
+}

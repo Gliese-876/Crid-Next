@@ -1,0 +1,44 @@
+Crid Next — third-party software
+
+Crid Next's original implementation is licensed under MIT. Third-party
+components retain their own copyright notices and licenses.
+
+Kotlin, kotlinx-coroutines and kotlinx-serialization
+JetBrains and contributors — Apache License 2.0
+https://github.com/JetBrains/kotlin
+https://github.com/Kotlin/kotlinx.coroutines
+https://github.com/Kotlin/kotlinx.serialization
+
+AndroidX, Jetpack Compose and Material components
+The Android Open Source Project and contributors — Apache License 2.0
+https://android.googlesource.com/platform/frameworks/support/
+
+Guava ListenableFuture
+Google and contributors — Apache License 2.0
+https://github.com/google/guava
+
+JSpecify annotations
+The JSpecify Authors — Apache License 2.0
+https://github.com/jspecify/jspecify
+
+JetBrains annotations
+JetBrains and contributors — Apache License 2.0
+https://github.com/JetBrains/java-annotations
+
+JExcelAPI 2.6.12 (net.sourceforge.jexcelapi:jxl)
+Copyright (C) 2002 Andrew Khan and contributors
+GNU Lesser General Public License 2.1 or later
+https://sourceforge.net/projects/jexcelapi/
+Unmodified matching source: third_party/jxl-2.6.12-sources.jar in this repository.
+Source artifact: https://repo.maven.apache.org/maven2/net/sourceforge/jexcelapi/jxl/2.6.12/jxl-2.6.12-sources.jar
+The source build links the dependency by its Maven coordinate; it may be
+replaced and the application rebuilt using the documented Gradle commands.
+
+jsoup 1.18.3
+Jonathan Hedley and contributors — MIT License
+https://jsoup.org/
+https://github.com/jhy/jsoup
+
+Full license texts are bundled in app/src/main/assets/licenses and reproduced
+below in the application's open-source notices. Development-only test tools
+are not part of the production application.

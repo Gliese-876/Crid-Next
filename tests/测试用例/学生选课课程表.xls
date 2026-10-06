@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Language" content="zh-cn" />
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+		<style type='text/css'>
+		.table{width:99%;height:99%;border-collapse: collapse; margin: 2px auto;}
+		.tr{height:auto;}
+		.td{border:solid 1px black;padding:0px; height: 80px;}
+		.td0{border:solid 1px black;padding:0px;height:4mm;font-size:14px;text-align: center;}
+		.td1{border:solid 1px black;padding:0px;width:9mm;height:48px;font-size:14px;text-align: center;background-color: white;}
+		.div1,.div_nokb{width:100%;height:100%;background-color:white;border:solid 0px gray;margin:0px;padding:0px;font-size:12px; position: relative;}
+		.div_nokb{background-color: #eee;} 
+		
+		.xkinfo{ position:absolute; left:3px; top:3px;}
+		.choice{ position:absolute; right:3px; bottom:3px; }
+		tr.H {background-color: #f5f5f5;text-align: center;}
+	</style>
+	
+	</head>
+	<body style="font-size:12px; margin: 0px auto;">
+		
+		
+		<div>
+			<input type="hidden" id="xn" name="xn" value="2025"> 
+			<input type="hidden" id="xq_m" name="xq_m" value="1"> 
+			<input type="hidden" id="xh" name="xh" value="209900000001"> 
+		</div>
+		
+		<table class='table' id='mytable' name='mytable'>
+			<thead></thead>
+			<tbody >
+				<tr class="H">
+					<td class="td0" style='width:5%;padding:0px;' colspan='2'></td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期一
+						</td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期二
+						</td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期三
+						</td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期四
+						</td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期五
+						</td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期六
+						</td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期日
+						</td>
+					
+				</tr>
+				
+				<tr>
+					<td class='td1' rowspan='2' valign='middle'>
+						<div style='background-color: white; '><b>上<br>午</b></div>
+					</td>
+					<td class='td1'>
+							<b>一</b>
+					</td>
+					
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k11'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成物理BI<br>戊师 <br>1-15[1-2]<br>示例楼A114</div></span>
+							</div>
+						
+					</td>
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k21'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成学基础 Ⅱ<br>教师戌 <br>1-15[1-2]<br>示例楼A111</div></span>
+							</div>
+						
+					</td>
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k31'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成分析Ⅱ<br>教师酉 <br>1-15[1-2]<br>示例楼A101</div></span>
+							</div>
+						
+					</td>
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k41'>
+							</div>
+						
+					</td>
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k51'>
+							</div>
+						
+					</td>
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k61'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成理论<br>教师乙 <br>11[1-4]<br>示例楼A102</div></span>
+							</div>
+						
+					</td>
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k71'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成理论<br>教师乙 <br>11[1-4]<br>示例楼A102</div></span>
+							</div>
+						
+					</td>
+					
+				</tr>
+				
+
+				<tr>
+					<td class='td1'>
+							<b>
+								二
+							</b>
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k12'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成分析Ⅱ<br>教师酉 <br>1-15[3-4]<br>示例楼A101</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k22'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k32'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成物理BI<br>戊师 <br>1-15[3-4]<br>示例楼A114</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k42'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成学基础 Ⅱ<br>教师戌 <br>1-15[3-4]<br>示例楼A111</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k52'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成分析Ⅱ<br>教师酉 <br>1-15[3-4]<br>示例楼A101</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k62'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k72'>
+							</div>
+												
+					</td>
+					
+				</tr>
+				
+				<!-- 
+				</tbody>
+				<tbody block="block">
+				 -->
+				
+				<tr>
+					<td class='td1' rowspan='2' valign='middle'>
+						<div style='background-color: white;'><b>下<br>午</b></div>
+					</td>
+					<td class='td1'>
+							<b>
+								三
+							</b>
+					</td>
+					
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k13'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>体能(入门)<br>甲师 <br>1[5-6]<br>示例楼A103</div><div style='padding-bottom:5px;clear:both;'>体能(入门)<br>甲师 <br>2-15[5-6]<br>测试馆</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k23'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成通识课程甲乙<br>教师甲 <br>1-15[5-6]<br>示例楼A101</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k33'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成编程课程（A）<br>教师丁 <br>1-15[5-6]<br>示例楼A105</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k43'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k53'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成与政策2<br>教师巳 <br>14-14[5-6]<br>示例楼A110</div><div style='padding-bottom:5px;clear:both;'>合成与政策2<br>教师午 <br>13-13[5-6]<br>示例楼A110</div><div style='padding-bottom:5px;clear:both;'>合成与政策2<br>教师未 <br>10-12双周[5-6]<br>示例楼A110</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k63'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成理论<br>教师乙 <br>11[5-8]<br>示例楼A102</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k73'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成理论<br>教师乙 <br>11[5-8]<br>示例楼A102</div></span>
+							</div>
+												
+					</td>
+					
+				</tr>
+				
+				<tr>
+					<td class='td1'>
+							<b>
+								四
+							</b>
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k14'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k24'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成分析研讨课Ⅰ<br>丁师 <br>2-15[7-8]<br>示例楼A113</div><div style='padding-bottom:5px;clear:both;'>合成分析研讨课Ⅰ<br>丁师 <br>1[7-8]<br>示例楼A112</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k34'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成编程课程（A）<br>教师丁 <br>1-15[7-8]<br>示例楼A106</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k44'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成语言听说<br>SYNTHETIC TEACHER ALFA <br>1-8[7-8]<br>示例楼A104</div><div style='padding-bottom:5px;clear:both;'>合成语言听说<br>教师丙 <br>9-15[7-8]<br>示例楼A104</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k54'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成安全导论<br>教师辰 <br>11[7-8]<br>示例楼A109</div><div style='padding-bottom:5px;clear:both;'>合成安全导论<br>教师寅 <br>15[7-8]<br>示例楼A109</div><div style='padding-bottom:5px;clear:both;'>合成安全导论<br>教师子 <br>14[7-8]<br>示例楼A109</div><div style='padding-bottom:5px;clear:both;'>合成安全导论<br>教师癸 <br>9[7-8]<br>示例楼A109</div><div style='padding-bottom:5px;clear:both;'>合成安全导论<br>教师癸 <br>10[7-8]<br>示例楼A109</div><div style='padding-bottom:5px;clear:both;'>合成安全导论<br>教师卯 <br>12[7-8]<br>示例楼A109</div><div style='padding-bottom:5px;clear:both;'>合成安全导论<br>教师丑 <br>13[7-8]<br>示例楼A109</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k64'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k74'>
+							</div>
+												
+					</td>
+					
+				</tr>
+				
+				<!-- 
+				</tbody>
+				<tbody block="block">
+				 -->
+				
+				<tr>
+					<td class='td1' rowspan='2' valign='middle'>
+						<div style='background-color: white;'><b>晚<br>上</b></div>
+					</td>
+					<td class='td1'>
+							<b>
+								五
+							</b>
+					</td>
+					
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k15'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k25'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k35'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成影像案例专题赏析<br>乙师 <br>1-15[9-10]<br>示例楼A107</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k45'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k55'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k65'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k75'>
+							</div>
+												
+					</td>
+					
+				</tr>
+				
+				<tr>
+					<td class='td1'>
+							<b>
+								六
+							</b>
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k16'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k26'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k36'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k46'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' onclick='labClick(this)' id='k56'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成教育案例与实践<br>教师辛 <br>11[11-12]<br>示例楼A108</div><div style='padding-bottom:5px;clear:both;'>合成教育案例与实践<br>教师辛 <br>14[11-12]<br>示例点</div><div style='padding-bottom:5px;clear:both;'>合成教育案例与实践<br>丙师 <br>12[11-12]<br>示例点</div><div style='padding-bottom:5px;clear:both;'>合成教育案例与实践<br>教师己 <br>13[11-12]<br>示例楼A108</div><div style='padding-bottom:5px;clear:both;'>合成教育案例与实践<br>教师庚 <br>9[11-12]<br>示例点</div><div style='padding-bottom:5px;clear:both;'>合成教育案例与实践<br>丙师 <br>15[11-12]<br>示例楼A108</div><div style='padding-bottom:5px;clear:both;'>合成教育案例与实践<br>教师戊 <br>10[11-12]<br>示例楼A108</div></span>
+								<a href="javascript:void(0);" class="choice">选课</a>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k66'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k76'>
+							</div>
+												
+					</td>
+					
+				</tr>
+				
+				<tr><td colspan='9'><div style='padding-left:10px;padding-bottom:5px;width:48%; float: left;'>合成理论 教师乙 11周</div><div style='padding-left:10px;padding-bottom:5px;width:48%; float: left;'>合成心理Ⅱ 教师壬 7-14周</div></td></tr>
+
+			</tbody>
+		</table>
+		
+	</body>
+</html>

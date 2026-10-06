@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Language" content="zh-cn" />
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+		<style type='text/css'>
+		.table{width:99%;height:99%;border-collapse: collapse; margin: 2px auto;}
+		.tr{height:auto;}
+		.td{border:solid 1px black;padding:0px; height: 80px;}
+		.td0{border:solid 1px black;padding:0px;height:4mm;font-size:14px;text-align: center;}
+		.td1{border:solid 1px black;padding:0px;width:9mm;height:48px;font-size:14px;text-align: center;background-color: white;}
+		.div1,.div_nokb{width:100%;height:100%;background-color:white;border:solid 0px gray;margin:0px;padding:0px;font-size:12px; position: relative;}
+		.div_nokb{background-color: #eee;} 
+		
+		.xkinfo{ position:absolute; left:3px; top:3px;}
+		.choice{ position:absolute; right:3px; bottom:3px; }
+		tr.H {background-color: #f5f5f5;text-align: center;}
+	</style>
+	
+	</head>
+	<body style="font-size:12px; margin: 0px auto;">
+		
+		
+		<div>
+			<input type="hidden" id="xn" name="xn" value="2026"> 
+			<input type="hidden" id="xq_m" name="xq_m" value="0"> 
+			<input type="hidden" id="xh" name="xh" value="990000000003"> 
+		</div>
+		
+		<table class='table' id='mytable' name='mytable'>
+			<thead></thead>
+			<tbody >
+				<tr class="H">
+					<td class="td0" style='width:5%;padding:0px;' colspan='2'></td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期一
+						</td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期二
+						</td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期三
+						</td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期四
+						</td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期五
+						</td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期六
+						</td>
+					
+						<td class='td0' style="width:13%;height:20px;">
+						星期日
+						</td>
+					
+				</tr>
+				
+				<tr>
+					<td class='td1' rowspan='2' valign='middle'>
+						<div style='background-color: white; '><b>上<br>午</b></div>
+					</td>
+					<td class='td1'>
+							<b>一</b>
+					</td>
+					
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k11'>
+							</div>
+						
+					</td>
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k21'>
+							</div>
+						
+					</td>
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k31'>
+							</div>
+						
+					</td>
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k41'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课课课卯<br>示寒 <br>1-16[1-3]<br>四107</div></span>
+							</div>
+						
+					</td>
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k51'>
+							</div>
+						
+					</td>
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k61'>
+							</div>
+						
+					</td>
+					
+						<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k71'>
+							</div>
+						
+					</td>
+					
+				</tr>
+				
+
+				<tr>
+					<td class='td1'>
+							<b>
+								二
+							</b>
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k12'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k22'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k32'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课课丑<br>示例寅 <br>4,8,12[3-4]<br>样样乙学</div><div style='padding-bottom:5px;clear:both;'>合成课课课丑<br>示例寅 <br>1-3,5-7,9-11,13-16[3-4]<br>二211</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k42'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k52'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课课未<br>示例星 <br>9[3-4]<br>九502</div><div style='padding-bottom:5px;clear:both;'>合成课课课未<br>示例癸 <br>7[3-4]<br>九502</div><div style='padding-bottom:5px;clear:both;'>合成课课课未<br>示暑 <br>5[3-4]<br>九502</div><div style='padding-bottom:5px;clear:both;'>合成课课课未<br>示丁 <br>02[3-4]<br>九502</div><div style='padding-bottom:5px;clear:both;'>合成课课课未<br>示洪 <br>3,4,6,8[3-4]<br>样样乙学</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k62'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k72'>
+							</div>
+												
+					</td>
+					
+				</tr>
+				
+				<!-- 
+				</tbody>
+				<tbody block="block">
+				 -->
+				
+				<tr>
+					<td class='td1' rowspan='2' valign='middle'>
+						<div style='background-color: white;'><b>下<br>午</b></div>
+					</td>
+					<td class='td1'>
+							<b>
+								三
+							</b>
+					</td>
+					
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k13'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课己<br>示例己 <br>1-16[5-6]<br>二103</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k23'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课课课课课戌<br>示例庚 <br>1-8[5-6]<br>九304</div><div style='padding-bottom:5px;clear:both;'>合成课课课课课课戌<br>示丑 <br>9-16[5-6]<br>九304</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k33'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课子3<br>示例丙 <br>7[5-6]<br>二208</div><div style='padding-bottom:5px;clear:both;'>合成课课子3<br>示亥 <br>8[5-6]<br>二208</div><div style='padding-bottom:5px;clear:both;'>合成课课子3<br>示例子 <br>9[5-6]<br>二208</div><div style='padding-bottom:5px;clear:both;'>合成课课子3<br>示例宇 <br>10[5-6]<br>二208</div><div style='padding-bottom:5px;clear:both;'>合成课课子3<br>示例子 <br>11[5-6]<br>二208</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k43'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课申<br>示例酉 <br>1-16[5-7]<br>十110</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k53'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课课课课课辰<br>示例地 <br>1-16[5-7]<br>八205</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k63'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k73'>
+							</div>
+												
+					</td>
+					
+				</tr>
+				
+				<tr>
+					<td class='td1'>
+							<b>
+								四
+							</b>
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k14'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>《合成》课乙<br>示例天 <br>1-16[7-8]<br>九502</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k24'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k34'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k44'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k54'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课课课课课辰<br>示例地 <br>1-16[8]<br>八301</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k64'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k74'>
+							</div>
+												
+					</td>
+					
+				</tr>
+				
+				<!-- 
+				</tbody>
+				<tbody block="block">
+				 -->
+				
+				<tr>
+					<td class='td1' rowspan='2' valign='middle'>
+						<div style='background-color: white;'><b>晚<br>上</b></div>
+					</td>
+					<td class='td1'>
+							<b>
+								五
+							</b>
+					</td>
+					
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k15'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课课丙<br>示例戊 <br>2-16[9-10]<br>四108</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k25'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课课课丁<br>示例玄 <br>1[9-10]<br>七103</div><div style='padding-bottom:5px;clear:both;'>合成课课课课丁<br>示例玄 <br>2-16[9-10]<br>二201</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k35'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课午<br>示例黄 <br>1-16[9-10]<br>七302</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k45'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课酉<br>示例秋 <br>1-16[9-11]<br>二208</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div1' id='k55'>
+								<span class="xkinfo"><div style='padding-bottom:5px;clear:both;'>合成课课课课课课巳<br>示例申 <br>1-16[9-11]<br>七101</div></span>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k65'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k75'>
+							</div>
+												
+					</td>
+					
+				</tr>
+				
+				<tr>
+					<td class='td1'>
+							<b>
+								六
+							</b>
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k16'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k26'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k36'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k46'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k56'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k66'>
+							</div>
+												
+					</td>
+					
+					<td class='td' style="width:13%;">
+						
+							<div class='div_nokb' id='k76'>
+							</div>
+												
+					</td>
+					
+				</tr>
+				
+				
+			</tbody>
+		</table>
+		
+	</body>
+</html>

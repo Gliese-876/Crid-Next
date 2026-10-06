@@ -1,0 +1,64 @@
+{
+  "format": "crid-next",
+  "version": 1,
+  "name": "示例课表",
+  "courses": [
+    {
+      "name": "数学与建模（示例）",
+      "credits": "3",
+      "extra": {
+        "课程类别": "必修"
+      },
+      "lessons": [
+        {
+          "weeks": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+          "weekday": 1,
+          "startPeriod": 1,
+          "endPeriod": 2,
+          "location": "示例教学楼 A101",
+          "teacher": "示例教师甲"
+        },
+        {
+          "weeks": [2, 4, 6, 8, 10, 12, 14, 16],
+          "weekday": 5,
+          "startPeriod": 3,
+          "endPeriod": 4,
+          "location": "示例教学楼 B203",
+          "teacher": "示例教师乙",
+          "note": "建模练习"
+        }
+      ]
+    },
+    {
+      "name": "数据实践（示例）",
+      "credits": "2",
+      "extra": {
+        "课程类别": "选修"
+      },
+      "lessons": [
+        {
+          "weeks": [2, 4, 6, 10, 12, 14],
+          "weekday": 3,
+          "startTime": "13:30",
+          "endTime": "15:00",
+          "location": "示例实验室 C305",
+          "teacher": "示例教师乙",
+          "note": "自备电脑"
+        }
+      ]
+    },
+    {
+      "name": "专题研讨（示例）",
+      "credits": "1",
+      "lessons": [
+        {
+          "weeks": [5, 9, 13],
+          "weekday": 0,
+          "teacher": "示例教师丙",
+          "note": "具体时间、地点另行通知",
+          "unscheduled": true
+        }
+      ]
+    }
+  ]
+}

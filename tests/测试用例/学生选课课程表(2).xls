@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Language" content="zh-cn" />
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+
+		<style type="text/css">
+
+			table {
+				margin: 0 auto;
+				border: 1px solid black;
+				border-collapse: collapse;
+				border-spacing: 0;
+				empty-cells: show;
+				table-layout: fixed;
+			}
+			
+			td {
+				text-align: left;
+				border: 1px solid black;
+				font-size: 9pt;
+				padding-left: 2px;
+				padding-right: 2px;
+				line-height: 5mm;
+				word-wrap: break-word;
+				word-break: break-all;
+				vnd.ms-excel.numberformat:@
+			}
+			
+			thead td {
+				text-align: center
+			}
+
+		</style>
+				
+	</head>
+	<body style="font-size:12px">
+	
+		<div pagetitle="pagetitle" style="width:169mm;font-size:20px;font-weight:bold;">
+			<div style="height:30px;"></div>
+			<div style="font-size:20px;font-weight:bold;">北京师范大学学生选课课程表</div>
+			 <font style="font-size:13px;font-weight:bold;">
+			 	（2026-2027学年秋季学期）
+			 </font>
+			 <div style="height:30px;width:100%"></div>
+		</div>
+
+		
+		<div group="group" style="width:169mm;text-align:left;font-size:12px;font-weight:normal;">
+			<div style="height:30px;width:100%"></div>
+			<div style="float:left;width:42mm;">
+				学号：990000000002
+			</div>
+			<div style="float:left;width:42mm;">
+				姓名：示例张
+			</div>
+			<div style="float:left;width:98mm;">
+				所在班级：汉语言文学（汉语言文学+人工智能双学士项目）2025
+			</div>
+			<div style="float:right;">
+				选课课程门数：14&ensp;
+				总学分：31.25&ensp;
+			</div>
+		</div>
+			<table style="clear:left;width:169mm;font-size:12px">
+				<thead>
+					<tr>
+						<td style="width: 25%">[课程号]课程名</td>
+						<td style="width: 4%">总<br>学时</td>
+						<td style="width: 4%">学分</td>
+						<td style="width: 4%">上课<br>班号</td>
+						<td style="width: 12%">任课教师</td>
+						<td style="width: 19%">上课时间、地点</td>
+						<td style="width: 4%">修读<br>性质</td>
+						<td style="width: 4%">辅修<br>标志</td>
+						<td style="width: 4%">是否<br>免听</td>
+						<td style="width: 13%">选课时间</td>
+						<td style="width: 7%">提交人</td>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70001]合成课课课丙</td>
+						<td style="text-align:center;">32</td>
+						<td style="text-align:center;">2.0</td>
+						<td style="text-align:center;">09</td>
+						<td style="text-align:left;">示例戊</td>
+						<td style="text-align:left;">2-16周 一[9-10] 四108(60)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:01:10</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr0_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr0_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr0_kcdm" name="kcdm" style="display: none">ZZZ70001</td>
+						<td id="tr0_skbjdm" name="skbjdm" style="display: none">ZZZ70001-09</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70002]合成课课己</td>
+						<td style="text-align:center;">32</td>
+						<td style="text-align:center;">2.0</td>
+						<td style="text-align:center;">03</td>
+						<td style="text-align:left;">示例己</td>
+						<td style="text-align:left;">1-16周 一[5-6] 二103(70)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:01:25</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr1_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr1_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr1_kcdm" name="kcdm" style="display: none">ZZZ70002</td>
+						<td id="tr1_skbjdm" name="skbjdm" style="display: none">ZZZ70002-03</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70003]合成课课课课丁</td>
+						<td style="text-align:center;">32</td>
+						<td style="text-align:center;">2.0</td>
+						<td style="text-align:center;">02</td>
+						<td style="text-align:left;">示例玄</td>
+						<td style="text-align:left;">1周 二[9-10] 七103(145),2-16周 二[9-10] 二201(156)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:01:42</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr2_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr2_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr2_kcdm" name="kcdm" style="display: none">ZZZ70003</td>
+						<td id="tr2_skbjdm" name="skbjdm" style="display: none">ZZZ70003-02</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70004]合成课课酉</td>
+						<td style="text-align:center;">48</td>
+						<td style="text-align:center;">3.0</td>
+						<td style="text-align:center;">06</td>
+						<td style="text-align:left;">示例秋</td>
+						<td style="text-align:left;">1-16周 四[9-11] 二208(156)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:02:03</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr3_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr3_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr3_kcdm" name="kcdm" style="display: none">ZZZ70004</td>
+						<td id="tr3_skbjdm" name="skbjdm" style="display: none">ZZZ70004-06</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70005]合成课课午</td>
+						<td style="text-align:center;">32</td>
+						<td style="text-align:center;">2.0</td>
+						<td style="text-align:center;">03</td>
+						<td style="text-align:left;">示例黄</td>
+						<td style="text-align:left;">1-16周 三[9-10] 七302(80)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:01:50</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr4_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr4_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr4_kcdm" name="kcdm" style="display: none">ZZZ70005</td>
+						<td id="tr4_skbjdm" name="skbjdm" style="display: none">ZZZ70005-03</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70006]《合成》课乙</td>
+						<td style="text-align:center;">32</td>
+						<td style="text-align:center;">2.0</td>
+						<td style="text-align:center;">01</td>
+						<td style="text-align:left;">示例天</td>
+						<td style="text-align:left;">1-16周 一[7-8] 九502(401)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:00:34</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr5_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr5_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr5_kcdm" name="kcdm" style="display: none">ZZZ70006</td>
+						<td id="tr5_skbjdm" name="skbjdm" style="display: none">ZZZ70006-01</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70007]合成课课课课课课戌</td>
+						<td style="text-align:center;">64</td>
+						<td style="text-align:center;">3.0</td>
+						<td style="text-align:center;">15</td>
+						<td style="text-align:left;">示丑;示例庚</td>
+						<td style="text-align:left;">1-8周 二[5-6] 九304(102),9-16周 二[5-6] 九304(102)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:00:00</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr6_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr6_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr6_kcdm" name="kcdm" style="display: none">ZZZ70007</td>
+						<td id="tr6_skbjdm" name="skbjdm" style="display: none">ZZZ70007-15</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70008]合成课课课丑</td>
+						<td style="text-align:center;">32</td>
+						<td style="text-align:center;">2.0</td>
+						<td style="text-align:center;">17</td>
+						<td style="text-align:left;">示例寅</td>
+						<td style="text-align:left;">1-3,5-7,9-11,13-16周 三[3-4] 二211(62),4,8,12周 三[3-4] 样样乙学(400)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:00:19</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr7_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr7_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr7_kcdm" name="kcdm" style="display: none">ZZZ70008</td>
+						<td id="tr7_skbjdm" name="skbjdm" style="display: none">ZZZ70008-17</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70010]合成课课课未</td>
+						<td style="text-align:center;">16</td>
+						<td style="text-align:center;">1.0</td>
+						<td style="text-align:center;">13</td>
+						<td style="text-align:left;">示例癸;示例星;示暑;示洪;示丁</td>
+						<td style="text-align:left;">02周 五[3-4] 九502(401),3,4,6,8周 五[3-4] 样样乙学(400),5周 五[3-4] 九502(401),7周 五[3-4] 九502(401),9周 五[3-4] 九502(401)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:01:08</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr8_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr8_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr8_kcdm" name="kcdm" style="display: none">ZZZ70010</td>
+						<td id="tr8_skbjdm" name="skbjdm" style="display: none">ZZZ70010-13</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70011]合成课课子3</td>
+						<td style="text-align:center;">8</td>
+						<td style="text-align:center;">0.25</td>
+						<td style="text-align:center;">20</td>
+						<td style="text-align:left;">示例子;示例宇;示例丙;示亥</td>
+						<td style="text-align:left;">7周 三[5-6] 二208(156),8周 三[5-6] 二208(156),9周 三[5-6] 二208(156),10周 三[5-6] 二208(156),11周 三[5-6] 二208(156)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:09:44</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr9_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr9_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr9_kcdm" name="kcdm" style="display: none">ZZZ70011</td>
+						<td id="tr9_skbjdm" name="skbjdm" style="display: none">ZZZ70011-20</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70017]合成课课课课课课巳</td>
+						<td style="text-align:center;">48</td>
+						<td style="text-align:center;">3.0</td>
+						<td style="text-align:center;">03</td>
+						<td style="text-align:left;">示例申</td>
+						<td style="text-align:left;">1-16周 五[9-11] 七101(145)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:01:53</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr10_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr10_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr10_kcdm" name="kcdm" style="display: none">ZZZ70017</td>
+						<td id="tr10_skbjdm" name="skbjdm" style="display: none">ZZZ70017-03</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70018]合成课申</td>
+						<td style="text-align:center;">48</td>
+						<td style="text-align:center;">3.0</td>
+						<td style="text-align:center;">03</td>
+						<td style="text-align:left;">示例酉</td>
+						<td style="text-align:left;">1-16周 四[5-7] 十110(148)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:03:03</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr11_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr11_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr11_kcdm" name="kcdm" style="display: none">ZZZ70018</td>
+						<td id="tr11_skbjdm" name="skbjdm" style="display: none">ZZZ70018-03</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70019]合成课课课课卯</td>
+						<td style="text-align:center;">48</td>
+						<td style="text-align:center;">3.0</td>
+						<td style="text-align:center;">01</td>
+						<td style="text-align:left;">示寒</td>
+						<td style="text-align:left;">1-16周 四[1-3] 四107(182)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:15:01</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr12_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr12_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr12_kcdm" name="kcdm" style="display: none">ZZZ70019</td>
+						<td id="tr12_skbjdm" name="skbjdm" style="display: none">ZZZ70019-01</td>
+					</tr>
+					
+					<tr>
+						<td style="text-align:left;">[ZZZ70020]合成课课课课课课辰</td>
+						<td style="text-align:center;">64</td>
+						<td style="text-align:center;">3.0</td>
+						<td style="text-align:center;">01</td>
+						<td style="text-align:left;">示例地</td>
+						<td style="text-align:left;">1-16周 五[5-7] 八205(182),1-16周 五[8] 八301(100)</td>
+						<td style="text-align:center;">初修</td>
+						<td style="text-align:center;">主修</td>
+						<td style="text-align:center;">否</td>
+						<td style="text-align:center;">2090-01-03 08:02:44</td>
+						<td style="text-align:left;">示例张</td>
+						<td id="tr13_xtxh" name="xtxh" style="display: none">990000000003</td>
+						<td id="tr13_xk_status_m" name="xk_status_m" style="display: none">03</td>
+						<td id="tr13_kcdm" name="kcdm" style="display: none">ZZZ70020</td>
+						<td id="tr13_skbjdm" name="skbjdm" style="display: none">ZZZ70020-01</td>
+					</tr>
+					
+				</tbody>
+			</table>
+			
+		
+	</body>
+</html>

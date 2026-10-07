@@ -4,7 +4,9 @@
 
 **A little clarity for every week.**
 
-Crid Next is a lightweight, native Android timetable app that makes today's classes and the week ahead easy to read. It keeps the details that real timetables depend on: alternating weeks, separate teaching blocks, and changing teachers and rooms. From your first import to your end-of-term backup, clear views and thoughtful interactions make it a comfortable everyday companion.
+Crid Next is a lightweight, native Android timetable app designed for students at **Beijing Normal University's Beijing and Zhuhai campuses**. It makes today's classes and the week ahead easy to read while keeping the details that real timetables depend on: alternating weeks, separate teaching blocks, and changing teachers and rooms. From your first import to your end-of-term backup, clear views and thoughtful interactions make it a comfortable everyday companion.
+
+The app supports timetable imports from both campuses' academic portals. Students at other universities can use the [AI conversion workflow below](#use-ai-to-convert-another-timetable-format) to turn their own timetable into Crid Next JSON and import it into the app.
 
 **Android 12 or later · 简体中文 / 繁體中文 / English · First public release: 2.0.0**
 
@@ -19,7 +21,7 @@ Crid Next is a lightweight, native Android timetable app that makes today's clas
 
 ### Clear to read, natural to use
 
-Each course keeps its own soft color, making it easy to recognize across views. A clear text hierarchy and balanced spacing give class names, times, and rooms their own place. Light and dark themes share a consistent visual style, while illustrations bring a little warmth to a day without classes.
+The interface uses **Material Design 3**, with soft course colors, a clear text hierarchy, and balanced spacing that give class names, times, and rooms their own place. Each course keeps its color across views, making it easy to recognize as you switch pages. Light and dark themes share a consistent visual style, while illustrations bring a little warmth to a day without classes.
 
 As you swipe between pages, the page and navigation indicator follow your finger together. Menus and dialogs open from where you tapped and return along the same path. Expand the course details panel with a drag, or swipe it down to close, with a natural flow between viewing, switching, and returning.
 

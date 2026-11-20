@@ -118,14 +118,14 @@ internal fun CourseDetailsSheet(
                                 style = titleStyle)
                         }
                         val edit: @Composable (Modifier) -> Unit = { modifier ->
-                            TextButton(onClick = { editCourseOrigin.capture(); onEditCourse(editCourseOrigin) }, enabled = !actionBusy,
+                            TextButton(onClick = hapticClick { editCourseOrigin.capture(); onEditCourse(editCourseOrigin) }, enabled = !actionBusy,
                                 modifier = modifier.heightIn(min = 48.dp).modalOrigin(editCourseOrigin).testTag("edit_course")
                                     .semantics { contentDescription = text.t("编辑课程", "Edit course") }) {
                                 VisualCenterText(editLabel, modifier = if (stacked) Modifier.centerVisualText() else Modifier, style = actionStyle)
                             }
                         }
                         val delete: @Composable (Modifier) -> Unit = { modifier ->
-                            TextButton(onClick = { deleteCourseOrigin.capture(); deleteCourse = true }, enabled = !actionBusy,
+                            TextButton(onClick = hapticClick { deleteCourseOrigin.capture(); deleteCourse = true }, enabled = !actionBusy,
                                 colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error),
                                 modifier = modifier.heightIn(min = 48.dp).modalOrigin(deleteCourseOrigin).testTag("delete_course")
                                     .semantics { contentDescription = text.t("删除课程", "Delete course") }) {
@@ -204,14 +204,14 @@ internal fun CourseDetailsSheet(
                 ))
             },
             confirmButton = { motion ->
-                TextButton(onClick = { motion.finish { deleteCourse = false; onDeleteCourse() } }, enabled = !actionBusy,
+                TextButton(onClick = hapticClick { motion.finish { deleteCourse = false; onDeleteCourse() } }, enabled = !actionBusy,
                     modifier = Modifier.testTag("confirm_delete_course"),
                     colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error)) {
                     VisualCenterText(text.t("删除课程", "Delete course"), Modifier.centerVisualText())
                 }
             },
             dismissButton = { motion ->
-                TextButton(onClick = motion.dismiss, modifier = Modifier.testTag("cancel_delete_course")) { VisualCenterText(text.t("取消", "Cancel"), Modifier.centerVisualText()) }
+                TextButton(onClick = hapticClick(motion.dismiss), modifier = Modifier.testTag("cancel_delete_course")) { VisualCenterText(text.t("取消", "Cancel"), Modifier.centerVisualText()) }
             },
         )
     }
@@ -234,14 +234,14 @@ internal fun CourseDetailsSheet(
                 }
             },
             confirmButton = { motion ->
-                TextButton(onClick = { motion.finish { cancelRecordDelete(); onDeleteLesson(source.courseId, source.lessonIndex) } }, enabled = !actionBusy,
+                TextButton(onClick = hapticClick { motion.finish { cancelRecordDelete(); onDeleteLesson(source.courseId, source.lessonIndex) } }, enabled = !actionBusy,
                     modifier = Modifier.testTag("confirm_delete_arrangement"),
                     colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error)) {
                     VisualCenterText(text.t("删除安排", "Delete arrangement"), Modifier.centerVisualText())
                 }
             },
             dismissButton = { motion ->
-                TextButton(onClick = motion.dismiss, modifier = Modifier.testTag("cancel_delete_arrangement")) { VisualCenterText(text.t("取消", "Cancel"), Modifier.centerVisualText()) }
+                TextButton(onClick = hapticClick(motion.dismiss), modifier = Modifier.testTag("cancel_delete_arrangement")) { VisualCenterText(text.t("取消", "Cancel"), Modifier.centerVisualText()) }
             },
         )
     }
@@ -323,7 +323,7 @@ internal fun TeachingRecord(
                         val origin = rememberModalOrigin()
                         val label = actionNumber?.let { text.t("编辑第 $it 条授课安排", "Edit arrangement $it") }
                             ?: text.t("编辑授课安排", "Edit arrangement")
-                        TextButton(onClick = { origin.capture(); edit(origin) }, enabled = actionsEnabled,
+                        TextButton(onClick = hapticClick { origin.capture(); edit(origin) }, enabled = actionsEnabled,
                             modifier = (actionTag?.let { Modifier.testTag("${it}_edit") } ?: Modifier)
                                 .heightIn(min = 48.dp).modalOrigin(origin).semantics { contentDescription = label }) {
                             VisualCenterText(text.t("编辑", "Edit"), Modifier.centerVisualText())
@@ -333,7 +333,7 @@ internal fun TeachingRecord(
                         val origin = rememberModalOrigin()
                         val label = actionNumber?.let { text.t("删除第 $it 条授课安排", "Delete arrangement $it") }
                             ?: text.t("删除授课安排", "Delete arrangement")
-                        TextButton(onClick = { origin.capture(); remove(origin) }, enabled = actionsEnabled,
+                        TextButton(onClick = hapticClick { origin.capture(); remove(origin) }, enabled = actionsEnabled,
                             colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error),
                             modifier = (actionTag?.let { Modifier.testTag("${it}_delete") } ?: Modifier)
                                 .heightIn(min = 48.dp).modalOrigin(origin).semantics { contentDescription = label }) {
@@ -373,7 +373,7 @@ internal fun CourseManagerSheet(
                             style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
                     }
                     val add: @Composable (Modifier) -> Unit = { modifier ->
-                        FilledTonalButton(onClick = { addCourseOrigin.capture(); onAddCourse(addCourseOrigin) },
+                        FilledTonalButton(onClick = hapticClick { addCourseOrigin.capture(); onAddCourse(addCourseOrigin) },
                             modifier = modifier.heightIn(min = 48.dp).modalOrigin(addCourseOrigin).testTag("course_manager_add")
                                 .semantics { contentDescription = text.t("新增课程", "Add course") }) {
                             VisualCenterText(text.t("新增", "Add"), modifier = if (stackActions) Modifier.centerVisualText() else Modifier)
@@ -394,7 +394,7 @@ internal fun CourseManagerSheet(
                     val first = related.first()
                     val lessons = related.flatMap { it.lessons }
                     val previews = courseArrangementPreviews(lessons, semester, text)
-                    Surface(onClick = { onSelectCourse(first) }, modifier = Modifier.fillMaxWidth().testTag("managed_course_$index"),
+                    Surface(onClick = hapticClick { onSelectCourse(first) }, modifier = Modifier.fillMaxWidth().testTag("managed_course_$index"),
                         shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surfaceContainerHigh,
                         contentColor = MaterialTheme.colorScheme.onSurface) {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {

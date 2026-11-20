@@ -145,7 +145,7 @@ internal fun CridBottomNavigation(
                 val iconAnchor = if (glass) Modifier else Modifier.onGloballyPositioned { anchors[route] = it.boundsInRoot() }
                 NavigationBarItem(
                     selected = selectedRoute == route,
-                    onClick = { onNavigate(route) },
+                    onClick = hapticClick { onNavigate(route) },
                     modifier = Modifier.testTag("nav_$route").then(itemAnchor),
                     interactionSource = interactionSource,
                     icon = {
@@ -179,7 +179,7 @@ internal fun GlassSideNavigationItem(route: String, label: String, selected: Boo
     val response = Modifier.glassItemPress(interaction)
     val selection = if (selected) Modifier.glassNavigationIndicator(scheme.primary, dark) else Modifier
     val frame = Modifier.fillMaxWidth().heightIn(min = 56.dp).testTag("nav_$route").clip(CircleShape)
-        .then(selection).selectable(selected, interaction, LocalIndication.current, role = Role.Tab, onClick = onClick)
+        .then(selection).selectable(selected, interaction, LocalIndication.current, role = Role.Tab, onClick = hapticClick(onClick))
         .padding(horizontal = if (expanded) 14.dp else 4.dp, vertical = 8.dp)
     if (expanded) {
         Row(frame, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {

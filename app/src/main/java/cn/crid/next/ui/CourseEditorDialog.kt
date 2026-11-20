@@ -53,7 +53,7 @@ internal fun CourseEditorDialog(
         AnimatedAppAlertDialog(onDismissRequest = onDismiss, origin = origin,
             title = { Text(text.t("无法编辑课程", "Course unavailable")) },
             text = { Text(text.t("这个学期或方案已被删除。", "This semester or plan has been deleted.")) },
-            confirmButton = { motion -> TextButton(onClick = motion.dismiss) { VisualCenterText(text.t("关闭", "Close"), modifier = Modifier.centerVisualText()) } })
+            confirmButton = { motion -> TextButton(onClick = hapticClick(motion.dismiss)) { VisualCenterText(text.t("关闭", "Close"), modifier = Modifier.centerVisualText()) } })
         return
     }
     var confirmDiscard by rememberSaveable(sessionId) { mutableStateOf(false) }
@@ -114,12 +114,12 @@ internal fun CourseEditorDialog(
                                     if (it.rowId == entry.rowId) it.copy(value = value) else it }) } },
                                     label = { Text(entry.key.ifBlank { text.t("内容", "Value") }) }, enabled = !model.busy,
                                     modifier = Modifier.fillMaxWidth().testTag("editor_extra_value_$index"))
-                                TextButton(onClick = { model.edit { current -> current.copy(extra = current.extra.filterNot { it.rowId == entry.rowId }) } },
+                                TextButton(onClick = hapticClick { model.edit { current -> current.copy(extra = current.extra.filterNot { it.rowId == entry.rowId }) } },
                             enabled = !model.busy) { VisualCenterText(text.t("删除这条信息", "Remove detail"), modifier = Modifier.centerVisualText()) }
                             }
                         }
                     }
-                    TextButton(onClick = { model.edit { it.copy(extra = it.extra + EditorExtra("", "")) } }, enabled = !model.busy,
+                    TextButton(onClick = hapticClick { model.edit { it.copy(extra = it.extra + EditorExtra("", "")) } }, enabled = !model.busy,
                         modifier = Modifier.testTag("editor_add_extra")) { VisualCenterText(text.t("添加其他信息", "Add detail"), modifier = Modifier.centerVisualText()) }
                     HorizontalDivider()
                     Text(text.t("授课安排", "Teaching arrangements"), style = MaterialTheme.typography.titleLarge)
@@ -132,7 +132,7 @@ internal fun CourseEditorDialog(
                                 onRemove = { model.edit { current -> current.copy(lessons = current.lessons.filterNot { it.rowId == entry.rowId }) } })
                         }
                     }
-                    OutlinedButton(onClick = {
+                    OutlinedButton(onClick = hapticClick {
                         val entry = EditorLesson(newEditorLesson(semester, initialDate))
                         model.edit { it.copy(lessons = it.lessons + entry) }
                         expandedLesson = entry.rowId
@@ -148,10 +148,10 @@ internal fun CourseEditorDialog(
                     }
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End),
                         verticalAlignment = Alignment.CenterVertically) {
-                        TextButton(onClick = ::requestClose, enabled = !model.busy, modifier = alignByVisualCenter(Modifier.testTag("editor_cancel"))) {
+                        TextButton(onClick = hapticClick(::requestClose), enabled = !model.busy, modifier = alignByVisualCenter(Modifier.testTag("editor_cancel"))) {
                             VisualCenterText(text.t("取消", "Cancel"))
                         }
-                        Button(onClick = {
+                        Button(onClick = hapticClick {
                             val error = contextError ?: editorValidationError(draft, semester, text)
                             if (error != null) model.showError(error)
                             else model.save(onSave) { failure -> editorSaveError(failure, text) }
@@ -170,9 +170,9 @@ internal fun CourseEditorDialog(
             AnimatedAppAlertDialog(onDismissRequest = { confirmDiscard = false },
                 title = { Text(text.t("放弃未保存的更改？", "Discard unsaved changes?")) },
                 text = { Text(text.t("离开后，这次修改将不会保存。", "Your changes will be lost when you leave.")) },
-                dismissButton = { confirmation -> TextButton(onClick = confirmation.dismiss,
+                dismissButton = { confirmation -> TextButton(onClick = hapticClick(confirmation.dismiss),
                 modifier = Modifier.testTag("editor_keep_editing")) { VisualCenterText(text.t("继续编辑", "Keep editing"), modifier = Modifier.centerVisualText()) } },
-                confirmButton = { confirmation -> TextButton(onClick = {
+                confirmButton = { confirmation -> TextButton(onClick = hapticClick {
                     confirmation.finish { confirmDiscard = false; motion.finish(close) }
             }, modifier = Modifier.testTag("editor_discard_changes")) { VisualCenterText(text.t("放弃修改", "Discard changes"), modifier = Modifier.centerVisualText()) } })
         }
@@ -191,10 +191,10 @@ private fun EditorColorPalette(selected: Int, text: UiText, enabled: Boolean, au
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(text.t("课程颜色", "Course color"), style = MaterialTheme.typography.titleSmall)
         FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        if (automaticAllowed) FilterChip(selected == 0, { onSelect(0) }, label = { VisualCenterText(text.t("自动", "Automatic"), modifier = Modifier.centerVisualText()) }, enabled = enabled)
+        if (automaticAllowed) FilterChip(selected == 0, hapticClick { onSelect(0) }, label = { VisualCenterText(text.t("自动", "Automatic"), modifier = Modifier.centerVisualText()) }, enabled = enabled)
             else if (selected == 0) Text(text.t("默认颜色", "Default color"), modifier = Modifier.padding(vertical = 12.dp))
             palette.forEach { (color, label) ->
-                Box(Modifier.size(48.dp).selectable(selected == color, enabled, Role.RadioButton) { onSelect(color) }
+                Box(Modifier.size(48.dp).selectable(selected == color, enabled, Role.RadioButton, onClick = hapticClick { onSelect(color) })
                     .semantics { contentDescription = label }, contentAlignment = Alignment.Center) {
                     Box(Modifier.size(34.dp).background(Color(color), CircleShape).then(if (selected == color)
                         Modifier.border(3.dp, MaterialTheme.colorScheme.onSurface, CircleShape) else Modifier), contentAlignment = Alignment.Center) {
@@ -284,7 +284,7 @@ private fun EditorLessonCard(
         colors = CardDefaults.outlinedCardColors(containerColor = MaterialTheme.colorScheme.appSurface(
             if (expanded) AppSurfaceRole.Focused else AppSurfaceRole.Supporting))) {
         Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            TextButton(onClick = onToggle, modifier = Modifier.fillMaxWidth().bringIntoViewRequester(bringIntoView).testTag("editor_lesson_toggle_$index")) {
+            TextButton(onClick = hapticClick(onToggle), modifier = Modifier.fillMaxWidth().bringIntoViewRequester(bringIntoView).testTag("editor_lesson_toggle_$index")) {
                 Column(alignByVisualCenter(Modifier.weight(1f)), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     VisualCenterText(text.t("授课安排 ${index + 1}", "Arrangement ${index + 1}"), style = MaterialTheme.typography.titleMedium)
                     VisualCenterText(editorLessonSummary(lesson, semester, text), style = MaterialTheme.typography.bodySmall,
@@ -296,7 +296,7 @@ private fun EditorLessonCard(
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     listOf("weekly" to text.t("每周课", "Weekly"), "date" to text.t("具体日期", "Specific date"),
                         "pending" to text.t("待排课", "Unscheduled")).forEach { (value, label) ->
-                        FilterChip(mode == value, { setMode(value) }, label = { VisualCenterText(label, modifier = Modifier.centerVisualText()) }, enabled = enabled,
+                        FilterChip(mode == value, hapticClick { setMode(value) }, label = { VisualCenterText(label, modifier = Modifier.centerVisualText()) }, enabled = enabled,
                             modifier = Modifier.testTag("editor_mode_${value}_$index"))
                     }
                 }
@@ -304,7 +304,7 @@ private fun EditorLessonCard(
                     Text(text.t("星期", "Day of week"), style = MaterialTheme.typography.labelLarge)
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
                         (1..7).forEach { weekday ->
-                            FilterChip(lesson.weekday == weekday, { onChange { it.copy(weekday = weekday) } },
+                            FilterChip(lesson.weekday == weekday, hapticClick { onChange { it.copy(weekday = weekday) } },
                                 label = { VisualCenterText(java.time.DayOfWeek.of(weekday).getDisplayName(TextStyle.SHORT, text.locale), modifier = Modifier.centerVisualText()) }, enabled = enabled,
                                 modifier = Modifier.testTag("editor_weekday_${index}_$weekday"))
                         }
@@ -316,7 +316,7 @@ private fun EditorLessonCard(
                     Text(text.t("授课周次", "Teaching weeks"), style = MaterialTheme.typography.labelLarge)
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
                         editorWeekChoices(semester, entry).forEach { week ->
-                            FilterChip(week in lesson.weeks, { onChange { old -> old.copy(weeks =
+                            FilterChip(week in lesson.weeks, hapticClick { onChange { old -> old.copy(weeks =
                                 if (week in old.weeks) old.weeks.filterNot { it == week } else (old.weeks + week).distinct().sorted()) } },
                                 label = { VisualCenterText(week.toString(), modifier = Modifier.centerVisualText()) }, enabled = enabled,
                                 modifier = Modifier.testTag("editor_week_${index}_$week").semantics { contentDescription = text.t("第 $week 周", "Week $week") })
@@ -329,18 +329,18 @@ private fun EditorLessonCard(
                             Modifier.weight(1f).modalOrigin(toOrigin).testTag("editor_to_week_$index"), enabled, "")
                     }
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                        TextButton(onClick = { onChange { it.copy(weeks = (it.weeks + (rangeStart..rangeEnd)).distinct().sorted()) } }, enabled = enabled) { VisualCenterText(text.t("选中范围", "Select range"), modifier = Modifier.centerVisualText()) }
-                        TextButton(onClick = { onChange { it.copy(weeks = it.weeks.filterNot { week -> week in rangeStart..rangeEnd }) } }, enabled = enabled) { VisualCenterText(text.t("取消范围", "Clear range"), modifier = Modifier.centerVisualText()) }
-                        TextButton(onClick = { onChange { it.copy(weeks = (rangeStart..rangeEnd).filter { week -> week % 2 == 1 }) } }, enabled = enabled) { VisualCenterText(text.t("仅单周", "Odd weeks"), modifier = Modifier.centerVisualText()) }
-                        TextButton(onClick = { onChange { it.copy(weeks = (rangeStart..rangeEnd).filter { week -> week % 2 == 0 }) } }, enabled = enabled) { VisualCenterText(text.t("仅双周", "Even weeks"), modifier = Modifier.centerVisualText()) }
+                        TextButton(onClick = hapticClick { onChange { it.copy(weeks = (it.weeks + (rangeStart..rangeEnd)).distinct().sorted()) } }, enabled = enabled) { VisualCenterText(text.t("选中范围", "Select range"), modifier = Modifier.centerVisualText()) }
+                        TextButton(onClick = hapticClick { onChange { it.copy(weeks = it.weeks.filterNot { week -> week in rangeStart..rangeEnd }) } }, enabled = enabled) { VisualCenterText(text.t("取消范围", "Clear range"), modifier = Modifier.centerVisualText()) }
+                        TextButton(onClick = hapticClick { onChange { it.copy(weeks = (rangeStart..rangeEnd).filter { week -> week % 2 == 1 }) } }, enabled = enabled) { VisualCenterText(text.t("仅单周", "Odd weeks"), modifier = Modifier.centerVisualText()) }
+                        TextButton(onClick = hapticClick { onChange { it.copy(weeks = (rangeStart..rangeEnd).filter { week -> week % 2 == 0 }) } }, enabled = enabled) { VisualCenterText(text.t("仅双周", "Even weeks"), modifier = Modifier.centerVisualText()) }
                     }
                 }
                 if (mode != "pending") {
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        FilterChip(!clock, { if (clock && periods.isNotEmpty()) onChange { it.copy(startPeriod = periods.first().number,
+                        FilterChip(!clock, hapticClick { if (clock && periods.isNotEmpty()) onChange { it.copy(startPeriod = periods.first().number,
                             endPeriod = periods.first().number, startTime = null, endTime = null) } },
                             label = { VisualCenterText(text.t("按节次", "Periods"), modifier = Modifier.centerVisualText()) }, enabled = enabled && periods.isNotEmpty(), modifier = Modifier.testTag("editor_time_mode_periods_$index"))
-                        FilterChip(clock, { if (!clock) onChange { old -> old.copy(startPeriod = null, endPeriod = null,
+                        FilterChip(clock, hapticClick { if (!clock) onChange { old -> old.copy(startPeriod = null, endPeriod = null,
                             startTime = old.startTime ?: periods.find { it.number == old.startPeriod }?.start ?: "08:00",
                             endTime = old.endTime ?: periods.find { it.number == old.endPeriod }?.end ?: "08:45") } },
                             label = { VisualCenterText(text.t("具体时间", "Clock times"), modifier = Modifier.centerVisualText()) }, enabled = enabled, modifier = Modifier.testTag("editor_time_mode_clock_$index"))
@@ -360,7 +360,7 @@ private fun EditorLessonCard(
                     label = { Text(text.t("教师", "Teacher")) }, enabled = enabled, modifier = Modifier.fillMaxWidth().testTag("editor_teacher_$index"))
                 OutlinedTextField(lesson.note, { value -> onChange { it.copy(note = value) } },
                     label = { Text(text.t("备注", "Notes")) }, enabled = enabled, modifier = Modifier.fillMaxWidth().testTag("editor_note_$index"))
-                TextButton(onClick = onRemove, enabled = enabled, modifier = Modifier.testTag("editor_remove_lesson_$index")) {
+                TextButton(onClick = hapticClick(onRemove), enabled = enabled, modifier = Modifier.testTag("editor_remove_lesson_$index")) {
                 VisualCenterText(text.t("删除这条安排", "Remove arrangement"), color = MaterialTheme.colorScheme.error, modifier = Modifier.centerVisualText())
                 }
             }

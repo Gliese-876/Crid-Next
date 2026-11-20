@@ -67,7 +67,7 @@ internal fun ColorScheme.appOnSurface(role: AppSurfaceRole): Color = when (role)
             AppIllustration(illustration, Modifier.widthIn(max = 360.dp).fillMaxWidth().height(152.dp))
             Text(title, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
             Text(body, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            if (actionLabel.isNotEmpty()) FilledTonalButton(onClick = onAction, modifier = actionModifier) { VisualCenterText(actionLabel, modifier = Modifier.centerVisualText(), textAlign = TextAlign.Center) }
+            if (actionLabel.isNotEmpty()) FilledTonalButton(onClick = hapticClick(onAction), modifier = actionModifier) { VisualCenterText(actionLabel, modifier = Modifier.centerVisualText(), textAlign = TextAlign.Center) }
         }
     }
 }

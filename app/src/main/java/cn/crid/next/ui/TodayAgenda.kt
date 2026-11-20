@@ -196,7 +196,7 @@ private fun TodayCourseRow(occurrence: Occurrence, index: Int, text: UiText, sel
     }
     Column(modifier.testTag("today_course_$index").modalOrigin(origin)
         .clip(RoundedCornerShape(14.dp)).courseTileBackground(palette, highlight, 14.dp, out, holiday)
-        .clickable { origin.capture(); onSelect(occurrence, origin) }.semantics { contentDescription = description }
+        .clickable(onClick = hapticClick { origin.capture(); onSelect(occurrence, origin) }).semantics { contentDescription = description }
         .padding(horizontal = 12.dp, vertical = verticalPadding), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text(courseNameSpacing(occurrence.course.name), modifier = Modifier.fillMaxWidth().testTag("agenda_name_$index"), style = titleStyle, color = palette.content)
         if (occurrence.lesson.location.isNotBlank()) Text(

@@ -50,7 +50,7 @@ internal fun ExportDialog(state: AppState, calendar: HolidayCalendar, text: UiTe
     if (semester == null || plan == null) {
         AnimatedAppAlertDialog(onDismissRequest = onDismiss, origin = origin, title = { Text(text.t("还没有课表", "No timetable yet")) },
             text = { Text(text.t("先选择一个学期和方案，再来导出。", "Choose a semester and plan before exporting.")) },
-            confirmButton = { motion -> TextButton(onClick = motion.dismiss) { VisualCenterText(text.t("知道了", "OK"), modifier = Modifier.centerVisualText()) } })
+            confirmButton = { motion -> TextButton(onClick = hapticClick(motion.dismiss)) { VisualCenterText(text.t("知道了", "OK"), modifier = Modifier.centerVisualText()) } })
         return
     }
     val context = LocalContext.current
@@ -269,14 +269,14 @@ internal fun ExportDialog(state: AppState, calendar: HolidayCalendar, text: UiTe
                     if (results.isNotEmpty()) SoftCard(Modifier.fillMaxWidth(), role = AppSurfaceRole.Raised) {
                         Text(text.t("已保存 ${results.size} 个文件", "${results.size} ${if (results.size == 1) "file" else "files"} saved"), fontWeight = FontWeight.Bold)
                         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            OutlinedButton(onClick = ::openResult, modifier = Modifier.heightIn(min = 48.dp)) { ActionLabel("open", text.t("打开", "Open")) }
-                            FilledTonalButton(onClick = ::shareResults, modifier = Modifier.heightIn(min = 48.dp)) { ActionLabel("share", text.t("分享", "Share")) }
+                            OutlinedButton(onClick = hapticClick(::openResult), modifier = Modifier.heightIn(min = 48.dp)) { ActionLabel("open", text.t("打开", "Open")) }
+                            FilledTonalButton(onClick = hapticClick(::shareResults), modifier = Modifier.heightIn(min = 48.dp)) { ActionLabel("share", text.t("分享", "Share")) }
                         }
                     }
                 }
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End), verticalAlignment = Alignment.CenterVertically) {
-                    if (busy) TextButton(onClick = { exportJob?.cancel() }, modifier = alignByVisualCenter(Modifier.heightIn(min = 48.dp))) { VisualCenterText(text.t("取消导出", "Cancel export")) }
-                    else Button(modifier = alignByVisualCenter(Modifier.heightIn(min = 48.dp)), enabled = !estimating && (kind == ExportKind.DATA || estimated != null && requests.isNotEmpty() && estimatedRequests == requests), onClick = {
+                    if (busy) TextButton(onClick = hapticClick { exportJob?.cancel() }, modifier = alignByVisualCenter(Modifier.heightIn(min = 48.dp))) { VisualCenterText(text.t("取消导出", "Cancel export")) }
+                    else Button(modifier = alignByVisualCenter(Modifier.heightIn(min = 48.dp)), enabled = !estimating && (kind == ExportKind.DATA || estimated != null && requests.isNotEmpty() && estimatedRequests == requests), onClick = hapticClick {
                         pendingRequests = requests.toList()
                         pendingPlan = plan
                         pendingKind = kind
@@ -335,7 +335,7 @@ private fun ExportSemesterChoice(
         contentColor = MaterialTheme.colorScheme.appOnSurface(role), modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Row(Modifier.fillMaxWidth().heightIn(min = 48.dp)
-                .toggleable(value = selected, enabled = enabled && (plans.isNotEmpty() || selected), role = Role.Checkbox, onValueChange = onSelected)
+                .toggleable(value = selected, enabled = enabled && (plans.isNotEmpty() || selected), role = Role.Checkbox, onValueChange = hapticToggle(onSelected))
                 .testTag("export_semester_${semester.id}"),
                 verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     Checkbox(checked = selected, onCheckedChange = null, enabled = enabled && (plans.isNotEmpty() || selected), modifier = alignByVisualCenter())
@@ -349,13 +349,13 @@ private fun ExportSemesterChoice(
                 if (plans.size == 1 && chosen != null) Text(chosen.name, style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(start = 40.dp))
                 else Box(Modifier.fillMaxWidth()) {
-                    OutlinedButton(onClick = { plansOpen = true }, enabled = enabled,
+                    OutlinedButton(onClick = hapticClick { plansOpen = true }, enabled = enabled,
                         modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).testTag("export_semester_plan_${semester.id}"),
                         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp)) {
                         VisualCenterText(chosen?.name ?: text.t("选择课程方案", "Choose course plan"), modifier = Modifier.weight(1f).centerVisualText(), textAlign = TextAlign.Start)
                     }
                     DropdownMenu(expanded = plansOpen, onDismissRequest = { plansOpen = false }) {
-                        plans.forEach { plan -> DropdownMenuItem(text = { VisualCenterText(plan.name, modifier = Modifier.centerVisualText()) }, onClick = { onPlan(plan); plansOpen = false }) }
+                        plans.forEach { plan -> DropdownMenuItem(text = { VisualCenterText(plan.name, modifier = Modifier.centerVisualText()) }, onClick = hapticClick { onPlan(plan); plansOpen = false }) }
                     }
                 }
             }
@@ -367,6 +367,6 @@ private fun ExportSemesterChoice(
 @Composable
 private fun <T> ExportChoices(items: List<T>, selected: T, enabled: Boolean, onSelect: (T) -> Unit, label: (T) -> String) {
     FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        items.forEach { item -> FilterChip(selected == item, { onSelect(item) }, { VisualCenterText(label(item), modifier = Modifier.centerVisualText()) }, enabled = enabled, modifier = Modifier.heightIn(min = 48.dp)) }
+        items.forEach { item -> FilterChip(selected == item, hapticClick { onSelect(item) }, { VisualCenterText(label(item), modifier = Modifier.centerVisualText()) }, enabled = enabled, modifier = Modifier.heightIn(min = 48.dp)) }
     }
 }

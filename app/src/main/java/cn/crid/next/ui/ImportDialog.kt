@@ -105,7 +105,7 @@ import kotlinx.coroutines.withContext
                     bottomBar={
                         if(result!=null&&!success)Surface(shadowElevation=4.dp) {
                             Column(Modifier.fillMaxWidth().navigationBarsPadding().padding(horizontal=14.dp,vertical=16.dp)) {
-                                Button(onClick={
+                                Button(onClick=hapticClick {
                                     val imported=readyResult
                                     val target=semesterId
                                     val targetPlan=planId
@@ -138,20 +138,20 @@ import kotlinx.coroutines.withContext
                                 SoftCard(Modifier.fillMaxWidth(), role = AppSurfaceRole.Raised) {
                                     Text(text.t("从本地文件导入","From a local file"),style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.SemiBold)
                                     Text(text.t("支持课表表格，以及 Crid Next 导出的数据文件","Choose a timetable spreadsheet or an exported Crid Next data file"),style=MaterialTheme.typography.bodyMedium)
-                                    Button(onClick={chooseFile.launch(arrayOf("*/*"))},enabled=!busy,modifier=Modifier.heightIn(min=48.dp)) {ActionLabel("folder",text.t("选择文件","Choose file"))}
+                                    Button(onClick=hapticClick {chooseFile.launch(arrayOf("*/*"))},enabled=!busy,modifier=Modifier.heightIn(min=48.dp)) {ActionLabel("folder",text.t("选择文件","Choose file"))}
                                 }
                                 SoftCard(Modifier.fillMaxWidth()) {
                                     Text(text.t("从教务系统导入","From the campus portal"),style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.SemiBold)
                                     Text(text.t("登录教务系统并下载课表，下载完成后即可检查课程","Sign in to your campus portal and download your timetable to review the classes here"),style=MaterialTheme.typography.bodyMedium)
                                     FlowRow(horizontalArrangement=Arrangement.spacedBy(12.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
-                                        OutlinedButton(onClick={beijingOrigin.capture();campusOrigin=beijingOrigin;launchCampus(CampusPortals.BEIJING)},enabled=!busy,modifier=Modifier.heightIn(min=48.dp).modalOrigin(beijingOrigin)){ActionLabel("open",text.t("北京校区","Beijing campus"))}
-                                        OutlinedButton(onClick={zhuhaiOrigin.capture();campusOrigin=zhuhaiOrigin;launchCampus(CampusPortals.ZHUHAI)},enabled=!busy,modifier=Modifier.heightIn(min=48.dp).modalOrigin(zhuhaiOrigin)){ActionLabel("open",text.t("珠海校区","Zhuhai campus"))}
+                                        OutlinedButton(onClick=hapticClick {beijingOrigin.capture();campusOrigin=beijingOrigin;launchCampus(CampusPortals.BEIJING)},enabled=!busy,modifier=Modifier.heightIn(min=48.dp).modalOrigin(beijingOrigin)){ActionLabel("open",text.t("北京校区","Beijing campus"))}
+                                        OutlinedButton(onClick=hapticClick {zhuhaiOrigin.capture();campusOrigin=zhuhaiOrigin;launchCampus(CampusPortals.ZHUHAI)},enabled=!busy,modifier=Modifier.heightIn(min=48.dp).modalOrigin(zhuhaiOrigin)){ActionLabel("open",text.t("珠海校区","Zhuhai campus"))}
                                     }
                                 }
                             }
                             result?.let {parsed ->
                                 SectionTitle(text.t("检查导入内容","Review your import"),filename)
-                                TextButton(onClick={chooseFile.launch(arrayOf("*/*"))},enabled=!busy,modifier=Modifier.heightIn(min=48.dp)) {ActionLabel("folder",text.t("重新选择文件","Choose another file"))}
+                                TextButton(onClick=hapticClick {chooseFile.launch(arrayOf("*/*"))},enabled=!busy,modifier=Modifier.heightIn(min=48.dp)) {ActionLabel("folder",text.t("重新选择文件","Choose another file"))}
                                 if(parsed.errors.isNotEmpty()) IssueCard(text.t("暂时无法完成解析","This file needs another look"),parsed.errors,true,text)
                                 if(parsed.unresolved.isNotEmpty()) {
                                     IssueCard(text.t("有些课程还没有明确时间","Some classes have no confirmed time"),parsed.unresolved,false,text)
@@ -192,7 +192,7 @@ import kotlinx.coroutines.withContext
                                 preview?.let {check ->
                                     if(check.errors.isNotEmpty()) {
                                         IssueCard(text.t("需要处理的问题","Please resolve these items"),check.errors,true,text)
-                                        TextButton(onClick={motion.finish(onManage)},enabled=!busy,modifier=Modifier.heightIn(min=48.dp)) {ActionLabel("edit",text.t("修改学期日期或作息","Edit semester dates or class times"))}
+                                        TextButton(onClick=hapticClick {motion.finish(onManage)},enabled=!busy,modifier=Modifier.heightIn(min=48.dp)) {ActionLabel("edit",text.t("修改学期日期或作息","Edit semester dates or class times"))}
                                     }
                                     SoftCard(Modifier.fillMaxWidth(), role = AppSurfaceRole.Raised) {
                                         Text(text.t("保存后的课表","Timetable after import"),style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.SemiBold)
@@ -222,7 +222,7 @@ import kotlinx.coroutines.withContext
 
 @Composable private fun ImportCheckOption(label:String,checked:Boolean,enabled:Boolean,onCheckedChange:(Boolean)->Unit,body:String="") {
     Row(
-        Modifier.fillMaxWidth().heightIn(min=48.dp).toggleable(value=checked,enabled=enabled,role=Role.Checkbox,onValueChange=onCheckedChange).padding(vertical=8.dp),
+        Modifier.fillMaxWidth().heightIn(min=48.dp).toggleable(value=checked,enabled=enabled,role=Role.Checkbox,onValueChange=hapticToggle(onCheckedChange)).padding(vertical=8.dp),
         verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(16.dp)
     ) {
         Checkbox(checked=checked,onCheckedChange=null,enabled=enabled,modifier=alignByVisualCenter())
@@ -238,8 +238,8 @@ import kotlinx.coroutines.withContext
     Column(Modifier.fillMaxWidth(),verticalArrangement=Arrangement.spacedBy(6.dp)) {
         Text(label,style=MaterialTheme.typography.labelMedium,color=MaterialTheme.colorScheme.onSurfaceVariant)
         Box {
-            OutlinedButton(onClick={open=true},enabled=enabled&&options.isNotEmpty(),modifier=Modifier.fillMaxWidth().heightIn(min=48.dp),contentPadding=PaddingValues(horizontal=16.dp,vertical=12.dp)){VisualCenterText(options.find {it.first==value}?.second ?: "—",modifier=Modifier.weight(1f).centerVisualText(),textAlign=TextAlign.Start,maxLines=2,overflow=TextOverflow.Ellipsis)}
-            DropdownMenu(expanded=open,onDismissRequest={open=false}) {options.forEach {(id,name)->DropdownMenuItem(text={VisualCenterText(name,modifier=Modifier.centerVisualText())},onClick={onSelect(id);open=false})}}
+            OutlinedButton(onClick=hapticClick {open=true},enabled=enabled&&options.isNotEmpty(),modifier=Modifier.fillMaxWidth().heightIn(min=48.dp),contentPadding=PaddingValues(horizontal=16.dp,vertical=12.dp)){VisualCenterText(options.find {it.first==value}?.second ?: "—",modifier=Modifier.weight(1f).centerVisualText(),textAlign=TextAlign.Start,maxLines=2,overflow=TextOverflow.Ellipsis)}
+            DropdownMenu(expanded=open,onDismissRequest={open=false}) {options.forEach {(id,name)->DropdownMenuItem(text={VisualCenterText(name,modifier=Modifier.centerVisualText())},onClick=hapticClick {onSelect(id);open=false})}}
         }
     }
 }
@@ -285,7 +285,7 @@ import kotlinx.coroutines.withContext
         }
         if(course.lessons.size>20)PageControls(page,course.lessons.size,20,text){page=it}
         if(course.extra.isNotEmpty()) {
-            TextButton(onClick={expanded=!expanded},modifier=Modifier.heightIn(min=48.dp)) {VisualCenterText(if(expanded)text.t("收起其他信息","Hide extra information")else text.t("其他信息","More information"),modifier=Modifier.centerVisualText())}
+            TextButton(onClick=hapticClick {expanded=!expanded},modifier=Modifier.heightIn(min=48.dp)) {VisualCenterText(if(expanded)text.t("收起其他信息","Hide extra information")else text.t("其他信息","More information"),modifier=Modifier.centerVisualText())}
             if(expanded)course.extra.forEach {(key,value)->Text("$key: $value",style=MaterialTheme.typography.bodySmall)}
         }
     }

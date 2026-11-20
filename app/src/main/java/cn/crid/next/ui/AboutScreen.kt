@@ -39,7 +39,7 @@ import cn.crid.next.R
 
 @Composable
 internal fun AboutSettingsEntry(text: UiText, modifier: Modifier = Modifier, onClick: () -> Unit) {
-    Surface(onClick = onClick, modifier = modifier.fillMaxWidth().testTag("about_entry"),
+    Surface(onClick = hapticClick(onClick), modifier = modifier.fillMaxWidth().testTag("about_entry"),
         shape = RoundedCornerShape(24.dp), color = MaterialTheme.colorScheme.appSurface(AppSurfaceRole.Raised),
         contentColor = MaterialTheme.colorScheme.appOnSurface(AppSurfaceRole.Raised)) {
         Row(Modifier.padding(20.dp).heightIn(min = 48.dp), verticalAlignment = Alignment.CenterVertically,
@@ -233,7 +233,7 @@ private fun AboutIllustration() {
 @Composable
 private fun AboutRow(glyph: String, title: String, subtitle: String, trailing: String, onClick: () -> Unit,
     modifier: Modifier = Modifier, @DrawableRes avatarResource: Int? = null, accent: Color = MaterialTheme.colorScheme.primary) {
-    Surface(onClick = onClick, modifier = modifier.fillMaxWidth(), color = Color.Transparent) {
+    Surface(onClick = hapticClick(onClick), modifier = modifier.fillMaxWidth(), color = Color.Transparent) {
         Row(Modifier.padding(horizontal = 20.dp, vertical = 16.dp).heightIn(min = 48.dp), verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Box(alignByVisualCenter(Modifier.size(40.dp)), contentAlignment = Alignment.Center) {

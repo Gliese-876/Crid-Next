@@ -131,8 +131,9 @@ internal fun PageToolbarButton(
     content: @Composable () -> Unit,
 ) {
     val dark = LocalLiquidGlassDark.current
+    val click = hapticClick(onClick)
     if (dark == null) {
-        IconButton(onClick = onClick, modifier = modifier, enabled = enabled, content = content)
+        IconButton(onClick = click, modifier = modifier, enabled = enabled, content = content)
         return
     }
 
@@ -165,5 +166,5 @@ internal fun PageToolbarButton(
             }
         }
     }
-    IconButton(onClick = onClick, modifier = surface, enabled = enabled, interactionSource = interaction, content = content)
+    IconButton(onClick = click, modifier = surface, enabled = enabled, interactionSource = interaction, content = content)
 }

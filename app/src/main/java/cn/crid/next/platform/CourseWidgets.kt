@@ -55,10 +55,12 @@ import cn.crid.next.core.courseTextSpacing
 import cn.crid.next.core.courseLocationSpacing
 import cn.crid.next.data.AppRepository
 import cn.crid.next.ui.WideColorDisplayProvider
+import cn.crid.next.ui.LocalButtonHapticsEnabled
 import cn.crid.next.ui.UiText
 import cn.crid.next.ui.VisualCenterText
 import cn.crid.next.ui.alignByVisualCenter
 import cn.crid.next.ui.cridColorScheme
+import cn.crid.next.ui.hapticClick
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -767,6 +769,7 @@ class WidgetConfigurationActivity : ComponentActivity() {
                 window.isNavigationBarContrastEnforced = false
             }
             WideColorDisplayProvider {
+            CompositionLocalProvider(LocalButtonHapticsEnabled provides state.settings.hapticFeedbackEnabled) {
             MaterialTheme(colorScheme = cridColorScheme(dark), typography = Typography()) {
                     Surface(Modifier.fillMaxSize().testTag("widget_configuration"), color = MaterialTheme.colorScheme.background) {
                         Column(Modifier.fillMaxSize()
@@ -782,7 +785,7 @@ class WidgetConfigurationActivity : ComponentActivity() {
                                     Column(Modifier.selectableGroup().padding(vertical = 8.dp)) {
                                         modes.forEachIndexed { index, choice ->
                                             Row(Modifier.fillMaxWidth().heightIn(min = 56.dp)
-                                                .selectable(selected = mode == choice, role = Role.RadioButton, onClick = { mode = choice })
+                                                .selectable(selected = mode == choice, role = Role.RadioButton, onClick = hapticClick { mode = choice })
                                                 .testTag("widget_theme_$choice").padding(horizontal = 16.dp, vertical = 8.dp),
                                                 verticalAlignment = Alignment.CenterVertically,
                                                 horizontalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -794,10 +797,10 @@ class WidgetConfigurationActivity : ComponentActivity() {
                                     }
                                 }
                                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End)) {
-                                    TextButton(onClick = { finish() }, modifier = alignByVisualCenter(Modifier.testTag("widget_configuration_cancel"))) {
+                                    TextButton(onClick = hapticClick { finish() }, modifier = alignByVisualCenter(Modifier.testTag("widget_configuration_cancel"))) {
                                         VisualCenterText(text.t("取消", "Cancel"))
                                     }
-                                    Button(onClick = {
+                                    Button(onClick = hapticClick {
                                         preferences.edit().putString("theme:$id", mode).apply()
                                         CourseWidgets.update(this@WidgetConfigurationActivity, id, repository.state.value, repository.holidays.value)
                                         setResult(RESULT_OK, Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id))
@@ -810,6 +813,7 @@ class WidgetConfigurationActivity : ComponentActivity() {
                         }
                     }
                 }
+            }
             }
         }
     }

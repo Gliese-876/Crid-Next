@@ -99,17 +99,13 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
     val calendar by repository.holidays.collectAsState()
     val systemLocale = LocalConfiguration.current.locales[0]
     val text = remember(state.settings.language, systemLocale) { UiText(state.settings.language, systemLocale) }
-    val liquidGlass = state.settings.theme == ThemeMode.LIQUID_GLASS
+    val liquidGlass = state.settings.liquidGlassEnabled
     val dark = when (state.settings.theme) {
         ThemeMode.DARK -> true
         ThemeMode.LIGHT -> false
         ThemeMode.SYSTEM, ThemeMode.LIQUID_GLASS -> isSystemInDarkTheme()
     }
     val hostView = LocalView.current
-    val hapticsEnabled = state.settings.hapticFeedbackEnabled
-    val touchFeedback: (Int) -> Unit = { effect ->
-        if (hapticsEnabled) ViewCompat.performHapticFeedback(hostView, effect)
-    }
     SideEffect {
         (hostView.context as? Activity)?.window?.let { window ->
             WindowCompat.getInsetsController(window, hostView).apply {
@@ -189,10 +185,6 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
     // Page actions stay with the settled page; navigation responds to taps and the nearest dragged page.
     val currentRoute=pageRoutes[pagerState.settledPage]
     val navigationRoute=pageRoutes[requestedPage ?: pagerState.currentPage]
-    val selectDestination: (String) -> Unit = { destination ->
-        if (destination != navigationRoute) touchFeedback(HapticFeedbackConstantsCompat.SEGMENT_TICK)
-        navigateTo(destination)
-    }
     LaunchedEffect(pagerState) {
         // Restore the selected destination, even if recreation interrupted a scroll.
         pagerState.scrollToPage(pageRoutes.indexOf(route).coerceAtLeast(0))
@@ -219,7 +211,6 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
             val plan=requireNotNull(state.plan)
             val semester=requireNotNull(state.semester)
             val target=CourseEditing.editTarget(state,plan.id,occurrence.course.id)
-            touchFeedback(HapticFeedbackConstantsCompat.VIRTUAL_KEY)
             selectedJson=Json.encodeToString(CourseSelection(target,semester,occurrence.course.id,occurrence.lesson,
                 occurrence.date.toString(),occurrence.start.toString(),occurrence.end.toString(),occurrence.week,
                 occurrence.statuses.map {it.name},occurrence.holidayName))
@@ -255,8 +246,18 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
             "plans", "settings" -> navigateTo(initialRoute)
         }
     }
-    val updateBase=state
-    val update: (AppState) -> Unit = { next -> scope.launch { runCatching { repository.update { current -> applyStateChanges(updateBase,next,current) } }.onFailure { snackbar.showSnackbar(text.t("保存失败，请重试。","Could not save. Please try again.")) } } }
+    val save: ((AppState) -> AppState) -> Unit = { change ->
+        scope.launch {
+            runCatching { repository.update(change) }.onFailure {
+                snackbar.showSnackbar(text.t("保存失败，请重试。", "Could not save. Please try again."))
+            }
+        }
+    }
+    val update: (AppState) -> Unit = { next -> save { current -> applyStateChanges(state, next, current) } }
+    val updateAppearance: ((Settings) -> Settings) -> Unit = { change ->
+        save { current -> current.copy(settings = change(current.settings)) }
+    }
+    CompositionLocalProvider(LocalButtonHapticsEnabled provides state.settings.hapticFeedbackEnabled) {
     WideColorDisplayProvider {
     MaterialTheme(colorScheme=baseScheme, typography=Typography()) {
         val scheme = MaterialTheme.colorScheme
@@ -290,13 +291,13 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
                     .padding(horizontal=if(expandedNavigation)12.dp else 4.dp,vertical=20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
                     Spacer(Modifier.height(12.dp))
                     destinations.forEach { (id,label) ->
-                        if (liquidGlass) GlassSideNavigationItem(id, label, navigationRoute == id, expandedNavigation, dark) { selectDestination(id) }
+                        if (liquidGlass) GlassSideNavigationItem(id, label, navigationRoute == id, expandedNavigation, dark) { navigateTo(id) }
                         else if(expandedNavigation) NavigationDrawerItem(
-                            selected=navigationRoute==id,onClick={selectDestination(id)},label={VisualCenterText(label,Modifier.centerVisualText(),maxLines=2)},modifier=Modifier.testTag("nav_$id"),
+                            selected=navigationRoute==id,onClick=hapticClick { navigateTo(id) },label={VisualCenterText(label,Modifier.centerVisualText(),maxLines=2)},modifier=Modifier.testTag("nav_$id"),
                             icon={NavGlyph(id,if(navigationRoute==id)scheme.primary else scheme.onSurfaceVariant)},
                             colors=NavigationDrawerItemDefaults.colors(selectedContainerColor=scheme.primaryContainer,unselectedContainerColor=Color.Transparent))
                         else NavigationRailItem(
-                            selected=navigationRoute==id,onClick={selectDestination(id)},icon={NavGlyph(id,if(navigationRoute==id)scheme.primary else scheme.onSurfaceVariant)},
+                            selected=navigationRoute==id,onClick=hapticClick { navigateTo(id) },icon={NavGlyph(id,if(navigationRoute==id)scheme.primary else scheme.onSurfaceVariant)},
                             label={Text(label,maxLines=2,textAlign=TextAlign.Center)},
                             modifier=Modifier.fillMaxWidth().testTag("nav_$id"),colors=NavigationRailItemDefaults.colors(indicatorColor=scheme.primaryContainer))
                     }
@@ -313,7 +314,7 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
             bottomBar={
                 if(!sideNavigation) CridBottomNavigation(
                     destinations=destinations,selectedRoute=navigationRoute,
-                    pagePosition={pagerState.currentPage+pagerState.currentPageOffsetFraction},onNavigate=selectDestination,
+                    pagePosition={pagerState.currentPage+pagerState.currentPageOffsetFraction},onNavigate=navigateTo,
                     backdrop=navigationBackdrop,dark=dark,
                 )
             }
@@ -377,9 +378,9 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
                                     null -> Unit
                                 }
                             },modifier=Modifier.testTag("more_menu_$pageRoute")) {
-                                DropdownMenuItem(text={VisualCenterText(text.t("管理课程","Manage courses"),Modifier.centerVisualText())},leadingIcon={AppGlyph("edit")},enabled=state.plan!=null,onClick={chooseMoreAction(MoreAction.MANAGE)},modifier=Modifier.testTag("action_manage_courses"))
-                                DropdownMenuItem(text={VisualCenterText(text.t("导入课表","Import timetable"),Modifier.centerVisualText())},leadingIcon={AppGlyph("import")},onClick={chooseMoreAction(MoreAction.IMPORT)},modifier=Modifier.testTag(if(pageActive)"action_import" else "action_import_$pageRoute"))
-                                DropdownMenuItem(text={VisualCenterText(text.t("导出课表","Export timetable"),Modifier.centerVisualText())},leadingIcon={AppGlyph("export")},enabled=state.plan!=null,onClick={chooseMoreAction(MoreAction.EXPORT)},modifier=Modifier.testTag(if(pageActive)"action_export" else "action_export_$pageRoute"))
+                                DropdownMenuItem(text={VisualCenterText(text.t("管理课程","Manage courses"),Modifier.centerVisualText())},leadingIcon={AppGlyph("edit")},enabled=state.plan!=null,onClick=hapticClick { chooseMoreAction(MoreAction.MANAGE) },modifier=Modifier.testTag("action_manage_courses"))
+                                DropdownMenuItem(text={VisualCenterText(text.t("导入课表","Import timetable"),Modifier.centerVisualText())},leadingIcon={AppGlyph("import")},onClick=hapticClick { chooseMoreAction(MoreAction.IMPORT) },modifier=Modifier.testTag(if(pageActive)"action_import" else "action_import_$pageRoute"))
+                                DropdownMenuItem(text={VisualCenterText(text.t("导出课表","Export timetable"),Modifier.centerVisualText())},leadingIcon={AppGlyph("export")},enabled=state.plan!=null,onClick=hapticClick { chooseMoreAction(MoreAction.EXPORT) },modifier=Modifier.testTag(if(pageActive)"action_export" else "action_export_$pageRoute"))
                             }
                         }
                     } else {
@@ -400,12 +401,10 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
                         when(pageRoute) {
                             "today" -> TodayScreen(state,calendar,todayDate,today,now.toLocalTime(),text,
                                 {navigateTo("plans")},{openImport(null)},selectedOrigin,selectCourse)
-                            "week" -> WeekScreen(state,calendar,weekDate,text,{ date ->
-                                if (date != weekDate) touchFeedback(HapticFeedbackConstantsCompat.SEGMENT_TICK)
-                                weekDateString = date.toString()
-                            },{navigateTo("plans")},{openImport(null)},selectedOrigin,selectCourse)
+                            "week" -> WeekScreen(state,calendar,weekDate,text,{weekDateString=it.toString()},
+                                {navigateTo("plans")},{openImport(null)},selectedOrigin,selectCourse)
                             "plans" -> PlansScreen(state,text,update,openImport)
-                            else -> SettingsScreen(state,calendar,text,update)
+                            else -> SettingsScreen(state, calendar, text, update, updateAppearance)
                         }
                     }
                 }
@@ -481,6 +480,7 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
         }
     }
     }
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -494,7 +494,7 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
                 Column(Modifier.fillMaxWidth(),verticalArrangement=Arrangement.spacedBy(10.dp)) {
                     Text(courseNameSpacing(records.first().first.name),style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.SemiBold)
                     records.map {it.second}.distinct().sortedBy {it.weeks.minOrNull() ?: Int.MAX_VALUE}.forEach {lesson -> TeachingRecord(lesson,semester,text) }
-                    TextButton(onClick={onCourse(records.first().first)}) {VisualCenterText(text.t("查看课程","View course"),Modifier.centerVisualText())}
+                    TextButton(onClick=hapticClick { onCourse(records.first().first) }) {VisualCenterText(text.t("查看课程","View course"),Modifier.centerVisualText())}
                 }
             }
         }
@@ -516,7 +516,8 @@ private fun rememberPreparedSchedule(
 ): PreparedSchedule? {
     // The visual and interaction settings do not affect which classes are scheduled.
     val scheduleSettings = remember(settings) {
-        settings.copy(theme = ThemeMode.SYSTEM, timetableBreakDisplay = TimetableBreakDisplay.NONE, hapticFeedbackEnabled = false)
+        settings.copy(theme = ThemeMode.SYSTEM, liquidGlassEnabled = false,
+            timetableBreakDisplay = TimetableBreakDisplay.NONE, hapticFeedbackEnabled = false)
     }
     return remember(semester, plan, scheduleSettings, calendar) {
         if (semester != null && plan != null) ScheduleEngine.prepare(semester, plan, scheduleSettings, calendar) else null
@@ -556,7 +557,7 @@ private fun rememberPreparedSchedule(
     val background = if (LocalLiquidGlassDark.current == null) MaterialTheme.colorScheme.surface else Color.Transparent
     Row(Modifier.fillMaxWidth().background(background).weekSwipe {direction -> onDate(anchor.plusWeeks(direction.toLong()))}.padding(horizontal=14.dp).padding(bottom=4.dp).testTag("week_switcher"),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
         Box(alignByVisualCenter()) {WeekArrow(false,text) {onDate(anchor.minusWeeks(1))}}
-        TextButton(onClick={onDate(LocalDate.now())},modifier=alignByVisualCenter(Modifier.weight(1f).heightIn(min=48.dp)).testTag("week_current")) {
+        TextButton(onClick=hapticClick { onDate(LocalDate.now()) },modifier=alignByVisualCenter(Modifier.weight(1f).heightIn(min=48.dp)).testTag("week_current")) {
             Column(horizontalAlignment=Alignment.CenterHorizontally) {
                 VisualCenterText(if(week!=null)text.t("第 $week 周","Week $week")else text.t("回到本周","This week"),fontWeight=FontWeight.Bold,maxLines=1,overflow=TextOverflow.Ellipsis)
                 VisualCenterText("${first.monthValue}.${first.dayOfMonth} – ${dates.last().monthValue}.${dates.last().dayOfMonth}",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.onSurfaceVariant,maxLines=1,overflow=TextOverflow.Ellipsis)
@@ -593,7 +594,12 @@ private fun rememberPreparedSchedule(
 
 /** Only the two fixed week controls own this gesture; the course body belongs to the pager. */
 @Composable private fun Modifier.weekSwipe(onWeek:(Int)->Unit):Modifier {
-    val latestOnWeek by rememberUpdatedState(onWeek)
+    val hostView = LocalView.current
+    val hapticsEnabled = LocalButtonHapticsEnabled.current
+    val latestOnWeek by rememberUpdatedState<(Int) -> Unit> { direction ->
+        if (hapticsEnabled) ViewCompat.performHapticFeedback(hostView, HapticFeedbackConstantsCompat.SEGMENT_TICK)
+        onWeek(direction)
+    }
     val minimumDrag=with(LocalDensity.current) {32.dp.toPx()}
     return pointerInput(minimumDrag) {
         var distance=0f
@@ -740,7 +746,7 @@ private fun rememberPreparedSchedule(
                 Text(if(group.hasConflict)text.t("同时段的课程","Overlapping classes") else text.t("课程安排","Course arrangements"),style=MaterialTheme.typography.headlineSmall,fontWeight=FontWeight.Bold)
                 group.courses.sortedBy {!it.representative.isActual}.forEach {course ->
                     val item=course.representative
-                    Surface(onClick={selectedGroup=null;groupOrigin?.let {onSelect(item,it)}},shape=RoundedCornerShape(16.dp),color=MaterialTheme.colorScheme.surfaceContainerLow,modifier=Modifier.fillMaxWidth()) {
+                    Surface(onClick=hapticClick { selectedGroup=null;groupOrigin?.let {onSelect(item,it)} },shape=RoundedCornerShape(16.dp),color=MaterialTheme.colorScheme.surfaceContainerLow,modifier=Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp),verticalArrangement=Arrangement.spacedBy(5.dp)) {
                             Text(courseNameSpacing(item.course.name),style=MaterialTheme.typography.titleMedium,fontWeight=FontWeight.SemiBold)
                             Text("${item.start}–${item.end}",style=MaterialTheme.typography.bodyMedium,color=MaterialTheme.colorScheme.primary)
@@ -778,7 +784,7 @@ private fun TimetableBreakLabel(rest: TimetableBreak, text: UiText, modifier: Mo
     val palette=courseTilePalette(occurrence.course,out,rest)
     val contentDescription=buildString {append(courseNameSpacing(occurrence.course.name));append(" ${occurrence.start}–${occurrence.end}");if(out)append(text.t("，非本周","; not this week"));if(rest)append(text.t("，休假不上课","; cancelled for holiday"));if(OccurrenceStatus.MAKEUP in occurrence.statuses)append(text.t("，调休补课","; make-up class"))}
     BoxWithConstraints(modifier.modalOrigin(origin).clip(RoundedCornerShape(8.dp)).courseTileBackground(palette,sourceHighlight,8.dp,out,rest)
-        .clickable {origin.capture();onSelect(occurrence,origin)}.semantics {this.contentDescription=contentDescription}) {
+        .clickable(onClick = hapticClick { origin.capture();onSelect(occurrence,origin) }).semantics {this.contentDescription=contentDescription}) {
         CourseTileContent(courseNameSpacing(occurrence.course.name),courseTextSpacing(occurrence.lesson.teacher),courseLocationSpacing(occurrence.lesson.location),palette.content,maxWidth,maxHeight)
     }
 }
@@ -802,7 +808,7 @@ private fun TimetableBreakLabel(rest: TimetableBreak, text: UiText, modifier: Mo
         if(allRest)append(text.t("，休假不上课","; cancelled for holiday"))
     }
     BoxWithConstraints(modifier.modalOrigin(origin).clip(RoundedCornerShape(8.dp)).courseTileBackground(palette,sourceHighlight,8.dp,allOut,allRest)
-        .clickable(onClick={origin.capture();onClick(origin)}).semantics {contentDescription=description}) {
+        .clickable(onClick=hapticClick { origin.capture();onClick(origin) }).semantics {contentDescription=description}) {
         CourseTileContent(names.joinToString(" / "),teachers,locations,palette.content,maxWidth,maxHeight) {
             Row(Modifier.testTag(if(group.hasConflict)"course_conflict" else "course_arrangements"),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(2.dp)) {
                 AppGlyph(if(group.hasConflict)"overlap" else "plans",palette.content,alignByVisualCenter(Modifier.size(11.dp)))

@@ -60,8 +60,8 @@ internal fun PlansScreen(state: AppState, text: UiText, onUpdate: (AppState) -> 
     LazyColumn(Modifier.fillMaxSize(), contentPadding = mainPageListPadding(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                Button(onClick = { importOrigin.capture(); onImport(importOrigin) }, modifier = alignByVisualCenter(Modifier.weight(1f).heightIn(min = 48.dp)).modalOrigin(importOrigin).testTag("plans_import")) { ActionLabel("import", text.t("导入课表", "Import")) }
-                OutlinedButton(onClick = { newSemesterOrigin.capture(); editorOrigin = newSemesterOrigin; creatingSemester = true }, modifier = alignByVisualCenter(Modifier.weight(1f).heightIn(min = 48.dp)).modalOrigin(newSemesterOrigin)) { ActionLabel("add", text.t("新建学期", "New term")) }
+                Button(onClick = hapticClick { importOrigin.capture(); onImport(importOrigin) }, modifier = alignByVisualCenter(Modifier.weight(1f).heightIn(min = 48.dp)).modalOrigin(importOrigin).testTag("plans_import")) { ActionLabel("import", text.t("导入课表", "Import")) }
+                OutlinedButton(onClick = hapticClick { newSemesterOrigin.capture(); editorOrigin = newSemesterOrigin; creatingSemester = true }, modifier = alignByVisualCenter(Modifier.weight(1f).heightIn(min = 48.dp)).modalOrigin(newSemesterOrigin)) { ActionLabel("add", text.t("新建学期", "New term")) }
             }
         }
         if (state.semesters.isEmpty()) {
@@ -72,7 +72,7 @@ internal fun PlansScreen(state: AppState, text: UiText, onUpdate: (AppState) -> 
             val editOrigin = rememberModalOrigin()
             val deleteOrigin = rememberModalOrigin()
             PlanCard(isSelected, Modifier.fillMaxWidth().testTag("term_card_${semester.id}")) {
-                Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).selectable(selected = isSelected, role = Role.RadioButton, onClick = {
+                Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).selectable(selected = isSelected, role = Role.RadioButton, onClick = hapticClick {
                         onUpdate(state.copy(selectedSemesterId = semester.id, selectedPlanId = state.plan?.takeIf { it.semesterId == semester.id }?.id ?: state.plans.firstOrNull { it.semesterId == semester.id }?.id))
                     }), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     RadioButton(selected = isSelected, onClick = null, modifier = alignByVisualCenter())
@@ -98,7 +98,7 @@ internal fun PlansScreen(state: AppState, text: UiText, onUpdate: (AppState) -> 
                 val editOrigin = rememberModalOrigin()
                 val deleteOrigin = rememberModalOrigin()
                 PlanCard(state.plan?.id == plan.id, Modifier.fillMaxWidth().testTag("plan_card_${plan.id}")) {
-                    Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).selectable(selected = state.plan?.id == plan.id, role = Role.RadioButton, onClick = { onUpdate(state.copy(selectedSemesterId = plan.semesterId, selectedPlanId = plan.id)) }), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                    Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).selectable(selected = state.plan?.id == plan.id, role = Role.RadioButton, onClick = hapticClick { onUpdate(state.copy(selectedSemesterId = plan.semesterId, selectedPlanId = plan.id)) }), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                         RadioButton(selected = state.plan?.id == plan.id, onClick = null, modifier = alignByVisualCenter())
                         Column(alignByVisualCenter(Modifier.weight(1f)), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                             VisualCenterText(plan.name, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
@@ -210,7 +210,7 @@ private fun SemesterDialog(original: Semester?, relatedPlans: List<Plan>, text: 
                 HorizontalDivider(Modifier.padding(vertical = 6.dp))
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     VisualCenterText(text.t("每日作息", "Daily class times"), style = MaterialTheme.typography.titleMedium, modifier = alignByVisualCenter(Modifier.weight(1f)))
-                    TextButton(onClick = { periods = Defaults.periods; errors = emptyList() }, modifier = alignByVisualCenter()) { VisualCenterText(text.t("学校作息", "BNU times")) }
+                    TextButton(onClick = hapticClick { periods = Defaults.periods; errors = emptyList() }, modifier = alignByVisualCenter()) { VisualCenterText(text.t("学校作息", "BNU times")) }
                 }
                 periods.forEachIndexed { index, period ->
                     val periodStartOrigin = rememberModalOrigin()
@@ -224,7 +224,7 @@ private fun SemesterDialog(original: Semester?, relatedPlans: List<Plan>, text: 
                     }
                 }
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    OutlinedButton(onClick = {
+                    OutlinedButton(onClick = hapticClick {
                         val start = runCatching { LocalTime.parse(periods.lastOrNull()?.end ?: "07:50").plusMinutes(10) }.getOrDefault(LocalTime.of(8, 0))
                         periods = periods + Period(periods.size + 1, start.toString(), start.plusMinutes(45).toString()); errors = emptyList()
                     }, modifier = alignByVisualCenter(Modifier.weight(1f).heightIn(min = 48.dp))) { ActionLabel("add", text.t("增加一节", "Add period")) }
@@ -236,15 +236,15 @@ private fun SemesterDialog(original: Semester?, relatedPlans: List<Plan>, text: 
             }
         },
         confirmButton = { motion ->
-            Button(onClick = {
+            Button(onClick = hapticClick {
                 val dates = editor.result
-                if (dates == null) { errors = editor.errors; return@Button }
+                if (dates == null) { errors = editor.errors; return@hapticClick }
                 val semester = initial.copy(name = name.trim(), startDate = dates.startDate, endDate = dates.endDate, weeks = dates.weeks, periods = periods)
                 val validation = DataValidator.validateSemester(semester) + relatedPlans.filter { it.courses.isNotEmpty() }.flatMap { DataValidator.validateCourses(it.courses, semester) }
                 errors = validation.distinct()
                 if (errors.isEmpty()) motion.finish { onSave(semester) }
             }, enabled = editor.result != null, modifier = Modifier.testTag("semester_save")) { VisualCenterText(text.t("保存", "Save"), modifier = Modifier.centerVisualText()) }
-        }, dismissButton = { motion -> TextButton(onClick = motion.dismiss, modifier = Modifier.testTag("semester_cancel")) { VisualCenterText(text.t("取消", "Cancel"), modifier = Modifier.centerVisualText()) } })
+        }, dismissButton = { motion -> TextButton(onClick = hapticClick(motion.dismiss), modifier = Modifier.testTag("semester_cancel")) { VisualCenterText(text.t("取消", "Cancel"), modifier = Modifier.centerVisualText()) } })
     dateField?.let { field ->
         if (field == SemesterField.WEEKS) NativeNumberPicker(text.t("周数", "Weeks"), editor.weeks ?: initial.weeks, 1, maxOf(104, editor.weeks ?: 1), text,
             onDismiss = { dateField = null }, onSelect = {
@@ -280,17 +280,25 @@ private fun fieldLabel(label: String, derived: Boolean, text: UiText) = if (deri
 private fun NameDialog(title: String, initial: String, text: UiText, onDismiss: () -> Unit, onSave: (String) -> Unit, origin: ModalOrigin? = null) {
     var name by remember { mutableStateOf(initial) }
     AnimatedAppAlertDialog(onDismissRequest = onDismiss, origin = origin, title = { Text(title) }, text = { OutlinedTextField(name, { name = it }, label = { Text(text.t("方案名称", "Plan name")) }, singleLine = true) },
-        confirmButton = { motion -> Button(onClick = { val savedName = name.trim(); motion.finish { onSave(savedName) } }, enabled = name.isNotBlank()) { VisualCenterText(text.t("保存", "Save"), modifier = Modifier.centerVisualText()) } }, dismissButton = { motion -> TextButton(onClick = motion.dismiss) { VisualCenterText(text.t("取消", "Cancel"), modifier = Modifier.centerVisualText()) } })
+        confirmButton = { motion -> Button(onClick = hapticClick { val savedName = name.trim(); motion.finish { onSave(savedName) } }, enabled = name.isNotBlank()) { VisualCenterText(text.t("保存", "Save"), modifier = Modifier.centerVisualText()) } }, dismissButton = { motion -> TextButton(onClick = hapticClick(motion.dismiss)) { VisualCenterText(text.t("取消", "Cancel"), modifier = Modifier.centerVisualText()) } })
 }
 
 @Composable
 private fun ConfirmRemoval(title: String, body: String, text: UiText, onDismiss: () -> Unit, origin: ModalOrigin? = null, onConfirm: () -> Unit) {
     AnimatedAppAlertDialog(onDismissRequest = onDismiss, origin = origin, title = { Text(title) }, text = { Text(body) },
-        confirmButton = { motion -> TextButton(onClick = { motion.finish(onConfirm) }) { VisualCenterText(text.t("删除", "Delete"), modifier = Modifier.centerVisualText(), color = MaterialTheme.colorScheme.error) } }, dismissButton = { motion -> TextButton(onClick = motion.dismiss) { VisualCenterText(text.t("取消", "Cancel"), modifier = Modifier.centerVisualText()) } })
+        confirmButton = { motion -> TextButton(onClick = hapticClick { motion.finish(onConfirm) }) { VisualCenterText(text.t("删除", "Delete"), modifier = Modifier.centerVisualText(), color = MaterialTheme.colorScheme.error) } }, dismissButton = { motion -> TextButton(onClick = hapticClick(motion.dismiss)) { VisualCenterText(text.t("取消", "Cancel"), modifier = Modifier.centerVisualText()) } })
 }
 
 @Composable
-internal fun SettingsScreen(state: AppState, calendar: HolidayCalendar, text: UiText, onUpdate: (AppState) -> Unit) {
+internal fun SettingsScreen(
+    state: AppState,
+    calendar: HolidayCalendar,
+    text: UiText,
+    onUpdate: (AppState) -> Unit,
+    onAppearanceUpdate: ((Settings) -> Settings) -> Unit = { change ->
+        onUpdate(state.copy(settings = change(state.settings)))
+    },
+) {
     val context = LocalContext.current
     val settings = state.settings
     fun update(value: Settings) = onUpdate(state.copy(settings = value))
@@ -323,13 +331,18 @@ internal fun SettingsScreen(state: AppState, calendar: HolidayCalendar, text: Ui
         item {
             SoftCard(Modifier.fillMaxWidth(), role = AppSurfaceRole.Raised) {
                 SettingsHeading("sun", text.t("外观", "Appearance"))
-                ThemeChoices(settings.theme, text) { update(settings.copy(theme = it)) }
+                ThemeChoices(settings.theme, text) { theme -> onAppearanceUpdate { it.copy(theme = theme) } }
+                HorizontalDivider()
+                SwitchRow(text.t("液态玻璃", "Liquid Glass", "液態玻璃"),
+                    text.t("为导航和工具栏添加玻璃效果", "Add the glass effect to navigation and toolbars", "為導覽和工具列加上玻璃效果"),
+                    settings.liquidGlassEnabled, modifier = Modifier.testTag("liquid_glass_toggle")) { enabled ->
+                    onAppearanceUpdate { it.copy(liquidGlassEnabled = enabled) }
+                }
                 HorizontalDivider()
                 SwitchRow(text.t("触感反馈", "Haptic feedback", "觸覺回饋"),
-                    text.t("切换页面、周次或打开课程时振动", "Feel a light tap when switching pages or weeks, or opening a class",
-                        "切換頁面、週次或開啟課程時震動"),
+                    text.t("点击或切换控件时轻振", "Feel a light tap when you use a button or switch", "點選或切換控制項時輕震"),
                     settings.hapticFeedbackEnabled, modifier = Modifier.testTag("haptic_feedback_toggle")) { enabled ->
-                    update(settings.copy(hapticFeedbackEnabled = enabled))
+                    onAppearanceUpdate { it.copy(hapticFeedbackEnabled = enabled) }
                 }
             }
         }
@@ -427,7 +440,7 @@ private fun TimetableBreakChoices(selected: TimetableBreakDisplay, text: UiText,
 
 @Composable
 private fun ChoiceRow(label: String, selected: Boolean, enabled: Boolean = true, onSelect: () -> Unit) {
-    Row(Modifier.fillMaxWidth().heightIn(min = 48.dp).selectable(selected = selected, enabled = enabled, role = Role.RadioButton, onClick = onSelect).padding(vertical = 6.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+    Row(Modifier.fillMaxWidth().heightIn(min = 48.dp).selectable(selected = selected, enabled = enabled, role = Role.RadioButton, onClick = hapticClick(onSelect)).padding(vertical = 6.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
         RadioButton(selected = selected, onClick = null, enabled = enabled, modifier = alignByVisualCenter())
         VisualCenterText(label, modifier = alignByVisualCenter(Modifier.weight(1f)), textAlign = TextAlign.Start, style = MaterialTheme.typography.bodyLarge, color = if (enabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurface.copy(alpha = .38f))
     }
@@ -436,15 +449,14 @@ private fun ChoiceRow(label: String, selected: Boolean, enabled: Boolean = true,
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ThemeChoices(selected: ThemeMode, text: UiText, onSelect: (ThemeMode) -> Unit) {
+    val choices = listOf(
+        Triple(ThemeMode.SYSTEM, "system", text.t("自动", "System", "自動")),
+        Triple(ThemeMode.LIGHT, "sun", text.t("浅色", "Light", "淺色")),
+        Triple(ThemeMode.DARK, "moon", text.t("深色", "Dark", "深色")),
+    )
     FlowRow(Modifier.fillMaxWidth().selectableGroup(), horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        ThemeMode.entries.forEach { mode ->
-            val (glyph, label) = when (mode) {
-                ThemeMode.SYSTEM -> "system" to text.t("自动", "System")
-                ThemeMode.LIGHT -> "sun" to text.t("浅色", "Light")
-                ThemeMode.DARK -> "moon" to text.t("深色", "Dark")
-                ThemeMode.LIQUID_GLASS -> "glass" to text.t("液态玻璃", "Liquid Glass", "液態玻璃")
-            }
+        choices.forEach { (mode, glyph, label) ->
             SettingsChoiceChip(label, selected == mode, { onSelect(mode) }) {
                 AppGlyph(glyph, tint = LocalContentColor.current, modifier = Modifier.size(20.dp))
             }
@@ -457,7 +469,7 @@ private fun SettingsChoiceChip(label: String, selected: Boolean, onClick: () -> 
     modifier: Modifier = Modifier, icon: (@Composable () -> Unit)? = null) {
     val scheme = MaterialTheme.colorScheme
     FilterChip(
-        selected = selected, onClick = onClick,
+        selected = selected, onClick = hapticClick(onClick),
         label = { VisualCenterText(label, modifier = Modifier.centerVisualText()) },
         leadingIcon = icon, modifier = modifier.heightIn(min = 48.dp), shape = CircleShape,
         colors = FilterChipDefaults.filterChipColors(
@@ -491,7 +503,7 @@ internal fun GlyphAction(glyph: String, label: String, onClick: () -> Unit, enab
     tint: Color = MaterialTheme.colorScheme.onSurface, modifier: Modifier = Modifier) {
     TooltipBox(positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
         tooltip = { PlainTooltip { Text(label) } }, state = rememberTooltipState()) {
-        IconButton(onClick = onClick, enabled = enabled, modifier = modifier.size(48.dp).semantics { contentDescription = label }) {
+        IconButton(onClick = hapticClick(onClick), enabled = enabled, modifier = modifier.size(48.dp).semantics { contentDescription = label }) {
             AppGlyph(glyph, tint = if (enabled) tint else tint.copy(alpha = .38f))
         }
     }
@@ -507,7 +519,7 @@ internal fun ActionLabel(glyph: String, label: String) {
 
 @Composable
 internal fun SwitchRow(title: String, body: String, checked: Boolean, enabled: Boolean = true, modifier: Modifier = Modifier, onChecked: (Boolean) -> Unit) {
-    Row(modifier.fillMaxWidth().heightIn(min = 56.dp).toggleable(value = checked, enabled = enabled, role = Role.Switch, onValueChange = onChecked).padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+    Row(modifier.fillMaxWidth().heightIn(min = 56.dp).toggleable(value = checked, enabled = enabled, role = Role.Switch, onValueChange = hapticToggle(onChecked)).padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         Column(alignByVisualCenter(Modifier.weight(1f)), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             VisualCenterText(title, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface.copy(alpha = if (enabled) 1f else .38f))
             VisualCenterText(body, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = if (enabled) 1f else .6f))

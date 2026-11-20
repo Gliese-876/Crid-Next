@@ -135,7 +135,7 @@ internal fun ReminderDeliverySettingsDialog(
 @Composable
 private fun ReminderDeliveryRow(title: String, status: String, action: String, glyph: String, tag: String, onClick: () -> Unit) {
     Row(Modifier.fillMaxWidth().heightIn(min = 64.dp).testTag(tag)
-        .clickable(onClickLabel = action, role = Role.Button, onClick = onClick)
+        .clickable(onClickLabel = action, role = Role.Button, onClick = hapticClick(onClick))
         .padding(vertical = 8.dp).semantics(mergeDescendants = true) {},
         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
         AppGlyph(glyph, tint = MaterialTheme.colorScheme.onSurfaceVariant, modifier = alignByVisualCenter(Modifier.size(24.dp)))

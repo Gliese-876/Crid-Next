@@ -41,7 +41,7 @@ internal fun SelectionField(
     enabled: Boolean = true,
     glyph: String = "calendar",
 ) {
-    OutlinedCard(onClick = onClick, enabled = enabled, modifier = modifier.semantics { role = Role.Button }) {
+    OutlinedCard(onClick = hapticClick(onClick), enabled = enabled, modifier = modifier.semantics { role = Role.Button }) {
         Row(Modifier.fillMaxWidth().heightIn(min = 64.dp).padding(horizontal = 14.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Column(alignByVisualCenter(Modifier.weight(1f)), verticalArrangement = Arrangement.spacedBy(3.dp)) {
@@ -243,8 +243,8 @@ private fun <T> PickerDialog(title: String, text: UiText, onDismiss: () -> Unit,
                         if (showTitle) Text(title, style = MaterialTheme.typography.titleLarge, modifier = Modifier.fillMaxWidth().padding(24.dp))
                         content()
                         Row(Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, bottom = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)) {
-                            TextButton(onClick = motion.dismiss, modifier = alignByVisualCenter(Modifier.testTag("native_picker_cancel"))) { VisualCenterText(text.t("取消", "Cancel")) }
-                            TextButton(onClick = {
+                            TextButton(onClick = hapticClick(motion.dismiss), modifier = alignByVisualCenter(Modifier.testTag("native_picker_cancel"))) { VisualCenterText(text.t("取消", "Cancel")) }
+                            TextButton(onClick = hapticClick {
                                 // A native wheel can settle or receive an accessibility action while exiting.
                                 // Confirm the value visible at the click, then finish the spatial return.
                                 val snapshot = selection()

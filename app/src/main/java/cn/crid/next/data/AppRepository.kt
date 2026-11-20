@@ -54,8 +54,12 @@ class AppRepository private constructor(private val context: Application) {
 
     private fun loadState(): AppState {
         if (!dataFile.baseFile.exists() && !File(dataFile.baseFile.path + ".bak").exists()) return AppState()
-        return try { json.decodeFromString<AppState>(dataFile.readFully().toString(Charsets.UTF_8)) }
-        catch (_: Exception) { loadFailure = true; AppState() }
+        return try {
+            val saved = json.decodeFromString<AppState>(dataFile.readFully().toString(Charsets.UTF_8))
+            if (saved.settings.theme == ThemeMode.LIQUID_GLASS) {
+                saved.copy(settings = saved.settings.copy(theme = ThemeMode.SYSTEM, liquidGlassEnabled = true))
+            } else saved
+        } catch (_: Exception) { loadFailure = true; AppState() }
     }
     suspend fun update(transform: (AppState) -> AppState) = withContext(Dispatchers.IO) {
         val changed = transactions.update {

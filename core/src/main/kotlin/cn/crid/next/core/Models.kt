@@ -24,7 +24,11 @@ fun courseKey(name: String): String = courseIdentitySpacing(Normalizer.normalize
 )
 @Serializable data class Course(val id: String = newId(), val name: String, val color: Int = 0, val credits: String = "", val extra: Map<String,String> = emptyMap(), val lessons: List<Lesson>)
 @Serializable data class Plan(val id: String = newId(), val semesterId: String, val name: String, val courses: List<Course>)
-@Serializable enum class ThemeMode { SYSTEM, LIGHT, DARK, LIQUID_GLASS }
+@Serializable enum class ThemeMode {
+    SYSTEM, LIGHT, DARK,
+    // Retained to read the combined appearance preference saved by version 2.1.0.
+    LIQUID_GLASS,
+}
 @Serializable enum class Language { SYSTEM, ZH_CN, ZH_TW, EN }
 @Serializable enum class MakeupMode { OFF, HOLIDAYS_ONLY, ON }
 @Serializable enum class TimetableBreakDisplay { NONE, LUNCH, EVENING, BOTH }
@@ -42,6 +46,7 @@ fun courseKey(name: String): String = courseIdentitySpacing(Normalizer.normalize
     val reminderAlarmClock: Boolean = false,
     val timetableBreakDisplay: TimetableBreakDisplay = TimetableBreakDisplay.NONE,
     val hapticFeedbackEnabled: Boolean = false,
+    val liquidGlassEnabled: Boolean = false,
 )
 @Serializable data class AppState(val semesters: List<Semester> = emptyList(), val plans: List<Plan> = emptyList(), val selectedSemesterId: String? = null, val selectedPlanId: String? = null, val settings: Settings = Settings()) {
     val semester: Semester? get() = semesters.find { it.id == selectedSemesterId }

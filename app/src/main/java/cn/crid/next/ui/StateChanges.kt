@@ -23,6 +23,7 @@ internal fun applyStateChanges(base: AppState, next: AppState, current: AppState
     val old=base.settings;val changed=next.settings;val live=current.settings
     val settings=live.copy(
         theme=if(changed.theme!=old.theme)changed.theme else live.theme,
+        liquidGlassEnabled=if(changed.liquidGlassEnabled!=old.liquidGlassEnabled)changed.liquidGlassEnabled else live.liquidGlassEnabled,
         language=if(changed.language!=old.language)changed.language else live.language,
         weekStartsSunday=if(changed.weekStartsSunday!=old.weekStartsSunday)changed.weekStartsSunday else live.weekStartsSunday,
         holidaysEnabled=if(changed.holidaysEnabled!=old.holidaysEnabled)changed.holidaysEnabled else live.holidaysEnabled,

@@ -220,7 +220,7 @@ internal fun TodayStatusCard(status: TodayCourseStatus, week: Int?, text: UiText
 private fun StatusCourse(occurrence: Occurrence, tag: String, onSelect: (Occurrence, ModalOrigin) -> Unit) {
     val origin = rememberModalOrigin()
     Column(Modifier.fillMaxWidth().modalOrigin(origin).clip(RoundedCornerShape(8.dp))
-        .clickable { origin.capture(); onSelect(occurrence, origin) }.testTag(tag).padding(vertical = 2.dp),
+        .clickable(onClick = hapticClick { origin.capture(); onSelect(occurrence, origin) }).testTag(tag).padding(vertical = 2.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text(courseNameSpacing(occurrence.course.name), modifier = Modifier.fillMaxWidth().testTag("${tag}_name"),
             style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold,

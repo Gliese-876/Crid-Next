@@ -53,6 +53,24 @@ class LegacySettingsRepositoryInstrumentedTest {
         assertEquals(updated, reopened.state.value)
     }
 
+    @Test fun combinedGlassThemeMigratesToAnIndependentSwitchAndCanBeTurnedOff() = withIsolatedStorage { application ->
+        val encoded = json.parseToJsonElement(json.encodeToString(expected)).jsonObject
+        val oldSettings = JsonObject(encoded.getValue("settings").jsonObject - "liquidGlassEnabled" +
+            ("theme" to JsonPrimitive("LIQUID_GLASS")))
+        val legacy = JsonObject(encoded + ("settings" to oldSettings)).toString()
+        val file = File(application.filesDir, "timetables-v1.json").apply { writeText(legacy) }
+        val repository = openRepository(application)
+        val migrated = expected.copy(settings = expected.settings.copy(theme = ThemeMode.SYSTEM, liquidGlassEnabled = true))
+        assertFalse(repository.storageNeedsRecovery)
+        assertEquals(migrated, repository.state.value)
+        assertEquals(legacy, file.readText())
+
+        runBlocking { repository.update { it.copy(settings = it.settings.copy(liquidGlassEnabled = false)) } }
+        val reopened = openRepository(application)
+        assertFalse(reopened.storageNeedsRecovery)
+        assertEquals(migrated.copy(settings = migrated.settings.copy(liquidGlassEnabled = false)), reopened.state.value)
+    }
+
     @Test fun unrelatedUnknownSavedFieldStillRequestsRecoveryAndPreservesOriginalFile() = withIsolatedStorage { application ->
         val encoded = json.parseToJsonElement(json.encodeToString(expected)).jsonObject
         val malformed = JsonObject(encoded + ("unrecognizedTimetableField" to JsonPrimitive(true))).toString()

@@ -123,7 +123,7 @@ internal fun ReminderManufacturerHelp(text: UiText) {
             Text(step, style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        TextButton(onClick = {
+        TextButton(onClick = hapticClick {
             openFailed = runCatching {
                 context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(guide.officialHelpUrl))
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))

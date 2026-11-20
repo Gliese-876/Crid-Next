@@ -8,7 +8,7 @@ Crid Next 是一款面向**北京師範大學北京校區與珠海校區**學生
 
 應用程式內建支援兩校區的教務課表匯入。其他學校的同學也可以透過下方的 [AI 轉換方法](#讓-ai-幫你轉換其他課表)，將自己的課表轉成 Crid Next JSON 後匯入使用。
 
-**Android 12 及以上 · 简体中文 / 繁體中文 / English · 首個公開版本 2.0.0**
+**Android 12 及以上 · 简体中文 / 繁體中文 / English · 2.1.0**
 
 [![GitHub 下載](https://img.shields.io/badge/GitHub-%E4%B8%8B%E8%BC%89-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Gliese-876/Crid-Next/releases/latest)
 [![Gitee 下載](https://img.shields.io/badge/Gitee-%E4%B8%8B%E8%BC%89-C71D23?style=for-the-badge&logo=gitee&logoColor=white)](https://gitee.com/gliese-876/crid-next/releases)
@@ -39,7 +39,7 @@ Crid Next 是一款面向**北京師範大學北京校區與珠海校區**學生
 
 ### 輕巧裝進手機，課表也方便帶走
 
-2.0.0 的通用 APK 約 **4.05 MB**。課表儲存在裝置本機，日常查看和編輯可離線完成，校園裡訊號不穩時也能隨時查課。
+通用 APK 約 **4.1 MB**。課表儲存在裝置本機，日常查看和編輯可離線完成，校園裡訊號不穩時也能隨時查課。
 
 想分享時，PNG 與 PDF 延續應用程式中的行程和課表樣式，可按日、週、月或整個學期匯出；想保留資料時，JSON 儲存課程與原始授課紀錄，方便備份和重新匯入。
 
@@ -73,7 +73,7 @@ Crid Next 是一款面向**北京師範大學北京校區與珠海校區**學生
 先讀取原始檔案，保留每門課程的全部授課安排、單雙週、分段週次，以及每次安排對應的教師、地點和備註。遇到無法辨認、含義不明或缺少的必要排課資訊，先向我提問，不要猜測或默默捨棄課程。原文未提供教師、地點、學分時使用空字串。
 
 嚴格使用以下結構與規則：
-1. 最外層只有 format、version、name、courses：format 為 "crid-next"，version 為數字 1，name 為非空方案名稱，courses 為非空課程陣列。應用程式版本 2.0.0 不改變這個檔案版本號。
+1. 最外層只有 format、version、name、courses：format 為 "crid-next"，version 為數字 1，name 為非空方案名稱，courses 為非空課程陣列。
 2. 每門課程使用 name、credits、extra、lessons。name 為非空課程名；credits 為字串；extra 為鍵和值均是字串的物件，可儲存課程代碼等附加資訊；lessons 為非空授課安排陣列。省略 id 和 color，讓應用程式產生識別碼並選擇顏色。教師和地點屬於每條 lesson，不能放在課程最外層。
 3. 每條 lesson 只使用 weeks、weekday、startPeriod、endPeriod、date、startTime、endTime、location、teacher、note、unscheduled。location、teacher、note 為字串，unscheduled 為布林值。
 4. 按週重複時，weeks 是實際授課週次的正整數陣列，展開區間和單雙週，去除重複並遞增排列；date 為 null。按特定日期上課時，date 使用 "YYYY-MM-DD"，weeks 使用 []。weekday 為星期一=1 至星期日=7，並與特定日期一致，不受介面一週起始日設定影響。必要時先詢問學期與週次的對應關係。

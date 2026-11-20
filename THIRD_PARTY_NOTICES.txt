@@ -38,6 +38,11 @@ AndroidX, Jetpack Compose and Material components
 The Android Open Source Project and contributors — Apache License 2.0
 https://android.googlesource.com/platform/frameworks/support/
 
+Backdrop 1.0.6 and Shapes (io.github.kyant0)
+Kyant0 and contributors — Apache License 2.0
+https://github.com/Kyant0/AndroidLiquidGlass/tree/1.0.6
+https://github.com/Kyant0/Shapes
+
 Guava ListenableFuture
 Google and contributors — Apache License 2.0
 https://github.com/google/guava

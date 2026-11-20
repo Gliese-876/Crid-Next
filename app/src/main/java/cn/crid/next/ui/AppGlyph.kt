@@ -67,6 +67,16 @@ internal fun AppGlyph(id: String, tint: Color = MaterialTheme.colorScheme.onSurf
                     drawPath(Path().apply {moveTo(20f,15f);cubicTo(14f,17f,7f,10f,9f,4f);cubicTo(-2f,8f,7f,28f,20f,15f);close()},tint,style=stroke)
                 }
                 "system" -> { roundRect(3f,4f,18f,14f); line(12f,18f,12f,21f); line(8f,21f,16f,21f) }
+                "glass" -> {
+                    drawPath(Path().apply {
+                        moveTo(12f, 3f)
+                        cubicTo(15f, 7f, 19f, 11f, 19f, 15f)
+                        cubicTo(19f, 23f, 5f, 23f, 5f, 15f)
+                        cubicTo(5f, 11f, 9f, 7f, 12f, 3f)
+                        close()
+                    }, tint, style = stroke)
+                    drawArc(tint, 90f, 90f, false, Offset(8f, 10f), Size(8f, 8f), style = stroke)
+                }
                 "language" -> { drawCircle(tint,9f,Offset(12f,12f),style=stroke); drawOval(tint,Offset(8f,3f),Size(8f,18f),style=stroke); line(3f,12f,21f,12f) }
                 "notification" -> { path(5f,17f,7f,14f,7f,9f); drawArc(tint,180f,180f,false,Offset(7f,4f),Size(10f,10f),style=stroke); path(17f,9f,17f,14f,19f,17f,5f,17f); drawArc(tint,0f,180f,false,Offset(10f,18f),Size(4f,4f),style=stroke) }
                 "overlap", "plans", "copy" -> { roundRect(7f,3f,14f,14f); roundRect(3f,7f,14f,14f) }

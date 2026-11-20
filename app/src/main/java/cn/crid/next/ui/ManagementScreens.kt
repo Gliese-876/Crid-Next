@@ -10,7 +10,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -55,7 +57,7 @@ internal fun PlansScreen(state: AppState, text: UiText, onUpdate: (AppState) -> 
     val emptyImportOrigin = rememberModalOrigin()
     val selected = state.semester
 
-    LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    LazyColumn(Modifier.fillMaxSize(), contentPadding = mainPageListPadding(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 Button(onClick = { importOrigin.capture(); onImport(importOrigin) }, modifier = alignByVisualCenter(Modifier.weight(1f).heightIn(min = 48.dp)).modalOrigin(importOrigin).testTag("plans_import")) { ActionLabel("import", text.t("导入课表", "Import")) }
@@ -317,11 +319,18 @@ internal fun SettingsScreen(state: AppState, calendar: HolidayCalendar, text: Ui
     val reminderStatusOrigin = rememberModalOrigin()
     val aboutOrigin = rememberModalOrigin()
 
-    LazyColumn(Modifier.fillMaxSize().testTag("settings_list"), contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    LazyColumn(Modifier.fillMaxSize().testTag("settings_list"), contentPadding = mainPageListPadding(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item {
             SoftCard(Modifier.fillMaxWidth(), role = AppSurfaceRole.Raised) {
                 SettingsHeading("sun", text.t("外观", "Appearance"))
                 ThemeChoices(settings.theme, text) { update(settings.copy(theme = it)) }
+                HorizontalDivider()
+                SwitchRow(text.t("触感反馈", "Haptic feedback", "觸覺回饋"),
+                    text.t("切换页面、周次或打开课程时振动", "Feel a light tap when switching pages or weeks, or opening a class",
+                        "切換頁面、週次或開啟課程時震動"),
+                    settings.hapticFeedbackEnabled, modifier = Modifier.testTag("haptic_feedback_toggle")) { enabled ->
+                    update(settings.copy(hapticFeedbackEnabled = enabled))
+                }
             }
         }
         item {
@@ -342,6 +351,9 @@ internal fun SettingsScreen(state: AppState, calendar: HolidayCalendar, text: Ui
                 ChoiceRow(text.t("周日", "Sunday"), settings.weekStartsSunday) { update(settings.copy(weekStartsSunday = true)) }
                 HorizontalDivider()
                 SwitchRow(text.t("显示非本周课程", "Show other-week lessons"), text.t("以虚线显示，方便查看课程安排", "Dashed outlines keep other weeks in view"), settings.showOutOfWeek) { update(settings.copy(showOutOfWeek = it)) }
+                HorizontalDivider()
+                Text(text.t("休息时段", "Breaks", "休息時段"), style = MaterialTheme.typography.titleSmall)
+                TimetableBreakChoices(settings.timetableBreakDisplay, text) { update(settings.copy(timetableBreakDisplay = it)) }
             }
         }
         item {
@@ -395,6 +407,24 @@ internal fun SettingsScreen(state: AppState, calendar: HolidayCalendar, text: Ui
         format = { text.t("$it 分钟", "$it minutes", "$it 分鐘") })
 }
 
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun TimetableBreakChoices(selected: TimetableBreakDisplay, text: UiText, onSelect: (TimetableBreakDisplay) -> Unit) {
+    FlowRow(Modifier.fillMaxWidth().selectableGroup(), horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        TimetableBreakDisplay.entries.forEach { option ->
+            val label = when (option) {
+                TimetableBreakDisplay.NONE -> text.t("隐藏", "Hide", "隱藏")
+                TimetableBreakDisplay.LUNCH -> TimetableBreakKind.LUNCH.label(text)
+                TimetableBreakDisplay.EVENING -> TimetableBreakKind.EVENING.label(text)
+                TimetableBreakDisplay.BOTH -> text.t("都显示", "Both", "都顯示")
+            }
+            SettingsChoiceChip(label, selected == option, { onSelect(option) },
+                modifier = Modifier.testTag("timetable_breaks_${option.name.lowercase()}"))
+        }
+    }
+}
+
 @Composable
 private fun ChoiceRow(label: String, selected: Boolean, enabled: Boolean = true, onSelect: () -> Unit) {
     Row(Modifier.fillMaxWidth().heightIn(min = 48.dp).selectable(selected = selected, enabled = enabled, role = Role.RadioButton, onClick = onSelect).padding(vertical = 6.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -406,15 +436,46 @@ private fun ChoiceRow(label: String, selected: Boolean, enabled: Boolean = true,
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ThemeChoices(selected: ThemeMode, text: UiText, onSelect: (ThemeMode) -> Unit) {
-    FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(Modifier.fillMaxWidth().selectableGroup(), horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)) {
         ThemeMode.entries.forEach { mode ->
-            val glyph = when (mode) { ThemeMode.SYSTEM -> "system"; ThemeMode.LIGHT -> "sun"; ThemeMode.DARK -> "moon" }
-            val label = when (mode) { ThemeMode.SYSTEM -> text.t("自动", "System"); ThemeMode.LIGHT -> text.t("浅色", "Light"); ThemeMode.DARK -> text.t("深色", "Dark") }
-            FilterChip(selected = selected == mode, onClick = { onSelect(mode) }, label = { VisualCenterText(label, modifier = Modifier.centerVisualText()) },
-                leadingIcon = { AppGlyph(glyph, tint = LocalContentColor.current, modifier = Modifier.size(20.dp)) }, modifier = Modifier.heightIn(min = 48.dp))
+            val (glyph, label) = when (mode) {
+                ThemeMode.SYSTEM -> "system" to text.t("自动", "System")
+                ThemeMode.LIGHT -> "sun" to text.t("浅色", "Light")
+                ThemeMode.DARK -> "moon" to text.t("深色", "Dark")
+                ThemeMode.LIQUID_GLASS -> "glass" to text.t("液态玻璃", "Liquid Glass", "液態玻璃")
+            }
+            SettingsChoiceChip(label, selected == mode, { onSelect(mode) }) {
+                AppGlyph(glyph, tint = LocalContentColor.current, modifier = Modifier.size(20.dp))
+            }
         }
     }
 }
+
+@Composable
+private fun SettingsChoiceChip(label: String, selected: Boolean, onClick: () -> Unit,
+    modifier: Modifier = Modifier, icon: (@Composable () -> Unit)? = null) {
+    val scheme = MaterialTheme.colorScheme
+    FilterChip(
+        selected = selected, onClick = onClick,
+        label = { VisualCenterText(label, modifier = Modifier.centerVisualText()) },
+        leadingIcon = icon, modifier = modifier.heightIn(min = 48.dp), shape = CircleShape,
+        colors = FilterChipDefaults.filterChipColors(
+            selectedContainerColor = scheme.primaryContainer,
+            selectedLabelColor = scheme.onPrimaryContainer,
+            selectedLeadingIconColor = scheme.onPrimaryContainer,
+        ),
+        border = FilterChipDefaults.filterChipBorder(
+            enabled = true, selected = selected, borderColor = scheme.outlineVariant,
+            selectedBorderColor = scheme.primary.copy(alpha = .45f), selectedBorderWidth = 1.dp,
+        ),
+    )
+}
+
+@Composable
+private fun mainPageListPadding() = PaddingValues(
+    start = 14.dp, end = 14.dp, top = 8.dp, bottom = 8.dp + LocalFloatingNavigationPadding.current,
+)
 
 @Composable
 private fun SettingsHeading(glyph: String, label: String) {

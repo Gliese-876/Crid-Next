@@ -5,6 +5,7 @@ import cn.crid.next.core.Lesson
 import cn.crid.next.core.Occurrence
 import cn.crid.next.core.OccurrenceStatus
 import cn.crid.next.core.Period
+import cn.crid.next.core.TimetableBreakDisplay
 import java.time.LocalDate
 import java.time.LocalTime
 import kotlin.math.roundToInt
@@ -118,6 +119,33 @@ class TimetableLayoutTest {
             val end = LocalTime.parse(period.end).minuteOfDay()
             assertEquals(72f, axis.y(end) - axis.y(start), .001f)
         }
+    }
+
+    @Test fun breakChoicesUseTheSemesterTimes() {
+        val lunch = TimetableBreak(TimetableBreakKind.LUNCH, MinuteSpan(700, 840))
+        val evening = TimetableBreak(TimetableBreakKind.EVENING, MinuteSpan(1060, 1140))
+        assertEquals(emptyList<TimetableBreak>(), timetableBreaks(periods, TimetableBreakDisplay.NONE))
+        assertEquals(listOf(lunch), timetableBreaks(periods, TimetableBreakDisplay.LUNCH))
+        assertEquals(listOf(evening), timetableBreaks(periods, TimetableBreakDisplay.EVENING))
+        assertEquals(listOf(lunch, evening), timetableBreaks(periods, TimetableBreakDisplay.BOTH))
+    }
+
+    @Test fun aLaterLunchIsDetectedWithoutLabelingAShortEveningBreak() {
+        val custom = listOf(
+            Period(1, "11:00", "12:10"), Period(2, "13:20", "14:05"),
+            Period(3, "17:10", "17:55"), Period(4, "18:10", "18:55"),
+        )
+        assertEquals(listOf(TimetableBreak(TimetableBreakKind.LUNCH, MinuteSpan(730, 800))),
+            timetableBreaks(custom, TimetableBreakDisplay.BOTH))
+    }
+
+    @Test fun aVisibleBreakHasRoomForLabelsEvenWhenALessonSplitsIt() {
+        val lunch = timetableBreaks(periods, TimetableBreakDisplay.LUNCH).single().span
+        val lesson = MinuteSpan(737, 742)
+        val axis = TimetableAxis(periods, listOf(lesson), displayedBreaks = listOf(lunch), minimumBreakHeight = 46f)
+        assertTrue(axis.y(lunch.end) - axis.y(lunch.start) >= 46f)
+        assertEquals(6f, axis.y(1140) - axis.y(1060), .001f)
+        assertCardFits(axis, lesson)
     }
 
     @Test fun everyMinuteInterpolatesWithinItsOwnAxisSegmentIncludingCompressedGaps() {

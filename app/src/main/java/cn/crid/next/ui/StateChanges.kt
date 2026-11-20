@@ -28,6 +28,8 @@ internal fun applyStateChanges(base: AppState, next: AppState, current: AppState
         holidaysEnabled=if(changed.holidaysEnabled!=old.holidaysEnabled)changed.holidaysEnabled else live.holidaysEnabled,
         makeupMode=if(changed.makeupMode!=old.makeupMode)changed.makeupMode else live.makeupMode,
         showOutOfWeek=if(changed.showOutOfWeek!=old.showOutOfWeek)changed.showOutOfWeek else live.showOutOfWeek,
+        timetableBreakDisplay=if(changed.timetableBreakDisplay!=old.timetableBreakDisplay)changed.timetableBreakDisplay else live.timetableBreakDisplay,
+        hapticFeedbackEnabled=if(changed.hapticFeedbackEnabled!=old.hapticFeedbackEnabled)changed.hapticFeedbackEnabled else live.hapticFeedbackEnabled,
         remindersEnabled=if(changed.remindersEnabled!=old.remindersEnabled)changed.remindersEnabled else live.remindersEnabled,
         reminderMinutes=if(changed.reminderMinutes!=old.reminderMinutes)changed.reminderMinutes else live.reminderMinutes,
         reminderAlarmClock=if(changed.reminderAlarmClock!=old.reminderAlarmClock)changed.reminderAlarmClock else live.reminderAlarmClock

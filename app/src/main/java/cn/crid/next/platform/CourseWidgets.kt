@@ -205,7 +205,7 @@ object CourseWidgets {
                 else -> when (state.settings.theme) {
                     ThemeMode.DARK -> true
                     ThemeMode.LIGHT -> false
-                    ThemeMode.SYSTEM -> context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+                    ThemeMode.SYSTEM, ThemeMode.LIQUID_GLASS -> context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
                 }
             }
             val sizes = responsiveSizes(manager.getAppWidgetOptions(id), weekly, context.resources.configuration.fontScale)
@@ -750,7 +750,7 @@ class WidgetConfigurationActivity : ComponentActivity() {
             val dark = when (state.settings.theme) {
                 ThemeMode.DARK -> true
                 ThemeMode.LIGHT -> false
-                ThemeMode.SYSTEM -> isSystemInDarkTheme()
+                ThemeMode.SYSTEM, ThemeMode.LIQUID_GLASS -> isSystemInDarkTheme()
             }
             val textContext = remember(state.settings.language, configuration) {
                 PlatformText.context(this, state.settings.language)

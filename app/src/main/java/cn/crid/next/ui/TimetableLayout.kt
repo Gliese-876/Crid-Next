@@ -3,6 +3,7 @@ package cn.crid.next.ui
 import cn.crid.next.core.Occurrence
 import cn.crid.next.core.Period
 import cn.crid.next.core.DisplayCourse
+import cn.crid.next.core.TimetableBreakDisplay
 import cn.crid.next.core.displayCourses
 import java.time.LocalTime
 import kotlin.math.abs
@@ -14,6 +15,39 @@ internal data class MinuteSpan(val start: Int, val end: Int) {
 }
 
 internal fun LocalTime.minuteOfDay() = toSecondOfDay() / 60
+
+internal enum class TimetableBreakKind(val mealMinute: Int) {
+    LUNCH(12 * 60 + 30), EVENING(18 * 60);
+
+    fun label(text: UiText) = when (this) {
+        LUNCH -> text.t("午休", "Lunch", "午休")
+        EVENING -> text.t("晚休", "Dinner", "晚休")
+    }
+}
+
+internal data class TimetableBreak(val kind: TimetableBreakKind, val span: MinuteSpan)
+
+/** Pick the longest gap around each meal from the semester's class times. */
+internal fun timetableBreaks(periods: List<Period>, display: TimetableBreakDisplay): List<TimetableBreak> {
+    val kinds = when (display) {
+        TimetableBreakDisplay.NONE -> return emptyList()
+        TimetableBreakDisplay.LUNCH -> listOf(TimetableBreakKind.LUNCH)
+        TimetableBreakDisplay.EVENING -> listOf(TimetableBreakKind.EVENING)
+        TimetableBreakDisplay.BOTH -> TimetableBreakKind.entries
+    }
+    val gaps = periods.sortedBy { it.number }.zipWithNext().mapNotNull { (before, after) ->
+        val start = LocalTime.parse(before.end).minuteOfDay()
+        val end = LocalTime.parse(after.start).minuteOfDay()
+        if (end - start >= 30) MinuteSpan(start, end) else null
+    }
+    return kinds.mapNotNull { kind ->
+        fun distance(span: MinuteSpan) = abs((span.start + span.end) / 2 - kind.mealMinute)
+        val span = gaps.filter { distance(it) <= 90 }.minWithOrNull(
+            compareByDescending<MinuteSpan> { it.end - it.start }.thenBy(::distance),
+        )
+        span?.let { TimetableBreak(kind, it) }
+    }
+}
 
 /** A smooth readable minimum that quickly approaches a time-proportional height. */
 internal fun readableCourseHeight(durationMinutes: Int, minimumHeight: Float, pixelsPerMinute: Float, smoothing: Float): Float {
@@ -44,13 +78,14 @@ internal class TimetableAxis(
     val minimumLessonHeight: Float = 64f,
     val heightSmoothing: Float = 8f,
     val minimumHeightStep: Float = 1f,
+    displayedBreaks: List<MinuteSpan> = emptyList(),
+    minimumBreakHeight: Float = 0f,
 ) {
-    private val protectedSpans = periods.map { MinuteSpan(LocalTime.parse(it.start).minuteOfDay(), LocalTime.parse(it.end).minuteOfDay()) } + lessons
-    private val boundaries = protectedSpans.flatMap { listOf(it.start, it.end) }.distinct().sorted()
+    private val boundaries: List<Int>
     private data class Segment(val start: Int, val end: Int, val y: Float, val height: Float)
     private val segments: List<Segment>
-    val startMinute = boundaries.firstOrNull() ?: 480
-    val endMinute = boundaries.lastOrNull() ?: 480
+    val startMinute: Int
+    val endMinute: Int
     val height: Float
     val usesUniformFallback: Boolean
 
@@ -60,23 +95,46 @@ internal class TimetableAxis(
         require(minimumLessonHeight.isFinite() && minimumLessonHeight >= 0)
         require(heightSmoothing.isFinite() && heightSmoothing > 0)
         require(minimumHeightStep.isFinite() && minimumHeightStep > 0)
-        val indices = boundaries.withIndex().associate { it.value to it.index }
+        require(minimumBreakHeight.isFinite() && minimumBreakHeight >= 0)
+        val periodSpans = periods.map { MinuteSpan(LocalTime.parse(it.start).minuteOfDay(), LocalTime.parse(it.end).minuteOfDay()) }
         val distinctLessons = lessons.distinct()
+        boundaries = buildSet {
+            for (spans in listOf(periodSpans, distinctLessons, displayedBreaks)) {
+                for (span in spans) {
+                    add(span.start)
+                    add(span.end)
+                }
+            }
+        }.sorted()
+        startMinute = boundaries.firstOrNull() ?: 480
+        endMinute = boundaries.lastOrNull() ?: 480
+        val indices = boundaries.withIndex().associate { it.value to it.index }
         val intervals = boundaries.zipWithNext()
-        val occupiedByLesson = intervals.map { (start, end) -> lessons.any { it.start < end && it.end > start } }
-        val ordinaryHeights = intervals.map { (start, end) ->
-            val occupied = protectedSpans.any { it.start < end && it.end > start }
+        val breakScales = if (displayedBreaks.isEmpty()) emptyMap()
+            else displayedBreaks.associateWith { minimumBreakHeight.toDouble() / (it.end - it.start) }
+        val occupiedByLesson = BooleanArray(intervals.size) { index ->
+            val (start, end) = intervals[index]
+            distinctLessons.any { it.start < end && it.end > start }
+        }
+        val ordinaryHeights = intervals.mapIndexed { index, (start, end) ->
+            val occupied = occupiedByLesson[index] || periodSpans.any { it.start < end && it.end > start }
             val naturalHeight = (end - start) * pixelsPerMinute.toDouble()
-            if (occupied) naturalHeight else minOf(naturalHeight, gapHeight.toDouble())
+            val compressedHeight = if (occupied) naturalHeight else minOf(naturalHeight, gapHeight.toDouble())
+            // A lesson's endpoints may split the break into several intervals.
+            val breakScale = breakScales.entries.firstOrNull { (span, _) -> start >= span.start && end <= span.end }?.value ?: 0.0
+            maxOf(compressedHeight, breakScale * (end - start))
         }
         // Edges only point forward in real time. The longest path gives the smallest
         // shared coordinates satisfying both ordinary spacing and every card's height.
         val cardsEndingAt = distinctLessons.groupBy { indices.getValue(it.end) }
         val positions = DoubleArray(boundaries.size)
+        var requiredLessonScale = 0.0
         intervals.forEachIndexed { index, _ ->
             var nextY = positions[index] + ordinaryHeights[index]
             cardsEndingAt[index + 1].orEmpty().forEach { span ->
-                nextY = maxOf(nextY, positions[indices.getValue(span.start)] + requiredLessonHeight(span))
+                val requiredHeight = requiredLessonHeight(span).toDouble()
+                requiredLessonScale = maxOf(requiredLessonScale, requiredHeight / (span.end - span.start))
+                nextY = maxOf(nextY, positions[indices.getValue(span.start)] + requiredHeight)
             }
             positions[index + 1] = nextY
         }
@@ -104,9 +162,10 @@ internal class TimetableAxis(
         // Adversarial nested, almost-equal spans can demand a large correction. A
         // uniform coefficient is always feasible; prefer it when it produces a shorter
         // whole axis. It still respects every readable minimum and strict duration order.
-        val uniformScale = maxOf(pixelsPerMinute.toDouble(), minimumHeightStep.toDouble(), distinctLessons.maxOfOrNull {
-            requiredLessonHeight(it).toDouble() / (it.end - it.start)
-        } ?: 0.0)
+        val uniformScale = maxOf(
+            pixelsPerMinute.toDouble(), minimumHeightStep.toDouble(),
+            breakScales.values.maxOrNull() ?: 0.0, requiredLessonScale,
+        )
         val uniformHeights = intervals.mapIndexed { index, (start, end) ->
             if (occupiedByLesson[index]) uniformScale * (end - start) else ordinaryHeights[index]
         }

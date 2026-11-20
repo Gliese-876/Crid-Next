@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -29,15 +30,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
+import androidx.core.view.HapticFeedbackConstantsCompat
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.contentDescription
@@ -53,6 +59,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cn.crid.next.core.*
 import cn.crid.next.data.AppRepository
+import com.kyant.backdrop.backdrops.rememberCombinedBackdrop
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -92,8 +99,17 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
     val calendar by repository.holidays.collectAsState()
     val systemLocale = LocalConfiguration.current.locales[0]
     val text = remember(state.settings.language, systemLocale) { UiText(state.settings.language, systemLocale) }
-    val dark = when(state.settings.theme) { ThemeMode.DARK -> true; ThemeMode.LIGHT -> false; else -> isSystemInDarkTheme() }
+    val liquidGlass = state.settings.theme == ThemeMode.LIQUID_GLASS
+    val dark = when (state.settings.theme) {
+        ThemeMode.DARK -> true
+        ThemeMode.LIGHT -> false
+        ThemeMode.SYSTEM, ThemeMode.LIQUID_GLASS -> isSystemInDarkTheme()
+    }
     val hostView = LocalView.current
+    val hapticsEnabled = state.settings.hapticFeedbackEnabled
+    val touchFeedback: (Int) -> Unit = { effect ->
+        if (hapticsEnabled) ViewCompat.performHapticFeedback(hostView, effect)
+    }
     SideEffect {
         (hostView.context as? Activity)?.window?.let { window ->
             WindowCompat.getInsetsController(window, hostView).apply {
@@ -103,7 +119,10 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
             window.isNavigationBarContrastEnforced = false
         }
     }
-    val baseScheme = cridColorScheme(dark)
+    val baseScheme = remember(dark, liquidGlass) {
+        val scheme = cridColorScheme(dark)
+        if (liquidGlass) scheme.withLiquidGlassColors(dark) else scheme
+    }
     val pageRoutes=remember {listOf("today","week","plans","settings")}
     val launchDate=remember(incomingDate) {incomingDate?.let {runCatching {LocalDate.parse(it)}.getOrNull()}}
     var todayDateOverride by rememberSaveable {mutableStateOf(if(initialRoute=="today")launchDate?.toString()else null)}
@@ -170,6 +189,10 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
     // Page actions stay with the settled page; navigation responds to taps and the nearest dragged page.
     val currentRoute=pageRoutes[pagerState.settledPage]
     val navigationRoute=pageRoutes[requestedPage ?: pagerState.currentPage]
+    val selectDestination: (String) -> Unit = { destination ->
+        if (destination != navigationRoute) touchFeedback(HapticFeedbackConstantsCompat.SEGMENT_TICK)
+        navigateTo(destination)
+    }
     LaunchedEffect(pagerState) {
         // Restore the selected destination, even if recreation interrupted a scroll.
         pagerState.scrollToPage(pageRoutes.indexOf(route).coerceAtLeast(0))
@@ -196,6 +219,7 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
             val plan=requireNotNull(state.plan)
             val semester=requireNotNull(state.semester)
             val target=CourseEditing.editTarget(state,plan.id,occurrence.course.id)
+            touchFeedback(HapticFeedbackConstantsCompat.VIRTUAL_KEY)
             selectedJson=Json.encodeToString(CourseSelection(target,semester,occurrence.course.id,occurrence.lesson,
                 occurrence.date.toString(),occurrence.start.toString(),occurrence.end.toString(),occurrence.week,
                 occurrence.statuses.map {it.name},occurrence.holidayName))
@@ -239,20 +263,40 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
         BoxWithConstraints(Modifier.fillMaxSize()) {
         val sideNavigation = maxWidth >= 600.dp
         val expandedNavigation = maxWidth >= 840.dp
+        val floatingBottomBar = liquidGlass && !sideNavigation
+        val backgroundLayer = if (liquidGlass) rememberGlassBackdrop() else null
+        val scrollLayer = if (floatingBottomBar) rememberGlassBackdrop() else null
+        val navigationBackdrop = if (backgroundLayer != null && scrollLayer != null) {
+            rememberCombinedBackdrop(backgroundLayer, scrollLayer)
+        } else null
+        if (backgroundLayer != null) {
+            Box(backgroundLayer.capture(Modifier.matchParentSize()).liquidGlassBackground(scheme.background, dark))
+        }
         val destinations=listOf("today" to text.t("今天","Today"),"week" to text.t("课表","Timetable"),"plans" to text.t("方案","Plans"),"settings" to text.t("设置","Settings"))
+        CompositionLocalProvider(LocalLiquidGlassDark provides dark.takeIf { liquidGlass }) {
         Row(Modifier.fillMaxSize()) {
         if(sideNavigation) {
-            Surface(color=scheme.surfaceContainerLow,modifier=Modifier.width(if(expandedNavigation)232.dp else 104.dp).fillMaxHeight().testTag("side_navigation")) {
-                Column(Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical))
+            val frame = if (backgroundLayer != null) {
+                Modifier.windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical + WindowInsetsSides.Start))
+                    .padding(start = 12.dp, top = 10.dp, bottom = 10.dp)
+                    .liquidGlassSurface(backgroundLayer, RoundedCornerShape(32.dp), dark)
+                    .glassTouchLight(dark, 32.dp)
+            } else Modifier
+            Surface(color=if (liquidGlass) Color.Transparent else scheme.surfaceContainerLow, contentColor=scheme.onSurface,
+                modifier=Modifier.width(if(expandedNavigation)232.dp else 104.dp).fillMaxHeight().then(frame).testTag("side_navigation")) {
+                val insets = if (liquidGlass) Modifier else Modifier.windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical))
+                val scroll = if (liquidGlass) Modifier.verticalScroll(rememberScrollState()) else Modifier
+                Column(Modifier.fillMaxSize().then(insets).then(scroll).selectableGroup()
                     .padding(horizontal=if(expandedNavigation)12.dp else 4.dp,vertical=20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
                     Spacer(Modifier.height(12.dp))
                     destinations.forEach { (id,label) ->
-                        if(expandedNavigation) NavigationDrawerItem(
-                            selected=navigationRoute==id,onClick={navigateTo(id)},label={VisualCenterText(label,Modifier.centerVisualText(),maxLines=2)},modifier=Modifier.testTag("nav_$id"),
+                        if (liquidGlass) GlassSideNavigationItem(id, label, navigationRoute == id, expandedNavigation, dark) { selectDestination(id) }
+                        else if(expandedNavigation) NavigationDrawerItem(
+                            selected=navigationRoute==id,onClick={selectDestination(id)},label={VisualCenterText(label,Modifier.centerVisualText(),maxLines=2)},modifier=Modifier.testTag("nav_$id"),
                             icon={NavGlyph(id,if(navigationRoute==id)scheme.primary else scheme.onSurfaceVariant)},
                             colors=NavigationDrawerItemDefaults.colors(selectedContainerColor=scheme.primaryContainer,unselectedContainerColor=Color.Transparent))
                         else NavigationRailItem(
-                            selected=navigationRoute==id,onClick={navigateTo(id)},icon={NavGlyph(id,if(navigationRoute==id)scheme.primary else scheme.onSurfaceVariant)},
+                            selected=navigationRoute==id,onClick={selectDestination(id)},icon={NavGlyph(id,if(navigationRoute==id)scheme.primary else scheme.onSurfaceVariant)},
                             label={Text(label,maxLines=2,textAlign=TextAlign.Center)},
                             modifier=Modifier.fillMaxWidth().testTag("nav_$id"),colors=NavigationRailItemDefaults.colors(indicatorColor=scheme.primaryContainer))
                     }
@@ -261,18 +305,36 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
         }
         Scaffold(
             modifier=Modifier.weight(1f),
-            containerColor=scheme.background,
+            containerColor=if (liquidGlass) Color.Transparent else scheme.background,
+            contentColor=scheme.onBackground,
             snackbarHost={ SnackbarHost(snackbar) },
             // Every page owns its top inset; the shell only reserves persistent navigation.
             contentWindowInsets=WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal+WindowInsetsSides.Bottom),
             bottomBar={
                 if(!sideNavigation) CridBottomNavigation(
                     destinations=destinations,selectedRoute=navigationRoute,
-                    pagePosition={pagerState.currentPage+pagerState.currentPageOffsetFraction},onNavigate=navigateTo,
+                    pagePosition={pagerState.currentPage+pagerState.currentPageOffsetFraction},onNavigate=selectDestination,
+                    backdrop=navigationBackdrop,dark=dark,
                 )
             }
         ) { padding ->
-            HorizontalPager(state=pagerState,key={pageRoutes[it]},modifier=Modifier.fillMaxSize().padding(padding).consumeWindowInsets(padding).testTag("main_pager")) {page ->
+            val direction = LocalLayoutDirection.current
+            val systemBottom = if (floatingBottomBar) WindowInsets.navigationBars.union(WindowInsets.displayCutout)
+                .asPaddingValues().calculateBottomPadding() else 0.dp
+            val floatingClearance = if (floatingBottomBar) (padding.calculateBottomPadding() - systemBottom).coerceAtLeast(0.dp) else 0.dp
+            val pagerPadding = if (!floatingBottomBar) padding else PaddingValues(
+                start = padding.calculateStartPadding(direction),
+                top = padding.calculateTopPadding(),
+                end = padding.calculateEndPadding(direction),
+                bottom = systemBottom,
+            )
+            val pagerFrame = Modifier.fillMaxSize()
+            val pagerBackdrop = if (scrollLayer != null) {
+                // Keep a margin around the bar for its optical sampling.
+                scrollLayer.capture(pagerFrame, padding.calculateBottomPadding() + 24.dp)
+            } else pagerFrame
+            HorizontalPager(state=pagerState,key={pageRoutes[it]},modifier=pagerBackdrop
+                .padding(pagerPadding).consumeWindowInsets(padding).testTag("main_pager")) {page ->
                 val pageRoute=pageRoutes[page]
                 val pageActive=page==pagerState.settledPage
                 val pageInteractive=pageActive&&!pagerState.isScrollInProgress
@@ -294,15 +356,15 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
                 Column(Modifier.fillMaxWidth().testTag(if(pageActive)"route_toolbar" else "route_toolbar_$pageRoute")) {
                 Row(Modifier.fillMaxWidth().statusBarsPadding().padding(start=20.dp,end=10.dp,top=26.dp,bottom=6.dp),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(4.dp)) {
                     VisualCenterText(destinations.first {it.first==pageRoute}.second,modifier=alignByVisualCenter(Modifier.weight(1f)).testTag(if(pageActive)"route_header" else "route_header_$pageRoute"),style=MaterialTheme.typography.headlineLarge,fontWeight=FontWeight.Bold,maxLines=1,overflow=TextOverflow.Ellipsis)
-                    if(pageRoute in listOf("today","week")&&pending.isNotEmpty())IconButton(onClick={if(pageInteractive){pendingOrigin.capture();pendingOpen=true}},modifier=Modifier.alignBy {it.measuredHeight/2}.size(48.dp).drawBehind {drawCircle(scheme.primaryContainer.copy(alpha=pendingHighlight.value.coerceIn(0f,1f)))}.modalOrigin(pendingOrigin).testTag(if(pageActive)"pending_lessons" else "pending_lessons_$pageRoute").semantics {contentDescription=text.t("${pending.size} 项待排时间","${pending.size} arrangements awaiting a time")}) {
+                    if(pageRoute in listOf("today","week")&&pending.isNotEmpty())PageToolbarButton(onClick={if(pageInteractive){pendingOrigin.capture();pendingOpen=true}},modifier=Modifier.alignBy {it.measuredHeight/2}.size(48.dp).drawBehind {drawCircle(scheme.primaryContainer.copy(alpha=pendingHighlight.value.coerceIn(0f,1f)))}.modalOrigin(pendingOrigin).testTag(if(pageActive)"pending_lessons" else "pending_lessons_$pageRoute").semantics {contentDescription=text.t("${pending.size} 项待排时间","${pending.size} arrangements awaiting a time")}) {
                         BadgedBox(badge={Badge {VisualCenterText(pending.size.toString(),Modifier.centerVisualText())}}) {AppGlyph("time",scheme.onSurface)}
                     }
                     if(pageRoute in listOf("today","week")) {
-                        IconButton(onClick={if(pageInteractive){addCourseOrigin.capture();addCourse(addCourseOrigin)}},modifier=alignByVisualCenter(Modifier.size(48.dp)).modalOrigin(addCourseOrigin).testTag(if(pageActive)"action_add_course" else "action_add_course_$pageRoute").semantics {contentDescription=text.t("新增课程","Add course")}) {
+                        PageToolbarButton(onClick={if(pageInteractive){addCourseOrigin.capture();addCourse(addCourseOrigin)}},modifier=alignByVisualCenter(Modifier.size(48.dp)).modalOrigin(addCourseOrigin).testTag(if(pageActive)"action_add_course" else "action_add_course_$pageRoute").semantics {contentDescription=text.t("新增课程","Add course")}) {
                             AppGlyph("add",scheme.onSurface)
                         }
                         Box(alignByVisualCenter()) {
-                            IconButton(onClick={if(pageInteractive){moreOrigin.capture();moreActions=true}},modifier=Modifier.size(48.dp).modalOrigin(moreOrigin).testTag(if(pageActive)"action_more" else "action_more_$pageRoute").semantics {contentDescription=text.t("更多操作","More actions")}) {
+                            PageToolbarButton(onClick={if(pageInteractive){moreOrigin.capture();moreActions=true}},modifier=Modifier.size(48.dp).modalOrigin(moreOrigin).testTag(if(pageActive)"action_more" else "action_more_$pageRoute").semantics {contentDescription=text.t("更多操作","More actions")}) {
                                 VisualCenterText("⋮",modifier=Modifier.centerVisualText(),fontSize=28.sp,color=scheme.onSurface)
                             }
                             AnimatedOverflowMenu(expanded=moreActions&&pageInteractive,onDismissRequest={moreActions=false},onClosed={
@@ -321,10 +383,10 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
                             }
                         }
                     } else {
-                        IconButton(onClick={if(pageInteractive){importOrigin.capture();openImport(importOrigin)}},modifier=alignByVisualCenter(Modifier.size(48.dp)).modalOrigin(importOrigin).testTag(if(pageActive)"action_import" else "action_import_$pageRoute").semantics {contentDescription=text.t("导入","Import")}) {
+                        PageToolbarButton(onClick={if(pageInteractive){importOrigin.capture();openImport(importOrigin)}},modifier=alignByVisualCenter(Modifier.size(48.dp)).modalOrigin(importOrigin).testTag(if(pageActive)"action_import" else "action_import_$pageRoute").semantics {contentDescription=text.t("导入","Import")}) {
                             AppGlyph("import",scheme.onSurface)
                         }
-                        IconButton(onClick={if(pageInteractive){exportOrigin.capture();activeExportOrigin=exportOrigin;exporting=true}},enabled=state.plan != null,modifier=alignByVisualCenter(Modifier.size(48.dp)).modalOrigin(exportOrigin).testTag(if(pageActive)"action_export" else "action_export_$pageRoute").semantics {contentDescription=text.t("导出","Export")}) {
+                        PageToolbarButton(onClick={if(pageInteractive){exportOrigin.capture();activeExportOrigin=exportOrigin;exporting=true}},enabled=state.plan != null,modifier=alignByVisualCenter(Modifier.size(48.dp)).modalOrigin(exportOrigin).testTag(if(pageActive)"action_export" else "action_export_$pageRoute").semantics {contentDescription=text.t("导出","Export")}) {
                             AppGlyph("export",if(state.plan!=null)scheme.onSurface else scheme.onSurface.copy(alpha=.38f))
                         }
                     }
@@ -334,16 +396,22 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
                 }
                 }
                 Box(Modifier.weight(1f).fillMaxWidth().testTag("page_content_$pageRoute")) {
-                when(pageRoute) {
-                    "today" -> TodayScreen(state,calendar,todayDate,today,now.toLocalTime(),text,
-                        {navigateTo("plans")},{openImport(null)},selectedOrigin,selectCourse)
-                    "week" -> WeekScreen(state,calendar,weekDate,text,{weekDateString=it.toString()},{navigateTo("plans")},{openImport(null)},selectedOrigin,selectCourse)
-                    "plans" -> PlansScreen(state,text,update,openImport)
-                    else -> SettingsScreen(state,calendar,text,update)
-                }
+                    CompositionLocalProvider(LocalFloatingNavigationPadding provides floatingClearance) {
+                        when(pageRoute) {
+                            "today" -> TodayScreen(state,calendar,todayDate,today,now.toLocalTime(),text,
+                                {navigateTo("plans")},{openImport(null)},selectedOrigin,selectCourse)
+                            "week" -> WeekScreen(state,calendar,weekDate,text,{ date ->
+                                if (date != weekDate) touchFeedback(HapticFeedbackConstantsCompat.SEGMENT_TICK)
+                                weekDateString = date.toString()
+                            },{navigateTo("plans")},{openImport(null)},selectedOrigin,selectCourse)
+                            "plans" -> PlansScreen(state,text,update,openImport)
+                            else -> SettingsScreen(state,calendar,text,update)
+                        }
+                    }
                 }
                 }
             }
+        }
         }
         }
         }
@@ -442,19 +510,29 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
     }
 }
 
+@Composable
+private fun rememberPreparedSchedule(
+    semester: Semester?, plan: Plan?, settings: Settings, calendar: HolidayCalendar,
+): PreparedSchedule? {
+    // The visual and interaction settings do not affect which classes are scheduled.
+    val scheduleSettings = remember(settings) {
+        settings.copy(theme = ThemeMode.SYSTEM, timetableBreakDisplay = TimetableBreakDisplay.NONE, hapticFeedbackEnabled = false)
+    }
+    return remember(semester, plan, scheduleSettings, calendar) {
+        if (semester != null && plan != null) ScheduleEngine.prepare(semester, plan, scheduleSettings, calendar) else null
+    }
+}
+
 @Composable internal fun TodayScreen(state:AppState,calendar:HolidayCalendar,date:LocalDate,today:LocalDate,now:LocalTime,text:UiText,onPlans:()->Unit,onImport:()->Unit,selectedOrigin:ModalOrigin?,onSelect:(Occurrence,ModalOrigin)->Unit) {
     val semester=state.semester
-    val plan=state.plan
-    val schedule=remember(semester,plan,state.settings,calendar) {
-        if(semester!=null&&plan!=null)ScheduleEngine.prepare(semester,plan,state.settings,calendar)else null
-    }
+    val schedule = rememberPreparedSchedule(semester, state.plan, state.settings, calendar)
     val lessons=remember(schedule,date) {schedule?.occurrences(date).orEmpty()}
     val actualLessons=remember(lessons) {lessons.filter {it.isActual}}
     Column(Modifier.fillMaxSize()) {
         Text(text.date(date),modifier=Modifier.padding(start=20.dp,end=20.dp,bottom=12.dp).testTag("today_date"),style=MaterialTheme.typography.bodyMedium,color=MaterialTheme.colorScheme.onSurfaceVariant)
     Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal=14.dp),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(10.dp)) {
         if(!missingSchedule(state,text,onPlans,onImport)) {
-            val following=remember(state,calendar,date,today) {
+            val following=remember(schedule,date,today) {
                 if(date==today)followingTeachingDay(state,calendar,date,schedule)else emptyList()
             }
             val status=remember(lessons,date,today,now,following) {todayCourseStatus(lessons,date,today,now,following)}
@@ -466,7 +544,7 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
                 }
             } else Box(Modifier.widthIn(max=720.dp).fillMaxWidth()) { TodayAgenda(actualLessons,semester.periods,text,selectedOrigin,onSelect) }
         }
-        Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(12.dp + LocalFloatingNavigationPadding.current))
     }
     }
 }
@@ -475,7 +553,8 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
     val first=ScheduleEngine.weekStart(anchor,state.settings.weekStartsSunday)
     val dates=(0..6).map { first.plusDays(it.toLong()) }
     val week=state.semester?.let { ScheduleEngine.weekNumber(it,dates.firstOrNull { d -> !d.isBefore(LocalDate.parse(it.startDate)) } ?: anchor,state.settings.weekStartsSunday) }
-    Row(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surface).weekSwipe {direction -> onDate(anchor.plusWeeks(direction.toLong()))}.padding(horizontal=14.dp).padding(bottom=4.dp).testTag("week_switcher"),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+    val background = if (LocalLiquidGlassDark.current == null) MaterialTheme.colorScheme.surface else Color.Transparent
+    Row(Modifier.fillMaxWidth().background(background).weekSwipe {direction -> onDate(anchor.plusWeeks(direction.toLong()))}.padding(horizontal=14.dp).padding(bottom=4.dp).testTag("week_switcher"),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
         Box(alignByVisualCenter()) {WeekArrow(false,text) {onDate(anchor.minusWeeks(1))}}
         TextButton(onClick={onDate(LocalDate.now())},modifier=alignByVisualCenter(Modifier.weight(1f).heightIn(min=48.dp)).testTag("week_current")) {
             Column(horizontalAlignment=Alignment.CenterHorizontally) {
@@ -491,13 +570,11 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
     val first=ScheduleEngine.weekStart(anchor,state.settings.weekStartsSunday)
     val scrollState=rememberScrollState()
     val semester=state.semester
-    val plan=state.plan
-    val schedule=remember(semester,plan,state.settings,calendar) {
-        if(semester!=null&&plan!=null)ScheduleEngine.prepare(semester,plan,state.settings,calendar)else null
-    }
+    val schedule = rememberPreparedSchedule(semester, state.plan, state.settings, calendar)
     Column(Modifier.fillMaxSize()) {
         WeekSwitcher(state,anchor,text,onDate)
-    Box(Modifier.weight(1f).fillMaxWidth().padding(horizontal=14.dp)) {
+    Box(Modifier.weight(1f).fillMaxWidth().padding(horizontal=14.dp)
+        .padding(bottom = if (schedule == null) LocalFloatingNavigationPadding.current else 0.dp)) {
         if(!missingSchedule(state,text,onPlans,onImport)) {
             AnimatedContent(targetState=first,modifier=Modifier.fillMaxSize(),label="week_change",transitionSpec={
                 val direction=if(targetState>initialState)1 else -1
@@ -507,9 +584,7 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
                 val dates=remember(displayFirst) {(0..6).map {displayFirst.plusDays(it.toLong())}}
                 val lessons=remember(schedule,displayFirst) {dates.map {day -> requireNotNull(schedule).occurrences(day)}}
                 WeekGrid(dates,lessons,state.semester!!.periods,state.settings,calendar,text,selectedOrigin,onSelect,
-                    bodyScrollState=scrollState,onWeekSwipe={direction -> onDate(anchor.plusWeeks(direction.toLong()))},emptyContent={
-                        EmptyPanel(text.t("这一周没有课程","An open week"),text.t("可以切换周次，或添加新的课程安排","Browse another week or add a course"),"",{})
-                    })
+                    bodyScrollState=scrollState,onWeekSwipe={direction -> onDate(anchor.plusWeeks(direction.toLong()))})
             }
         }
     }
@@ -532,7 +607,7 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
 }
 
 @Composable private fun WeekArrow(next:Boolean,text:UiText,onClick:()->Unit) {
-    IconButton(onClick=onClick,modifier=Modifier.size(48.dp).testTag(if(next)"week_next" else "week_previous").semantics {
+    PageToolbarButton(onClick=onClick,modifier=Modifier.size(48.dp).testTag(if(next)"week_next" else "week_previous").semantics {
         contentDescription=if(next)text.t("下一周","Next week")else text.t("上一周","Previous week")
     }) {
         AppGlyph(if(next)"next" else "previous",MaterialTheme.colorScheme.primary)
@@ -540,17 +615,26 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Composable private fun WeekGrid(dates:List<LocalDate>,days:List<List<Occurrence>>,periods:List<Period>,settings:Settings,calendar:HolidayCalendar,text:UiText,selectedOrigin:ModalOrigin?,onSelect:(Occurrence,ModalOrigin)->Unit,bodyScrollState:ScrollState,onWeekSwipe:(Int)->Unit,emptyContent:@Composable ()->Unit) {
+@Composable private fun WeekGrid(dates:List<LocalDate>,days:List<List<Occurrence>>,periods:List<Period>,settings:Settings,calendar:HolidayCalendar,text:UiText,selectedOrigin:ModalOrigin?,onSelect:(Occurrence,ModalOrigin)->Unit,bodyScrollState:ScrollState,onWeekSwipe:(Int)->Unit) {
     val isEmpty=days.all {it.isEmpty()}
     val fontScale=LocalDensity.current.fontScale.coerceAtLeast(1f)
     val k=1.6f*fontScale
     val layouts=remember(days) {days.map(::timetableGroups)}
     val spans=remember(layouts) {layouts.flatten().map {it.span}}
+    val breaks = remember(periods, settings.timetableBreakDisplay) { timetableBreaks(periods, settings.timetableBreakDisplay) }
+    val breakInset = 6f
     val minimumHeightStep=with(LocalDensity.current) {1f.toDp().value}+.01f
-    val axis=remember(periods,spans,k,minimumHeightStep) { TimetableAxis(periods,spans,k,6f*fontScale,minimumLessonHeight=64f*fontScale,heightSmoothing=8f*fontScale,minimumHeightStep=minimumHeightStep) }
+    val axis = remember(periods, spans, breaks, k, minimumHeightStep) {
+        TimetableAxis(periods, spans, k, 6f * fontScale, minimumLessonHeight = 64f * fontScale,
+            heightSmoothing = 8f * fontScale, minimumHeightStep = minimumHeightStep,
+            displayedBreaks = breaks.map { it.span }, minimumBreakHeight = 46f * fontScale + 2 * breakInset)
+    }
     val periodPositions=remember(periods,axis) {periods.map {period ->
         axis.y(LocalTime.parse(period.start).minuteOfDay()) to axis.y(LocalTime.parse(period.end).minuteOfDay())
     }}
+    val breakPositions = remember(breaks, axis) {
+        breaks.associateWith { (axis.y(it.span.start) + breakInset) to (axis.y(it.span.end) - breakInset) }
+    }
     val restDays=remember(dates,calendar,settings.holidaysEnabled,settings.makeupMode) {dates.map {date ->
         val holiday=calendar.days.find {it.date==date.toString()}
         settings.holidaysEnabled&&(holiday?.statutory==true||(holiday?.extraRest==true&&settings.makeupMode!=MakeupMode.OFF))
@@ -558,9 +642,19 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
     val lineColor=MaterialTheme.colorScheme.outlineVariant.copy(alpha=.35f)
     val holidayShade=MaterialTheme.colorScheme.onSurface.copy(alpha=.03f)
     val holidayHatch=MaterialTheme.colorScheme.onSurface.copy(alpha=.075f)
+    val breakBackground = if (breakPositions.isEmpty()) Modifier else {
+        val breakShade = MaterialTheme.colorScheme.secondary.copy(alpha = .10f)
+        Modifier.drawBehind {
+            breakPositions.values.forEach { (start, end) ->
+                drawRoundRect(breakShade, Offset(0f, start.dp.toPx()), Size(size.width, (end - start).dp.toPx()),
+                    CornerRadius(6.dp.toPx()))
+            }
+        }
+    }
     var selectedGroup by remember {mutableStateOf<TimetableGroup?>(null)}
     var groupOrigin by remember {mutableStateOf<ModalOrigin?>(null)}
     val headerHeight=(56*fontScale).dp
+    val headerColor = if (LocalLiquidGlassDark.current == null) MaterialTheme.colorScheme.surface else Color.Transparent
     BoxWithConstraints(Modifier.fillMaxSize().testTag("week_grid")) {
         val columns=timetableColumns(maxWidth.value,dates.size,fontScale)
         val dateDiameter=minOf(columns.dayWidth,32f*fontScale.coerceAtMost(1.2f))
@@ -568,7 +662,7 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
         val scrollState=rememberScrollState()
         val gridModifier=if(columns.scrolls)Modifier.horizontalScroll(scrollState).testTag("narrow_grid_scroll") else Modifier
         Column(gridModifier.width(columns.contentWidth.dp).fillMaxHeight()) {
-            Row(Modifier.width(columns.contentWidth.dp).height(headerHeight).background(MaterialTheme.colorScheme.surface).weekSwipe(onWeekSwipe).testTag("week_grid_header"),horizontalArrangement=Arrangement.spacedBy(columns.gap.dp)) {
+            Row(Modifier.width(columns.contentWidth.dp).height(headerHeight).background(headerColor).weekSwipe(onWeekSwipe).testTag("week_grid_header"),horizontalArrangement=Arrangement.spacedBy(columns.gap.dp)) {
                 Box(Modifier.width(columns.timeWidth.dp).fillMaxHeight(),contentAlignment=Alignment.TopCenter) {
                     Text(text.t("节次","Period"),fontSize=10.sp,lineHeight=12.sp,color=MaterialTheme.colorScheme.onSurfaceVariant,maxLines=1)
                 }
@@ -587,7 +681,8 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
                 }
             }
             val body:@Composable ()->Unit={
-                Row(Modifier.width(columns.contentWidth.dp).height(axis.height.dp),horizontalArrangement=Arrangement.spacedBy(columns.gap.dp)) {
+                Row(Modifier.width(columns.contentWidth.dp).height(axis.height.dp).then(breakBackground),
+                    horizontalArrangement = Arrangement.spacedBy(columns.gap.dp)) {
                     Box(Modifier.width(columns.timeWidth.dp).fillMaxHeight().testTag("time_axis")) {
                         periods.forEachIndexed {index,period ->
                             val (start,end)=periodPositions[index]
@@ -596,6 +691,10 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
                                 VisualCenterText(period.start,fontSize=9.sp,lineHeight=11.sp,color=MaterialTheme.colorScheme.onSurfaceVariant,maxLines=1)
                                 VisualCenterText(period.end,fontSize=9.sp,lineHeight=11.sp,color=MaterialTheme.colorScheme.onSurfaceVariant,maxLines=1)
                             }
+                        }
+                        breakPositions.forEach { (rest, position) ->
+                            val (start, end) = position
+                            TimetableBreakLabel(rest, text, Modifier.offset(y = start.dp).height((end - start).dp).fillMaxWidth())
                         }
                     }
                     dates.indices.forEach {index ->
@@ -617,8 +716,19 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
                     }
                 }
             }
-            Box(Modifier.weight(1f).fillMaxWidth().verticalScroll(bodyScrollState).testTag("week_grid_body").padding(bottom=12.dp)) {
-                if(isEmpty)emptyContent()else body()
+            Box(Modifier.weight(1f).fillMaxWidth().verticalScroll(bodyScrollState).testTag("week_grid_body")
+                .padding(bottom = 12.dp + LocalFloatingNavigationPadding.current)) {
+                val emptyTitle = text.t("这一周没有课程", "An open week", "這一週沒有課程")
+                when {
+                    isEmpty && breaks.isEmpty() -> EmptyPanel(emptyTitle,
+                        text.t("可以切换周次，或添加新的课程安排", "Browse another week or add a course"), "", {})
+                    isEmpty -> Column {
+                        Text(emptyTitle, Modifier.padding(start = 4.dp, bottom = 12.dp), style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        body()
+                    }
+                    else -> body()
+                }
             }
         }
     }
@@ -643,6 +753,20 @@ fun CridApp(repository: AppRepository, incomingUri: Uri? = null, onIncomingConsu
             }
             }
         }
+    }
+}
+
+@Composable
+private fun TimetableBreakLabel(rest: TimetableBreak, text: UiText, modifier: Modifier) {
+    val colors = MaterialTheme.colorScheme
+    Column(modifier.testTag("timetable_break_${rest.kind.name.lowercase()}").semantics(mergeDescendants = true) {},
+        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+        VisualCenterText(rest.kind.label(text), fontSize = 10.sp, lineHeight = 13.sp, color = colors.onSurface,
+            fontWeight = FontWeight.SemiBold, maxLines = 1)
+        VisualCenterText(LocalTime.ofSecondOfDay(rest.span.start * 60L).toString(),
+            fontSize = 9.sp, lineHeight = 11.sp, color = colors.onSurfaceVariant, maxLines = 1)
+        VisualCenterText(LocalTime.ofSecondOfDay(rest.span.end * 60L).toString(),
+            fontSize = 9.sp, lineHeight = 11.sp, color = colors.onSurfaceVariant, maxLines = 1)
     }
 }
 

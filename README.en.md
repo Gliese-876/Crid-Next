@@ -8,7 +8,7 @@ Crid Next is a lightweight, native Android timetable app designed for students a
 
 The app supports timetable imports from both campuses' academic portals. Students at other universities can use the [AI conversion workflow below](#use-ai-to-convert-another-timetable-format) to turn their own timetable into Crid Next JSON and import it into the app.
 
-**Android 12 or later · 简体中文 / 繁體中文 / English · First public release: 2.0.0**
+**Android 12 or later · 简体中文 / 繁體中文 / English · 2.1.0**
 
 [![GitHub Download](https://img.shields.io/badge/GitHub-Download-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Gliese-876/Crid-Next/releases/latest)
 [![Gitee Download](https://img.shields.io/badge/Gitee-Download-C71D23?style=for-the-badge&logo=gitee&logoColor=white)](https://gitee.com/gliese-876/crid-next/releases)
@@ -39,7 +39,7 @@ Multiple semesters and plans let you keep different arrangements. Custom class p
 
 ### Small to install, easy to take with you
 
-The universal APK for version 2.0.0 is about **4.05 MB**. Timetables stay on your device, and everyday viewing and editing work offline, including when the campus connection is unreliable.
+The universal APK is about **4.1 MB**. Timetables stay on your device, and everyday viewing and editing work offline, including when the campus connection is unreliable.
 
 For sharing, PNG and PDF exports carry the app's daily and weekly layouts into a day, week, month, or full-semester view. For keeping your data, JSON preserves course and lesson details for backup and reimport.
 
@@ -73,7 +73,7 @@ Convert my original timetable file into JSON that Crid Next can import. The atta
 Read the original file and preserve every course and teaching arrangement, including odd/even weeks, separate week ranges, and the teacher, location, and notes associated with each arrangement. Ask me about unreadable, ambiguous, or missing essential scheduling information before proceeding. Do not guess or silently omit courses. Use empty strings for teachers, locations, and credits that the source does not provide.
 
 Follow this structure and these rules exactly:
-1. The root contains only format, version, name, and courses. format is "crid-next"; version is the number 1; name is a nonblank plan name; courses is a nonempty array. App version 2.0.0 does not change this file format version.
+1. The root contains only format, version, name, and courses. Use "crid-next" for format and the number 1 for version. Set name to a nonblank plan name and courses to a nonempty array.
 2. Each course uses name, credits, extra, and lessons. name is a nonblank course name; credits is a string; extra is an object with string keys and string values for details such as a course code; lessons is a nonempty array of teaching arrangements. Omit id and color so the app generates identifiers and chooses colors. Teachers and locations belong to individual lessons, not to the course object.
 3. Each lesson uses only weeks, weekday, startPeriod, endPeriod, date, startTime, endTime, location, teacher, note, and unscheduled. location, teacher, and note are strings; unscheduled is a boolean.
 4. For recurring classes, weeks is an ascending array of unique positive integers listing the actual teaching weeks. Expand ranges and odd/even weeks; set date to null. For a class on a specific date, use "YYYY-MM-DD" for date and [] for weeks. weekday is Monday=1 through Sunday=7 and must match any specific date, regardless of the app's first-day-of-week setting. Ask how weeks map to the semester if needed.

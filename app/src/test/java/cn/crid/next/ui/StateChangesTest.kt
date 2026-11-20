@@ -50,6 +50,14 @@ class StateChangesTest {
         assertEquals(ThemeMode.DARK, result.settings.theme)
         assertEquals(Language.EN, result.settings.language)
     }
+    @Test fun breakChoiceSurvivesConcurrentSettingsChanges() {
+        val live = base.copy(settings = base.settings.copy(theme = ThemeMode.DARK))
+        val requested = base.copy(settings = base.settings.copy(timetableBreakDisplay = TimetableBreakDisplay.BOTH))
+        val withBreaks = applyStateChanges(base, requested, live)
+        assertEquals(live.settings.copy(timetableBreakDisplay = TimetableBreakDisplay.BOTH), withBreaks.settings)
+        val otherAction = base.copy(settings = base.settings.copy(showOutOfWeek = false))
+        assertEquals(withBreaks.settings.copy(showOutOfWeek = false), applyStateChanges(base, otherAction, withBreaks).settings)
+    }
     @Test fun renamePreservesConcurrentlyMergedCourses() {
         val course = Course(name = "Math", lessons = listOf(Lesson(weeks = listOf(1), startPeriod = 1, endPeriod = 1)))
         val live = base.copy(plans = listOf(plan.copy(courses = listOf(course))))

@@ -22,3 +22,15 @@ fun cridColorScheme(dark: Boolean): ColorScheme = if (dark) {
         surfaceContainer = Color(0xFFEAE7F3),
     )
 }
+
+internal fun ColorScheme.withLiquidGlassColors(dark: Boolean): ColorScheme = if (dark) {
+    copy(
+        background = Color(0xFF131725), surface = Color(0xFF191C2C),
+        surfaceContainerLow = Color(0xFF212537), surfaceContainer = Color(0xFF282C40),
+    )
+} else {
+    copy(
+        background = Color(0xFFF4F5FD), surface = Color(0xFFF8F9FE),
+        surfaceContainerLow = Color(0xFFF2F3FB), surfaceContainer = Color(0xFFEBEDF9),
+    )
+}

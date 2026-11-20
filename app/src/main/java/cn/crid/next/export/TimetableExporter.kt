@@ -204,7 +204,11 @@ class TimetableExporter(context: Context) {
         checkpoint()
         val words = Words(request.settings.language, systemLocale)
         val text = TextLayout()
-        val palette = Palette(when (request.settings.theme) { ThemeMode.DARK -> true; ThemeMode.LIGHT -> false; ThemeMode.SYSTEM -> systemDark })
+        val palette = Palette(when (request.settings.theme) {
+            ThemeMode.DARK -> true
+            ThemeMode.LIGHT -> false
+            ThemeMode.SYSTEM, ThemeMode.LIQUID_GLASS -> systemDark
+        })
         require(request.to >= request.from) { words.badDates }
         require(ChronoUnit.DAYS.between(request.from, request.to) < 732) { words.rangeTooLong }
         require(request.plan.semesterId == request.semester.id) { words.wrongPlan }
